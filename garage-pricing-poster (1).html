@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stoic Agency - Garage Pricing Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#1a1a1a;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;font-family:'Barlow',sans-serif;}
+
+.poster{
+  width:700px;
+  background:#080C10;
+  border:1px solid rgba(230,57,70,0.25);
+  border-radius:24px;
+  overflow:hidden;
+}
+
+.poster-header{
+  background:linear-gradient(135deg,#0f0a0a,#1a0e0e);
+  padding:36px 40px 28px;
+  text-align:center;
+  border-bottom:1px solid rgba(230,57,70,0.1);
+  position:relative;
+  overflow:hidden;
+}
+.poster-header::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(230,57,70,0.08) 0%,transparent 70%);border-radius:50%;}
+.agency-name{font-family:'Bebas Neue',cursive;font-size:14px;letter-spacing:6px;color:#E63946;margin-bottom:8px;position:relative;}
+.poster-title{font-family:'Bebas Neue',cursive;font-size:42px;letter-spacing:2px;color:white;line-height:1;position:relative;}
+.poster-title span{color:#E63946;}
+.poster-sub{font-size:13px;color:#555;margin-top:8px;position:relative;}
+
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+
+.plan{padding:28px 24px;border-right:1px solid rgba(255,255,255,0.05);position:relative;display:flex;flex-direction:column;}
+.plan:last-child{border-right:none;}
+.plan.featured{background:linear-gradient(160deg,#150a0a,#0f0606);}
+.plan.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E63946,#ff6b6b);}
+
+.best-badge{display:inline-block;background:#E63946;color:white;padding:3px 10px;border-radius:4px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.plan-name{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:1px;color:white;margin-bottom:4px;}
+.plan-price{font-family:'Bebas Neue',cursive;font-size:38px;color:#E63946;line-height:1;margin-bottom:4px;}
+.plan-price span{font-size:18px;}
+.plan-note{font-size:10px;color:#444;margin-bottom:18px;}
+
+.features{list-style:none;display:flex;flex-direction:column;gap:7px;flex:1;}
+.features li{font-size:11.5px;color:#777;display:flex;align-items:flex-start;gap:7px;line-height:1.4;}
+.features li::before{content:'✓';color:#E63946;font-weight:800;font-size:11px;flex-shrink:0;margin-top:1px;}
+.features li.no{color:#2a2a2a;}
+.features li.no::before{content:'✕';color:#2a2a2a;}
+
+.divider{height:1px;background:rgba(255,255,255,0.04);margin:0 40px;}
+
+.included{padding:24px 40px;}
+.inc-title{font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:3px;color:#E63946;margin-bottom:16px;text-align:center;}
+.inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.inc-item{display:flex;align-items:center;gap:8px;}
+.inc-dot{width:6px;height:6px;background:#E63946;border-radius:50%;flex-shrink:0;}
+.inc-text{font-size:11px;color:#555;}
+
+.poster-footer{
+  background:linear-gradient(135deg,#E63946,#c1121f);
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.footer-left h3{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:1px;color:white;}
+.footer-left p{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;}
+.footer-right .phone{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px;color:white;}
+.footer-right .wa{font-size:11px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:4px;justify-content:flex-end;margin-top:2px;}
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <div class="poster-header">
+    <div class="agency-name">STOIC AGENCY · ABU DHABI</div>
+    <div class="poster-title">GARAGE WEBSITE<br><span>PACKAGES 2026</span></div>
+    <div class="poster-sub">Professional websites delivered in 7 days 🔧</div>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><span>AED </span>2,500</div>
+      <div class="plan-note">One-time payment</div>
+      <ul class="features">
+        <li>Up to 5 pages</li>
+        <li>Mobile friendly</li>
+        <li>WhatsApp button</li>
+        <li>Services list</li>
+        <li>Google Maps</li>
+        <li>Your photos & logo</li>
+        <li>3 free revisions</li>
+        <li class="no">Animations</li>
+        <li class="no">Booking form</li>
+        <li class="no">Price list page</li>
+        <li class="no">Arabic version</li>
+      </ul>
+    </div>
+
+    <div class="plan featured">
+      <div class="best-badge">⭐ Most Popular</div>
+      <div class="plan-name">Professional</div>
+      <div class="plan-price"><span>AED </span>4,500</div>
+      <div class="plan-note">One-time payment</div>
+      <ul class="features">
+        <li>Up to 10 pages</li>
+        <li>Scroll animations</li>
+        <li>Full services page</li>
+        <li>Price list display</li>
+        <li>Book a service form</li>
+        <li>Before/after gallery</li>
+        <li>Team section</li>
+        <li>Customer reviews</li>
+        <li>WhatsApp & call btn</li>
+        <li>1 month support</li>
+        <li>Unlimited revisions</li>
+      </ul>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price"><span>AED </span>7,000</div>
+      <div class="plan-note">One-time payment</div>
+      <ul class="features">
+        <li>Everything in Pro</li>
+        <li>Arabic & English</li>
+        <li>Online booking system</li>
+        <li>Car tracker page</li>
+        <li>Live chat widget</li>
+        <li>Google Ads ready</li>
+        <li>Full SEO package</li>
+        <li>Speed optimized</li>
+        <li>3 months support</li>
+        <li>Analytics report</li>
+        <li>Unlimited revisions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="included">
+    <div class="inc-title">✦ INCLUDED IN ALL PACKAGES ✦</div>
+    <div class="inc-grid">
+      <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">100% Mobile Friendly</div></div>
+      <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Your Real Photos</div></div>
+      <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Delivered in 7 Days</div></div>
+      <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Your Logo & Branding</div></div>
+      <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">WhatsApp Button</div></div>
+      <div class="inc-item"><div class="inc-dot"></div><div class="inc-text">Free Changes Until Happy</div></div>
+    </div>
+  </div>
+
+  <div class="poster-footer">
+    <div class="footer-left">
+      <h3>STOIC AGENCY</h3>
+      <p>Abu Dhabi, UAE · stoicagency.ae</p>
+    </div>
+    <div class="footer-right">
+      <div class="phone">+971 54 557 2646</div>
+      <div class="wa">📱 WhatsApp anytime</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
