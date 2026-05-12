@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProGarage Auto Service | Abu Dhabi, UAE</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --red:#E63946;--red2:#c1121f;--dark:#080C10;--dark2:#0E1318;--dark3:#141C22;
+  --steel:#1C2830;--white:#FFFFFF;--off:#7A8A96;--text:#B0BEC5;--border:rgba(255,255,255,0.06);
+  --yellow:#FFD60A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 60px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,12,16,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.logo-icon{width:44px;height:44px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;position:relative;overflow:hidden;}
+.logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);}
+.lt span:first-child{display:block;font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--white);line-height:1;letter-spacing:1px;}
+.lt span:last-child{font-size:10px;color:var(--red);font-weight:600;letter-spacing:3px;text-transform:uppercase;}
+.nav-links{display:flex;list-style:none;gap:36px;align-items:center;}
+.nav-links a{color:var(--off);text-decoration:none;font-size:14px;font-weight:500;letter-spacing:0.5px;transition:color 0.3s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:var(--red)!important;color:white!important;padding:11px 26px!important;border-radius:4px!important;font-weight:700!important;transition:all 0.3s!important;letter-spacing:0.5px!important;}
+.nav-cta:hover{background:var(--red2)!important;transform:translateY(-2px)!important;}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--dark);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:72px;}
+
+.hero-bg-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(230,57,70,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(230,57,70,0.03) 1px,transparent 1px);background-size:50px 50px;}
+.hero-glow{position:absolute;top:20%;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(230,57,70,0.07) 0%,transparent 70%);border-radius:50%;}
+.hero-glow2{position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,214,10,0.04) 0%,transparent 70%);border-radius:50%;}
+
+/* Animated car lines */
+.speed-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(230,57,70,0.3),transparent);animation:speedLine 3s linear infinite;opacity:0;}
+.sl1{top:25%;width:300px;animation-delay:0s;}
+.sl2{top:45%;width:200px;animation-delay:1s;}
+.sl3{top:65%;width:400px;animation-delay:2s;}
+.sl4{top:80%;width:150px;animation-delay:0.5s;}
+@keyframes speedLine{0%{left:-400px;opacity:0}20%{opacity:1}80%{opacity:1}100%{left:110%;opacity:0}}
+
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+
+.h-tag{display:inline-flex;align-items:center;gap:10px;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.25);padding:8px 18px;border-radius:4px;margin-bottom:24px;font-size:11px;font-weight:700;color:var(--red);letter-spacing:3px;text-transform:uppercase;opacity:0;animation:fadeUp 0.8s ease 0.2s forwards;}
+.h-title{font-family:'Rajdhani',sans-serif;font-size:clamp(48px,6vw,78px);font-weight:700;line-height:1;margin-bottom:20px;letter-spacing:1px;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards;}
+.h-title .hl{color:var(--red);}
+.h-title .hl2{color:var(--yellow);}
+.h-sub{font-size:16px;color:var(--text);line-height:1.8;max-width:460px;margin-bottom:36px;font-weight:300;opacity:0;animation:fadeUp 0.8s ease 0.6s forwards;}
+.h-btns{display:flex;gap:14px;margin-bottom:44px;opacity:0;animation:fadeUp 0.8s ease 0.8s forwards;}
+.btn-red{background:var(--red);color:white;padding:16px 32px;border-radius:4px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:0.5px;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;box-shadow:0 6px 20px rgba(230,57,70,0.3);}
+.btn-red:hover{background:var(--red2);transform:translateY(-3px);box-shadow:0 12px 30px rgba(230,57,70,0.4);}
+.btn-wa{background:#25D366;color:white;padding:16px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:14px;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;}
+.btn-wa:hover{background:#20bf5a;transform:translateY(-3px);}
+.h-badges{display:flex;gap:24px;opacity:0;animation:fadeUp 0.8s ease 1s forwards;}
+.badge{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--off);font-weight:500;}
+.badge i{color:var(--red);font-size:14px;}
+
+.h-right{opacity:0;animation:fadeRight 0.8s ease 0.5s forwards;}
+@keyframes fadeRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+.car-display{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:16px;position:relative;overflow:hidden;}
+.car-display::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--yellow),var(--red));}
+.car-emoji{font-size:80px;text-align:center;display:block;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(230,57,70,0.3));}
+.car-status{display:flex;justify-content:space-between;align-items:center;background:var(--dark3);border-radius:8px;padding:14px 18px;}
+.cs-item{text-align:center;}
+.cs-num{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;color:var(--red);line-height:1;}
+.cs-label{font-size:10px;color:var(--off);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+
+.mini-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mc{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:18px;display:flex;align-items:center;gap:12px;transition:all 0.3s;}
+.mc:hover{border-color:rgba(230,57,70,0.3);transform:translateY(-2px);}
+.mc-icon{width:38px;height:38px;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.mc h4{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--white);margin-bottom:2px;}
+.mc p{font-size:11px;color:var(--off);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal-l.visible{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal-r.visible{opacity:1;transform:translateX(0);}
+
+.sec-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(230,57,70,0.08);border:1px solid rgba(230,57,70,0.2);padding:6px 16px;border-radius:4px;margin-bottom:14px;font-size:10px;font-weight:700;color:var(--red);letter-spacing:3px;text-transform:uppercase;}
+.sec-title{font-family:'Rajdhani',sans-serif;font-size:clamp(36px,4.5vw,58px);font-weight:700;line-height:1.1;margin-bottom:16px;letter-spacing:1px;}
+.sec-title em{color:var(--red);font-style:normal;}
+.sec-sub{font-size:15px;color:var(--text);line-height:1.8;max-width:520px;font-weight:300;}
+
+/* STATS */
+.stats-bar{background:var(--red);padding:46px 60px;position:relative;overflow:hidden;}
+.stats-bar::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.08) 1px,transparent 1px);background-size:40px 40px;}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1;}
+.s-item{text-align:center;}
+.s-num{font-family:'Rajdhani',sans-serif;font-size:54px;font-weight:700;color:white;line-height:1;margin-bottom:4px;}
+.s-label{font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:2px;text-transform:uppercase;font-weight:500;}
+
+/* SERVICES */
+#services{padding:100px 0;background:var(--dark2);}
+.srv-wrap{max-width:1200px;margin:0 auto;padding:0 60px;}
+.srv-top{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px;}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.srv-card{background:var(--dark3);padding:40px 32px;transition:all 0.4s;position:relative;overflow:hidden;border:1px solid var(--border);}
+.srv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform 0.4s;}
+.srv-card:hover{background:var(--steel);transform:translateY(-4px);border-color:rgba(230,57,70,0.2);box-shadow:0 20px 50px rgba(0,0,0,0.5);}
+.srv-card:hover::after{transform:scaleX(1);}
+.srv-num{font-family:'Rajdhani',sans-serif;font-size:50px;font-weight:700;color:rgba(230,57,70,0.07);line-height:1;margin-bottom:16px;}
+.srv-icon{font-size:36px;margin-bottom:16px;display:block;}
+.srv-card h3{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:10px;letter-spacing:0.5px;}
+.srv-card p{font-size:13px;color:var(--text);line-height:1.7;}
+.srv-price{display:inline-block;margin-top:16px;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.2);color:var(--red);padding:5px 14px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:1px;}
+
+/* WHY */
+#why{padding:100px 0;background:var(--dark);}
+.why-wrap{max-width:1200px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.why-visual{position:relative;}
+.why-box{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:48px;text-align:center;position:relative;overflow:hidden;}
+.why-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--yellow),var(--red));}
+.why-box .big{font-size:90px;margin-bottom:16px;display:block;filter:drop-shadow(0 0 20px rgba(230,57,70,0.2));}
+.why-box h3{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.why-box p{font-size:14px;color:var(--text);line-height:1.7;}
+.why-badge{position:absolute;bottom:-18px;right:-18px;background:var(--red);padding:20px;border-radius:4px;text-align:center;}
+.wb-num{font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;color:white;line-height:1;}
+.wb-label{font-size:10px;color:rgba(255,255,255,0.7);letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+.why-points{display:flex;flex-direction:column;gap:18px;}
+.why-point{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--dark2);border:1px solid var(--border);border-radius:6px;transition:all 0.3s;}
+.why-point:hover{border-color:rgba(230,57,70,0.25);transform:translateX(6px);}
+.wp-icon{width:46px;height:46px;background:rgba(230,57,70,0.08);border:1px solid rgba(230,57,70,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:18px;flex-shrink:0;}
+.wp-text h4{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.wp-text p{font-size:13px;color:var(--text);line-height:1.6;}
+
+/* TEAM */
+#team{padding:100px 0;background:var(--dark2);}
+.team-wrap{max-width:1200px;margin:0 auto;padding:0 60px;}
+.team-header{text-align:center;margin-bottom:60px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.team-card{background:var(--dark3);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.4s;}
+.team-card:hover{transform:translateY(-6px);border-color:rgba(230,57,70,0.25);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
+.tc-photo{height:180px;display:flex;align-items:center;justify-content:center;font-size:64px;position:relative;}
+.tcp1{background:linear-gradient(135deg,#1a0a0a,#2a1010);}
+.tcp2{background:linear-gradient(135deg,#0a0a1a,#10102a);}
+.tcp3{background:linear-gradient(135deg,#0a1a0a,#102a10);}
+.tcp4{background:linear-gradient(135deg,#1a1a0a,#2a2a10);}
+.tc-bar{height:2px;background:var(--red);transform:scaleX(0);transition:transform 0.4s;}
+.team-card:hover .tc-bar{transform:scaleX(1);}
+.tc-info{padding:20px 16px;}
+.tc-info h3{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:3px;}
+.tc-role{font-size:11px;color:var(--red);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.tc-exp{font-size:12px;color:var(--off);}
+
+/* TESTIMONIALS */
+#testimonials{padding:100px 0;background:var(--dark);}
+.test-wrap{max-width:1200px;margin:0 auto;padding:0 60px;}
+.test-header{text-align:center;margin-bottom:60px;}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.test-card{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:32px;transition:all 0.3s;position:relative;}
+.test-card::before{content:'"';font-family:'Rajdhani',sans-serif;font-size:80px;color:var(--red);opacity:0.1;position:absolute;top:10px;left:20px;line-height:1;}
+.test-card:hover{border-color:rgba(230,57,70,0.2);transform:translateY(-4px);}
+.test-stars{color:var(--yellow);font-size:14px;letter-spacing:2px;margin-bottom:14px;}
+.test-text{font-size:14px;color:var(--text);line-height:1.8;margin-bottom:20px;font-style:italic;}
+.test-author{display:flex;align-items:center;gap:12px;}
+.test-av{width:40px;height:40px;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:16px;}
+.test-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--white);}
+.test-car{font-size:12px;color:var(--off);}
+
+/* CONTACT */
+#contact{padding:100px 0;background:var(--dark2);}
+.c-wrap{max-width:1200px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;}
+.c-items{display:flex;flex-direction:column;gap:16px;margin-top:32px;margin-bottom:28px;}
+.c-item{display:flex;gap:14px;align-items:flex-start;padding:18px;background:var(--dark3);border:1px solid var(--border);border-radius:6px;transition:all 0.3s;}
+.c-item:hover{border-color:rgba(230,57,70,0.25);}
+.c-icon{width:44px;height:44px;background:rgba(230,57,70,0.08);border:1px solid rgba(230,57,70,0.15);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:17px;flex-shrink:0;}
+.c-item h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:5px;}
+.c-item p,.c-item a{font-size:14px;color:var(--text);text-decoration:none;transition:color 0.3s;}
+.c-item a:hover{color:var(--red);}
+.wa-btn{display:inline-flex;align-items:center;gap:12px;background:#25D366;color:white;padding:18px 40px;border-radius:4px;text-decoration:none;font-weight:700;font-size:15px;transition:all 0.3s;width:100%;justify-content:center;}
+.wa-btn:hover{background:#20bf5a;transform:translateY(-3px);}
+
+.c-form{background:var(--dark3);border:1px solid var(--border);padding:44px;border-radius:6px;}
+.c-form h3{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;margin-bottom:28px;letter-spacing:1px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--off);font-weight:700;margin-bottom:7px;}
+.fg input,.fg textarea,.fg select{width:100%;padding:13px 16px;background:var(--dark2);border:1px solid var(--border);border-radius:4px;color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;outline:none;transition:border-color 0.3s;}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,0.2);}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(230,57,70,0.4);}
+.fg textarea{min-height:100px;resize:vertical;}
+.fg select option{background:var(--dark2);}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.f-submit{width:100%;padding:16px;background:var(--red);color:white;border:none;border-radius:4px;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.3s;margin-top:6px;}
+.f-submit:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 10px 25px rgba(230,57,70,0.3);}
+
+footer{background:var(--dark);padding:60px 60px 30px;border-top:1px solid var(--border);}
+.ft{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+.fa p{font-size:14px;color:rgba(255,255,255,0.3);line-height:1.8;margin-top:16px;max-width:260px;}
+.fc h4{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:20px;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.fc ul li a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:13px;transition:color 0.3s;display:flex;align-items:center;gap:8px;}
+.fc ul li a:hover{color:var(--red);}
+.fc ul li a i{font-size:10px;color:var(--red);}
+.fb{max-width:1200px;margin:28px auto 0;display:flex;justify-content:space-between;align-items:center;}
+.fb p{font-size:13px;color:rgba(255,255,255,0.15);}
+.fb span{color:var(--red);}
+.sl{display:flex;gap:10px;}
+.sl a{width:34px;height:34px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--off);font-size:13px;text-decoration:none;transition:all 0.3s;}
+.sl a:hover{background:var(--red);border-color:var(--red);color:white;transform:translateY(-2px);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
+  nav{padding:0 24px;}.nav-links{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:40px 24px;}.h-right{display:none;}
+  .srv-top{grid-template-columns:1fr;}.srv-grid{grid-template-columns:1fr;}
+  .why-wrap{grid-template-columns:1fr;padding:0 24px;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .test-grid{grid-template-columns:1fr;}
+  .c-wrap{grid-template-columns:1fr;}
+  .ft{grid-template-columns:1fr 1fr;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .srv-wrap,.team-wrap,.test-wrap,.c-wrap{padding:0 24px;}
+  .stats-bar{padding:50px 24px;}
+  footer{padding:50px 24px 30px;}
+  .fg-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="logo-icon">🔧</div>
+    <div class="lt"><span>ProGarage</span><span>Auto Service · Abu Dhabi</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:+97126654200" class="nav-cta">Book Service</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="speed-line sl1"></div>
+  <div class="speed-line sl2"></div>
+  <div class="speed-line sl3"></div>
+  <div class="speed-line sl4"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="h-tag"><i class="fas fa-wrench" style="font-size:10px"></i> Abu Dhabi's Trusted Auto Service</div>
+      <h1 class="h-title">YOUR CAR<br>DESERVES THE<br><em class="hl">BEST</em> <em class="hl2">CARE</em></h1>
+      <p class="h-sub">Expert car servicing, repairs, and maintenance in Abu Dhabi. All makes and models. Fast turnaround, honest pricing, guaranteed quality.</p>
+      <div class="h-btns">
+        <a href="#contact" class="btn-red"><i class="fas fa-calendar-check"></i> Book a Service</a>
+        <a href="https://wa.me/97126654200" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+      <div class="h-badges">
+        <div class="badge"><i class="fas fa-check-circle"></i> All Car Brands</div>
+        <div class="badge"><i class="fas fa-check-circle"></i> Same Day Service</div>
+        <div class="badge"><i class="fas fa-check-circle"></i> Warranty on All Work</div>
+      </div>
+    </div>
+    <div class="h-right">
+      <div class="car-display">
+        <span class="car-emoji">🚗</span>
+        <div class="car-status">
+          <div class="cs-item"><div class="cs-num">15+</div><div class="cs-label">Years Exp</div></div>
+          <div class="cs-item"><div class="cs-num">8K+</div><div class="cs-label">Cars Serviced</div></div>
+          <div class="cs-item"><div class="cs-num">98%</div><div class="cs-label">Satisfaction</div></div>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mc"><div class="mc-icon">🔧</div><div><h4>Quick Service</h4><p>Same day available</p></div></div>
+        <div class="mc"><div class="mc-icon">💰</div><div><h4>Fair Pricing</h4><p>No hidden charges</p></div></div>
+        <div class="mc"><div class="mc-icon">🛡️</div><div><h4>Guaranteed</h4><p>All work warranted</p></div></div>
+        <div class="mc"><div class="mc-icon">🚗</div><div><h4>All Brands</h4><p>Any make & model</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="s-item reveal"><div class="s-num">8K+</div><div class="s-label">Cars Serviced</div></div>
+    <div class="s-item reveal" style="transition-delay:0.1s"><div class="s-num">15+</div><div class="s-label">Years Experience</div></div>
+    <div class="s-item reveal" style="transition-delay:0.2s"><div class="s-num">50+</div><div class="s-label">Car Brands</div></div>
+    <div class="s-item reveal" style="transition-delay:0.3s"><div class="s-num">98%</div><div class="s-label">Happy Customers</div></div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="srv-wrap">
+    <div class="srv-top">
+      <div class="reveal-l">
+        <div class="sec-tag">Our Services</div>
+        <h2 class="sec-title">EVERYTHING<br>YOUR CAR <em>NEEDS</em></h2>
+      </div>
+      <p class="sec-sub reveal-r">From routine oil changes to complex engine repairs — our certified technicians handle everything with precision and care.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card reveal" style="transition-delay:0.1s"><div class="srv-num">01</div><span class="srv-icon">🔧</span><h3>General Service</h3><p>Full vehicle inspection, oil change, filter replacement, and all routine maintenance to keep your car running perfectly.</p><div class="srv-price">From AED 150</div></div>
+      <div class="srv-card reveal" style="transition-delay:0.2s"><div class="srv-num">02</div><span class="srv-icon">❄️</span><h3>AC Service & Repair</h3><p>Full AC diagnostics, gas recharge, compressor repair, and cooling system maintenance — essential in the UAE heat.</p><div class="srv-price">From AED 200</div></div>
+      <div class="srv-card reveal" style="transition-delay:0.3s"><div class="srv-num">03</div><span class="srv-icon">🛞</span><h3>Tyres & Alignment</h3><p>Tyre fitting, balancing, wheel alignment, and rotation for all car brands. Fast service while you wait.</p><div class="srv-price">From AED 100</div></div>
+      <div class="srv-card reveal" style="transition-delay:0.4s"><div class="srv-num">04</div><span class="srv-icon">⚙️</span><h3>Engine & Gearbox</h3><p>Engine diagnostics, overhaul, timing belt replacement, and gearbox repair by specialist technicians.</p><div class="srv-price">Custom Quote</div></div>
+      <div class="srv-card reveal" style="transition-delay:0.5s"><div class="srv-num">05</div><span class="srv-icon">🔋</span><h3>Electrical & Battery</h3><p>Full electrical diagnostics, battery testing and replacement, alternator, starter motor and wiring repairs.</p><div class="srv-price">From AED 80</div></div>
+      <div class="srv-card reveal" style="transition-delay:0.6s"><div class="srv-num">06</div><span class="srv-icon">🚗</span><h3>Body & Paint</h3><p>Dent removal, scratch repair, full and partial respray, and bumper repairs to restore your car's appearance.</p><div class="srv-price">Custom Quote</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="why-wrap">
+    <div class="why-visual reveal-l">
+      <div class="why-box">
+        <span class="big">🏆</span>
+        <h3>Abu Dhabi's Most Trusted Garage</h3>
+        <p>Over 15 years serving Abu Dhabi drivers with honest, reliable, and expert car care. We treat your car like our own.</p>
+      </div>
+      <div class="why-badge"><div class="wb-num">15+</div><div class="wb-label">Years<br>Trusted</div></div>
+    </div>
+    <div class="reveal-r">
+      <div class="sec-tag">Why Choose Us</div>
+      <h2 class="sec-title">WHY DRIVERS<br><em>TRUST</em> US</h2>
+      <div class="why-points">
+        <div class="why-point"><div class="wp-icon"><i class="fas fa-certificate"></i></div><div class="wp-text"><h4>Certified Technicians</h4><p>All our mechanics are certified with manufacturer training for major car brands.</p></div></div>
+        <div class="why-point"><div class="wp-icon"><i class="fas fa-dollar-sign"></i></div><div class="wp-text"><h4>Honest & Transparent Pricing</h4><p>We give you a full quote before starting any work. Zero surprise charges — ever.</p></div></div>
+        <div class="why-point"><div class="wp-icon"><i class="fas fa-bolt"></i></div><div class="wp-text"><h4>Same Day Service Available</h4><p>Most services completed same day. We know your time is valuable.</p></div></div>
+        <div class="why-point"><div class="wp-icon"><i class="fas fa-shield-alt"></i></div><div class="wp-text"><h4>Warranty on All Repairs</h4><p>Every repair comes with a warranty. We stand behind the quality of our work.</p></div></div>
+        <div class="why-point"><div class="wp-icon"><i class="fas fa-car"></i></div><div class="wp-text"><h4>All Makes & Models</h4><p>Japanese, European, American, Korean — we service every car brand in the UAE.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="team-wrap">
+    <div class="team-header reveal">
+      <div class="sec-tag" style="margin:0 auto 16px;width:fit-content;">Our Technicians</div>
+      <h2 class="sec-title">MEET OUR <em>EXPERT</em> TEAM</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Certified, experienced mechanics who treat every car with care and precision.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal" style="transition-delay:0.1s"><div class="tc-photo tcp1">👨‍🔧</div><div class="tc-bar"></div><div class="tc-info"><h3>Ahmed Al Mansoori</h3><div class="tc-role">Master Technician</div><div class="tc-exp">20 years experience</div></div></div>
+      <div class="team-card reveal" style="transition-delay:0.2s"><div class="tc-photo tcp2">👨‍🔧</div><div class="tc-bar"></div><div class="tc-info"><h3>Ravi Kumar</h3><div class="tc-role">Engine Specialist</div><div class="tc-exp">15 years experience</div></div></div>
+      <div class="team-card reveal" style="transition-delay:0.3s"><div class="tc-photo tcp3">👨‍🔧</div><div class="tc-bar"></div><div class="tc-info"><h3>Mohammed Saleh</h3><div class="tc-role">Electrical Expert</div><div class="tc-exp">12 years experience</div></div></div>
+      <div class="team-card reveal" style="transition-delay:0.4s"><div class="tc-photo tcp4">👨‍🔧</div><div class="tc-bar"></div><div class="tc-info"><h3>Carlos Mendez</h3><div class="tc-role">Body & Paint Specialist</div><div class="tc-exp">10 years experience</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="test-wrap">
+    <div class="test-header reveal">
+      <div class="sec-tag" style="margin:0 auto 16px;width:fit-content;">Customer Reviews</div>
+      <h2 class="sec-title">WHAT DRIVERS <em>SAY</em></h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Real reviews from real Abu Dhabi drivers who trust ProGarage with their cars.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal" style="transition-delay:0.1s"><div class="test-stars">★★★★★</div><p class="test-text">"Been coming here for 5 years with my Land Cruiser. Always honest, always fast, and the price is always fair. Won't take my car anywhere else in Abu Dhabi."</p><div class="test-author"><div class="test-av"><i class="fas fa-user"></i></div><div><div class="test-name">Khalid Al Rashidi</div><div class="test-car">Toyota Land Cruiser 2022</div></div></div></div>
+      <div class="test-card reveal" style="transition-delay:0.2s"><div class="test-stars">★★★★★</div><p class="test-text">"My BMW had an engine warning light and every garage quoted me double the price. ProGarage fixed it same day for a fair price. Absolutely brilliant service."</p><div class="test-author"><div class="test-av"><i class="fas fa-user"></i></div><div><div class="test-name">James Whitfield</div><div class="test-car">BMW 5 Series 2021</div></div></div></div>
+      <div class="test-card reveal" style="transition-delay:0.3s"><div class="test-stars">★★★★★</div><p class="test-text">"AC stopped working in July — worst timing ever 😂 They fixed it within 3 hours and the price was very reasonable. Very professional team, highly recommend!"</p><div class="test-author"><div class="test-av"><i class="fas fa-user"></i></div><div><div class="test-name">Priya Sharma</div><div class="test-car">Honda Accord 2020</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="c-wrap">
+    <div class="reveal-l">
+      <div class="sec-tag">Contact Us</div>
+      <h2 class="sec-title">BOOK YOUR<br>CAR SERVICE<br><em>TODAY</em></h2>
+      <div class="c-items">
+        <div class="c-item"><div class="c-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><a href="tel:+97126654200">+971 2 665 4200</a></div></div>
+        <div class="c-item"><div class="c-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:service@progarage.ae">service@progarage.ae</a></div></div>
+        <div class="c-item"><div class="c-icon"><i class="fas fa-location-dot"></i></div><div><h4>Location</h4><p>Industrial Area, Mussafah<br>Abu Dhabi, UAE</p></div></div>
+        <div class="c-item"><div class="c-icon"><i class="fas fa-clock"></i></div><div><h4>Working Hours</h4><p>Daily: 8:00 AM – 9:00 PM<br>Friday: 9:00 AM – 6:00 PM</p></div></div>
+      </div>
+      <a href="https://wa.me/97126654200" class="wa-btn"><i class="fab fa-whatsapp" style="font-size:20px"></i> WhatsApp for Quick Booking</a>
+    </div>
+    <div class="c-form reveal-r">
+      <h3>BOOK A SERVICE</h3>
+      <div class="fg-row">
+        <div class="fg"><label>Your Name</label><input type="text" placeholder="Full name"></div>
+        <div class="fg"><label>Phone</label><input type="tel" placeholder="+971 XX XXX XXXX"></div>
+      </div>
+      <div class="fg-row">
+        <div class="fg"><label>Car Brand</label><input type="text" placeholder="e.g. Toyota, BMW"></div>
+        <div class="fg"><label>Year</label><input type="text" placeholder="e.g. 2022"></div>
+      </div>
+      <div class="fg"><label>Service Needed</label>
+        <select><option>Select service...</option><option>General Service / Oil Change</option><option>AC Service & Repair</option><option>Tyres & Alignment</option><option>Engine & Gearbox</option><option>Electrical & Battery</option><option>Body & Paint</option><option>Other</option></select>
+      </div>
+      <div class="fg"><label>Preferred Date</label><input type="text" placeholder="e.g. Tomorrow morning"></div>
+      <div class="fg"><label>Issue Description</label><textarea placeholder="Describe the problem or service needed..."></textarea></div>
+      <button class="f-submit">BOOK SERVICE NOW →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="fa"><a href="#hero" class="nav-logo"><div class="logo-icon">🔧</div><div class="lt"><span>ProGarage</span><span>Auto Service · Abu Dhabi</span></div></a><p>Abu Dhabi's most trusted auto service center. 15+ years, 8,000+ cars serviced, 100% honest pricing.</p></div>
+    <div class="fc"><h4>Services</h4><ul><li><a href="#services"><i class="fas fa-chevron-right"></i> General Service</a></li><li><a href="#services"><i class="fas fa-chevron-right"></i> AC Repair</a></li><li><a href="#services"><i class="fas fa-chevron-right"></i> Tyres & Alignment</a></li><li><a href="#services"><i class="fas fa-chevron-right"></i> Engine & Gearbox</a></li></ul></div>
+    <div class="fc"><h4>Garage</h4><ul><li><a href="#why"><i class="fas fa-chevron-right"></i> Why Choose Us</a></li><li><a href="#team"><i class="fas fa-chevron-right"></i> Our Team</a></li><li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Reviews</a></li><li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li></ul></div>
+    <div class="fc"><h4>Contact</h4><ul><li><a href="tel:+97126654200"><i class="fas fa-phone"></i> +971 2 665 4200</a></li><li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a></li><li><a href="mailto:service@progarage.ae"><i class="fas fa-envelope"></i> Email</a></li><li><a href="#"><i class="fas fa-location-dot"></i> Mussafah, Abu Dhabi</a></li></ul></div>
+  </div>
+  <div class="fb"><p>© 2026 <span>ProGarage Auto Service</span>. All rights reserved. | Sample demo website.</p><div class="sl"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-tiktok"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+  window.addEventListener('scroll',()=>{document.querySelector('nav').style.background=window.scrollY>50?'rgba(8,12,16,1)':'rgba(8,12,16,0.97)';});
+</script>
+</body>
+</html>
