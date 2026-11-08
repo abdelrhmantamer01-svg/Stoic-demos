@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a Battery Works</title>
+<style>
+  :root { --bg:#06070a; --dim:rgba(255,255,255,.52); --ion:#ff8a3d; --elec:#5ec8ff; }
+  html,body { margin:0; height:100%; background:var(--bg); overflow:hidden; }
+  body { display:flex; align-items:center; justify-content:center; font-family:"Inter","Inter Display",system-ui,sans-serif; }
+  #stage { position:relative; width:1080px; height:1920px; background:var(--bg); overflow:hidden; transform-origin:center; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .layer { position:absolute; inset:0; pointer-events:none; }
+  #cap { position:absolute; left:60px; right:60px; top:190px; text-align:center; }
+  #cap .line { font-size:74px; line-height:1.12; letter-spacing:-1.5px; }
+  #cap .w { display:inline-block; margin:0 .13em; will-change:opacity,filter,transform; }
+  #cap .d { color:var(--dim); font-weight:500; }
+  #cap .b { color:#fff; font-weight:800; }
+  #sub { position:absolute; left:90px; right:90px; top:390px; text-align:center; color:rgba(255,255,255,.6); font-size:36px; font-weight:500; line-height:1.35; }
+  .lbl { position:absolute; transform:translate(-50%,-50%); text-align:center; white-space:nowrap; color:#fff; font-weight:700; font-size:34px; text-shadow:0 2px 12px rgba(0,0,0,.9); }
+  .lbl small { display:block; font-weight:500; font-size:26px; color:rgba(255,255,255,.62); margin-top:2px; }
+  .lbl.ion { color:var(--ion); } .lbl.elec { color:var(--elec); }
+  #meter { position:absolute; left:50%; top:1770px; transform:translateX(-50%); display:flex; align-items:center; gap:14px; padding:12px 22px; border-radius:40px;
+           background:rgba(18,20,26,.78); border:1px solid rgba(255,255,255,.14); color:#fff; font-weight:800; font-size:34px; }
+  #meter { font-size:40px; padding:16px 30px; }
+  #meter .bat { width:62px; height:30px; border:3px solid rgba(255,255,255,.85); border-radius:7px; position:relative; box-sizing:border-box; }
+  #meter .bat:after { content:""; position:absolute; right:-9px; top:7px; width:5px; height:10px; background:rgba(255,255,255,.85); border-radius:0 3px 3px 0; }
+  #meter .fill { position:absolute; left:3px; top:3px; bottom:3px; border-radius:3px; background:#4ade80; }
+  #meter .st { font-weight:500; font-size:26px; color:rgba(255,255,255,.65); }
+  #fade { position:absolute; inset:0; background:#000; opacity:0; }
+  #flash { position:absolute; inset:0; background:radial-gradient(circle at 50% 55%, rgba(255,190,120,.85), rgba(255,140,60,0) 60%); opacity:0; }
+  #end { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; text-align:center; }
+  #end h1 { margin:0; color:#fff; font-size:104px; font-weight:800; letter-spacing:-3px; line-height:1.02; }
+  #end h1 span { color:var(--ion); }
+  #end p { margin:28px 0 0; color:rgba(255,255,255,.6); font-size:38px; font-weight:500; }
+  #end .recap { margin-top:70px; display:flex; flex-direction:column; gap:20px; font-size:34px; color:rgba(255,255,255,.82); font-weight:500; }
+  #end .recap b { color:#fff; }
+  #vign { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.6) 100%); }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c" width="1080" height="1920"></canvas>
+  <div id="vign" class="layer"></div>
+  <div id="labels" class="layer"></div>
+  <div id="cap" class="layer"></div>
+  <div id="sub" class="layer"></div>
+  <div id="flash" class="layer"></div>
+  <div id="fade" class="layer"></div>
+  <div id="end" class="layer">
+    <h1>How a<br><span>battery</span> works</h1>
+    <p>lithium-ion, in 40 seconds</p>
+    <div class="recap">
+      <div><b>Unplugged:</b> ions → cathode, electrons → your device</div>
+      <div><b>Charging:</b> the charger pushes them back</div>
+      <div><b>Aging:</b> a few ions get trapped every cycle</div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const W = 1080, H = 1920, DURATION = 44;
+const RECORD = new URLSearchParams(location.search).has('record');
+
+// ---------- helpers ----------
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const R = rng(7);
+const clamp = (x,a=0,b=1) => Math.min(b, Math.max(a, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+const ss = (a,b,x) => { const t = clamp((x-a)/(b-a)); return t*t*(3-2*t); };
+const eio = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+const V = (x,y,z) => new THREE.Vector3(x,y,z);
+const vlerp = (a,b,t) => a.clone().lerp(b,t);
+
+// ---------- renderer ----------
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, preserveDrawingBuffer:true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 0.82;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x06070a);
+scene.fog = new THREE.Fog(0x06070a, 18, 40);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+const camera = new THREE.PerspectiveCamera(40, W/H, 0.05, 100);
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(W/2, H/2), 0.6, 0.45, 0.82);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+const amb = new THREE.AmbientLight(0xffffff, 0.15); scene.add(amb);
+const key = new THREE.DirectionalLight(0xffe2c4, 1.6); key.position.set(5, 9, 6); scene.add(key);
+const rim = new THREE.DirectionalLight(0x8fb4ff, 0.9); rim.position.set(-6, 3, -6); scene.add(rim);
+
+function dotTexture(){ const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d');
+  const gr = g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.35,'rgba(255,255,255,.6)'); gr.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); }
+const DOT = dotTexture();
+
+const alu = new THREE.MeshStandardMaterial({ color:0xb9b4ad, metalness:.85, roughness:.36, envMapIntensity:.45 });
+const aluEdge = new THREE.MeshStandardMaterial({ color:0xe0a27a, metalness:.4, roughness:.45, emissive:0x3a1405 });
+
+// ======================================================================
+// SCENE A — laptop that shatters to reveal its battery
+// ======================================================================
+const A = new THREE.Group(); scene.add(A);
+const tray = new THREE.Mesh(new RoundedBoxGeometry(6, .3, 4.2, 4, .08), alu); tray.position.y = 0.05; A.add(tray);
+const inner = new THREE.Mesh(new THREE.BoxGeometry(5.7, .05, 3.9), new THREE.MeshStandardMaterial({ color:0x15161a, roughness:.8 })); inner.position.y = 0.21; A.add(inner);
+// logic board (back half)
+const board = new THREE.Mesh(new THREE.BoxGeometry(5.2, .04, 1.5), new THREE.MeshStandardMaterial({ color:0x0f2a22, roughness:.6, metalness:.2 })); board.position.set(0, .25, -1.05); A.add(board);
+for (let i=0;i<14;i++){ const s = .15 + R()*.35; const chip = new THREE.Mesh(new THREE.BoxGeometry(s, .05, s*(.6+R()*.6)), new THREE.MeshStandardMaterial({ color:0x2b2d33, roughness:.4, metalness:.5 }));
+  chip.position.set(-2.4 + R()*4.8, .29, -1.65 + R()*1.2); A.add(chip); }
+// battery cells (front half)
+const cellMats = [], cellLights = [];
+const cellX = [-2.1, -0.7, 0.7, 2.1];
+cellX.forEach((x,i) => {
+  const m = new THREE.MeshStandardMaterial({ color:0x2a2420, roughness:.5, metalness:.3, emissive:0xff5a12, emissiveIntensity:0 });
+  cellMats.push(m);
+  const cell = new THREE.Mesh(new RoundedBoxGeometry(1.25, .2, 1.75, 3, .05), m); cell.position.set(x, .33, .95); A.add(cell);
+  const pl = new THREE.PointLight(0xff6a1a, 0, 3.5, 1.6); pl.position.set(x, .9, .95); A.add(pl); cellLights.push(pl);
+});
+// deck shards — a jittered grid tessellation of the top plate
+const shards = [];
+{
+  const NX = 7, NZ = 5, X0 = -3, X1 = 3, Z0 = -2.1, Z1 = 2.1, verts = [];
+  for (let j=0;j<=NZ;j++){ verts[j] = []; for (let i=0;i<=NX;i++){
+    let x = lerp(X0,X1,i/NX), z = lerp(Z0,Z1,j/NZ);
+    if (i>0 && i<NX) x += (R()-.5)*.55; if (j>0 && j<NZ) z += (R()-.5)*.5;
+    verts[j][i] = [x,z]; } }
+  for (let j=0;j<NZ;j++) for (let i=0;i<NX;i++){
+    const poly = [verts[j][i], verts[j][i+1], verts[j+1][i+1], verts[j+1][i]];
+    const cx = poly.reduce((s,p)=>s+p[0],0)/4, cz = poly.reduce((s,p)=>s+p[1],0)/4;
+    const sh = new THREE.Shape(); poly.forEach((p,k)=> k ? sh.lineTo(p[0]-cx, p[1]-cz) : sh.moveTo(p[0]-cx, p[1]-cz));
+    const g = new THREE.ExtrudeGeometry(sh, { depth:.08, bevelEnabled:false }); g.rotateX(Math.PI/2); g.translate(0,.04,0);
+    const mesh = new THREE.Mesh(g, [alu, aluEdge]); mesh.position.set(cx, .4, cz); A.add(mesh);
+    const out = V(cx, 0, cz).normalize();
+    shards.push({ mesh, p0: mesh.position.clone(),
+      v: V(out.x*(1.5+R()*3.5), 2.5+R()*4.5, out.z*(1.5+R()*3) + 1.2 + R()*1.5),
+      av: V((R()-.5)*7, (R()-.5)*5, (R()-.5)*7), drift: V((R()-.5)*.25, .1+R()*.2, (R()-.5)*.25), delay: R()*.12 });
+  }
+}
+// lid
+const lid = new THREE.Group(); lid.position.set(0, .4, -2.1); A.add(lid);
+const lidBody = new THREE.Mesh(new RoundedBoxGeometry(6, 4.05, .12, 4, .05), alu); lidBody.position.set(0, 2.02, 0); lid.add(lidBody);
+const screenMat = new THREE.MeshStandardMaterial({ color:0x05060a, emissive:0x1d3b6e, emissiveIntensity:.35, roughness:.15, metalness:.1 });
+const scr = new THREE.Mesh(new THREE.PlaneGeometry(5.6, 3.6), screenMat); scr.position.set(0, 2.05, .065); lid.add(scr);
+// sparks
+const NSP = 380, spData = [];
+const spGeo = new THREE.BufferGeometry(); spGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(NSP*3), 3));
+for (let i=0;i<NSP;i++){ const c = cellX[i%4]; spData.push({ o: V(c+(R()-.5)*1.2, .4, .95+(R()-.5)*1.6), v: V((R()-.5)*5, 1+R()*5, (R()-.5)*5+1), ph: R()*6.28, sp: .2+R()*.5 }); }
+const sparks = new THREE.Points(spGeo, new THREE.PointsMaterial({ color:0xffa060, size:.07, map:DOT, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending }));
+A.add(sparks);
+
+function updateA(t){
+  const tE = 4.55; const e = Math.max(0, t - tE);
+  shards.forEach(s => { const d = Math.max(0, e - s.delay); const k = (1 - Math.exp(-2.4*d))/2.4;
+    s.mesh.position.copy(s.p0).addScaledVector(s.v, k).addScaledVector(s.drift, d);
+    s.mesh.rotation.set(s.av.x*k, s.av.y*k, s.av.z*k); });
+  const le = ss(tE, tE+1.4, t);
+  lid.rotation.x = lerp(-.22, -1.2, le); lid.position.set(0, .4 + 4*le, -2.1 - 7*le);
+  screenMat.emissiveIntensity = .35 * (1-le);
+  const glow = ss(tE-.1, tE+1.6, t);
+  cellMats.forEach((m,i) => { const fl = 1 + .12*Math.sin(t*9 + i*2) + .08*Math.sin(t*23+i); m.emissiveIntensity = glow*1.3*fl; cellLights[i].intensity = glow*5*fl; });
+  const pos = spGeo.attributes.position.array;
+  spData.forEach((s,i) => { const k = (1-Math.exp(-1.8*e))/1.8; const p = s.o.clone().addScaledVector(s.v, k*.8); p.y += e*s.sp*.6 + Math.sin(t*1.3+s.ph)*.05; p.x += Math.sin(t*.9+s.ph)*.08;
+    pos[i*3] = p.x; pos[i*3+1] = e>0 ? p.y : -50; pos[i*3+2] = p.z; });
+  spGeo.attributes.position.needsUpdate = true;
+  sparks.material.opacity = ss(tE, tE+.3, t) * (.55 + .45*Math.sin(t*3));
+  // camera
+  const p0 = V(9.5, 7.5, 14.5), p1 = V(4.2, 10.5, 10.5), p2 = V(.75, 1.55, 2.05);
+  const l0 = V(0, 2.3, 0), l1 = V(0, 1.6, .6), l2 = V(.7, .3, .95);
+  let p, l;
+  if (t < 7.6){ const u = eio(clamp(t/7.6)); p = vlerp(p0,p1,u); l = vlerp(l0,l1,u); }
+  else { const u = Math.pow(ss(7.6, 9.6, t), 1.6); p = vlerp(p1,p2,u); l = vlerp(l1,l2,u); }
+  camera.fov = 40; camera.position.copy(p); camera.lookAt(l);
+}
+
+// ======================================================================
+// SCENE B — inside one cell (cross-section)
+// ======================================================================
+const B = new THREE.Group(); scene.add(B);
+const SLAB_H = 4.4, XC = 1.75, PLATES = 8;
+const plateY = i => lerp(-SLAB_H/2, SLAB_H/2, i/(PLATES-1));
+const cathMat = new THREE.MeshStandardMaterial({ color:0x6f8fb6, metalness:.6, roughness:.35, emissive:0x0d1a2c });
+const anodeMat = new THREE.MeshStandardMaterial({ color:0x3b3c44, metalness:.4, roughness:.5, emissive:0x08080a });
+for (let i=0;i<PLATES;i++){
+  const pc = new THREE.Mesh(new RoundedBoxGeometry(1.3, .07, 2.4, 2, .02), cathMat); pc.position.set(-XC, plateY(i), 0); B.add(pc);
+  const pa = new THREE.Mesh(new RoundedBoxGeometry(1.3, .07, 2.4, 2, .02), anodeMat); pa.position.set( XC, plateY(i), 0); B.add(pa);
+}
+const cuMat = new THREE.MeshStandardMaterial({ color:0xc8743f, metalness:.9, roughness:.3 });
+const alMat = new THREE.MeshStandardMaterial({ color:0xc9cdd3, metalness:.9, roughness:.28 });
+const colA = new THREE.Mesh(new THREE.BoxGeometry(.1, SLAB_H+.5, 2.6), cuMat); colA.position.set( 2.48, 0, 0); B.add(colA);
+const colC = new THREE.Mesh(new THREE.BoxGeometry(.1, SLAB_H+.5, 2.6), alMat); colC.position.set(-2.48, 0, 0); B.add(colC);
+function holesTexture(){ const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
+  g.fillStyle = '#fff'; g.fillRect(0,0,256,256); g.fillStyle = '#000'; for (let y=8;y<256;y+=18) for (let x=8+(y%36?9:0);x<256;x+=18){ g.beginPath(); g.arc(x,y,4,0,7); g.fill(); }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(2,4); return t; }
+const sep = new THREE.Mesh(new THREE.BoxGeometry(.05, SLAB_H+.4, 2.6), new THREE.MeshStandardMaterial({ color:0xf3f3f6, alphaMap:holesTexture(), transparent:true, opacity:.55, depthWrite:false, roughness:.6 }));
+B.add(sep);
+const electrolyte = new THREE.Mesh(new THREE.BoxGeometry(2.2, SLAB_H+.3, 2.5), new THREE.MeshStandardMaterial({ color:0x2a6fb0, transparent:true, opacity:.08, depthWrite:false, roughness:.1 }));
+B.add(electrolyte);
+// SEI crust (aging)
+const seiMat = new THREE.MeshStandardMaterial({ color:0x8a7f72, roughness:.9, transparent:true, opacity:0 });
+const sei = new THREE.Mesh(new THREE.BoxGeometry(.08, SLAB_H+.1, 2.45), seiMat); sei.position.set(XC-.69, 0, 0); B.add(sei);
+
+// wire + device
+const wire = new THREE.CurvePath();
+const WY = 3.75, CY = SLAB_H/2 + .25;
+[[V(2.48,CY,0),V(2.48,WY,0)],[V(2.48,WY,0),V(-2.48,WY,0)],[V(-2.48,WY,0),V(-2.48,CY,0)]].forEach(([a,b]) => wire.add(new THREE.LineCurve3(a,b)));
+const wireMat = new THREE.MeshStandardMaterial({ color:0x9aa3ad, metalness:.8, roughness:.35 });
+[[V(2.48,CY,0),V(2.48,WY,0)],[V(2.48,WY,0),V(-2.48,WY,0)],[V(-2.48,WY,0),V(-2.48,CY,0)]].forEach(([a,b]) => {
+  const len = a.distanceTo(b); const m = new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,len,12), wireMat);
+  m.position.copy(a).add(b).multiplyScalar(.5); if (Math.abs(a.y-b.y) < .01) m.rotation.z = Math.PI/2; B.add(m); });
+const devBody = new THREE.Mesh(new RoundedBoxGeometry(1.25, .78, .1, 3, .04), new THREE.MeshStandardMaterial({ color:0x2a2c33, metalness:.6, roughness:.35 }));
+devBody.position.set(0, WY, 0); B.add(devBody);
+const devScreenMat = new THREE.MeshStandardMaterial({ color:0x000000, emissive:0x6fb6ff, emissiveIntensity:0 });
+const devScreen = new THREE.Mesh(new THREE.PlaneGeometry(1.08, .62), devScreenMat); devScreen.position.set(0, WY, .056); B.add(devScreen);
+
+// ions
+const NION = 36, STUCK = new Set([3, 11, 19, 26, 33]);
+const ionGeo = new THREE.SphereGeometry(.11, 20, 14);
+function sites(xc){ const s = []; for (let g=0; g<PLATES-1; g++) for (let c=0;c<3;c++) for (let z of [-.55,.55]) s.push(V(xc + (c-1)*.4, (plateY(g)+plateY(g+1))/2, z)); return s; }
+const aSites = sites(XC), cSites = sites(-XC);
+function pick(arr){ const a = arr.slice(); for (let i=a.length-1;i>0;i--){ const j = Math.floor(R()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a.slice(0, NION); }
+const aPick = pick(aSites), cPick = pick(cSites), a2Pick = pick(aSites);
+function ionPath(from, to, dir){ // dir: -1 anode→cathode, +1 cathode→anode
+  const exitX = from.x > 0 ? 1.05 : -1.05, entX = to.x > 0 ? 1.05 : -1.05;
+  const mid = V((R()-.5)*.3, lerp(from.y, to.y, .5) + (R()-.5)*1.2, (R()-.5)*1.6);
+  return new THREE.CatmullRomCurve3([from, V(exitX, from.y, from.z), mid, V(entX, to.y, to.z), to]); }
+const ions = [];
+for (let i=0;i<NION;i++){
+  const mat = new THREE.MeshStandardMaterial({ color:0xff7a2a, emissive:0xff6a1a, emissiveIntensity:1.4, roughness:.3 });
+  const m = new THREE.Mesh(ionGeo, mat); B.add(m);
+  const ia = aPick[i], ic = cPick[i];
+  const stuckTo = V(1.0, (a2Pick[i].y), a2Pick[i].z*.9);
+  const ia2 = STUCK.has(i) ? stuckTo : a2Pick[i];
+  const order = (ia.x - (XC-.4)) / .8;     // ions near the separator leave first
+  ions.push({ m, mat, dis: ionPath(ia, ic), chg: ionPath(ic, ia2), ia, ic, ia2,
+    t0: 14.4 + (order*.45 + R()*.55)*6.2, t1: 28.9 + (order*.45 + R()*.55)*5.0, ph: R()*6.28, stuck: STUCK.has(i) });
+}
+// electrons
+const NEL = 30, elGeo = new THREE.SphereGeometry(.075, 14, 10);
+const elMat = new THREE.MeshStandardMaterial({ color:0x5ec8ff, emissive:0x3fb4ff, emissiveIntensity:1.6 });
+const elecs = []; for (let i=0;i<NEL;i++){ const m = new THREE.Mesh(elGeo, elMat); B.add(m); elecs.push(m); }
+
+const bLight = new THREE.PointLight(0xff8a3d, 0, 9, 1.4); bLight.position.set(0, 0, 2.5); B.add(bLight);
+
+function ionFlow(t){ // returns {dir, rate}: discharge flow 14.4–21.6, charge 28.9–34.9
+  const d = ss(14.2, 14.9, t) * (1 - ss(21.4, 22.4, t));
+  const c = ss(28.7, 29.3, t) * (1 - ss(34.6, 35.4, t));
+  return { d, c }; }
+
+function updateB(t){
+  for (const ion of ions){
+    let p;
+    if (t < ion.t0) p = ion.ia.clone();
+    else if (t < ion.t0 + 1.7) p = ion.dis.getPoint(eio((t - ion.t0)/1.7));
+    else if (t < ion.t1) p = ion.ic.clone();
+    else if (t < ion.t1 + 1.6) p = ion.chg.getPoint(eio((t - ion.t1)/1.6));
+    else p = ion.ia2.clone();
+    p.x += Math.sin(t*3 + ion.ph)*.015; p.y += Math.cos(t*2.6 + ion.ph)*.015;
+    ion.m.position.copy(p);
+    const dead = ion.stuck ? ss(ion.t1 + 1.6, ion.t1 + 2.6, t) : 0;
+    ion.mat.emissiveIntensity = lerp(1.4, 0, dead); ion.mat.color.setRGB(lerp(1,.45,dead), lerp(.48,.42,dead), lerp(.16,.38,dead));
+  }
+  const { d, c } = ionFlow(t);
+  const flow = Math.max(d, c);
+  elecs.forEach((m,i) => {
+    let u = (i/NEL + t*.22) % 1; if (c > d) u = 1 - u;
+    const p = wire.getPointAt(u); m.position.copy(p);
+    const hidden = Math.abs(p.x) < .62 && Math.abs(p.y - WY) < .1;
+    m.visible = flow > .02 && !hidden; m.scale.setScalar(Math.max(.01, flow));
+  });
+  devScreenMat.emissiveIntensity = 1.0 * ss(14.6, 15.6, t) * (1 - ss(21.6, 22.6, t)) + .7 * c;
+  devScreenMat.emissive.set(c > d ? 0xffc46b : 0x6fb6ff);
+  seiMat.opacity = .85 * ss(34.6, 36.4, t);
+  bLight.intensity = 1.2 + 1.2*flow;
+  // camera
+  camera.fov = 45;
+  let p, l;
+  if (t < 24.2){ const u = eio(ss(9.6, 24.2, t)); p = vlerp(V(4.8, 1.6, 13.4), V(-1.8, 3.2, 15.4), u); l = vlerp(V(.3, 1.4, 0), V(0, 1.6, 0), u); }
+  else if (t < 35){ const u = eio(ss(28.6, 35, t)); p = vlerp(V(1.6, 3.2, 15.4), V(2.4, 2.6, 14.8), u); l = V(0, 1.6, 0); }
+  else { const u = eio(ss(35, 38.5, t)); p = vlerp(V(2.4, 2.6, 14.8), V(4.0, 1.4, 9.6), u); l = vlerp(V(0,1.6,0), V(1.3, 1.2, 0), u); }
+  camera.position.copy(p); camera.lookAt(l);
+}
+
+// ======================================================================
+// SCENE C — USB-C plug goes in
+// ======================================================================
+const C = new THREE.Group(); scene.add(C);
+const body = new THREE.Mesh(new RoundedBoxGeometry(8, .62, 3, 4, .12), alu); body.position.set(-4.4, 0, 0); C.add(body);
+{
+  const sh = new THREE.Shape(); const hw = 1.5, hh = .31; sh.moveTo(-hw,-hh); sh.lineTo(hw,-hh); sh.lineTo(hw,hh); sh.lineTo(-hw,hh); sh.lineTo(-hw,-hh);
+  const hole = new THREE.Path(); const pw = .3, ph = .115, r = .11;
+  hole.absarc(-pw, 0, ph, Math.PI/2, Math.PI*1.5, false); hole.absarc(pw, 0, ph, -Math.PI/2, Math.PI/2, false); sh.holes.push(hole);
+  const g = new THREE.ExtrudeGeometry(sh, { depth:.12, bevelEnabled:true, bevelSize:.02, bevelThickness:.02, bevelSegments:2, curveSegments:24 });
+  g.rotateY(Math.PI/2); const cap = new THREE.Mesh(g, alu); cap.position.set(-.4, 0, 0); C.add(cap);
+  // ring glow around port
+  const ringG = new THREE.ExtrudeGeometry((() => { const s = new THREE.Shape(); s.absarc(-pw,0,ph+.035,Math.PI/2,Math.PI*1.5,false); s.absarc(pw,0,ph+.035,-Math.PI/2,Math.PI/2,false);
+    const h = new THREE.Path(); h.absarc(-pw,0,ph,Math.PI/2,Math.PI*1.5,false); h.absarc(pw,0,ph,-Math.PI/2,Math.PI/2,false); s.holes.push(h); return s; })(), { depth:.01, bevelEnabled:false, curveSegments:24 });
+  ringG.rotateY(Math.PI/2);
+  const ring = new THREE.Mesh(ringG, new THREE.MeshStandardMaterial({ color:0xffe2b0, emissive:0xffb35a, emissiveIntensity:0 })); ring.position.set(-.27, 0, 0); C.add(ring); C.userData.ring = ring;
+  const dark = new THREE.Mesh(new THREE.BoxGeometry(.6, .28, .9), new THREE.MeshStandardMaterial({ color:0x050505, roughness:1 })); dark.position.set(-.62, 0, 0); C.add(dark);
+  const tongue = new THREE.Mesh(new THREE.BoxGeometry(.4, .04, .42), new THREE.MeshStandardMaterial({ color:0x2a2a2e, metalness:.5 })); tongue.position.set(-.55, 0, 0); C.add(tongue);
+}
+const plug = new THREE.Group(); C.add(plug);
+const plugBody = new THREE.Mesh(new RoundedBoxGeometry(1.5, .44, .92, 5, .2), new THREE.MeshStandardMaterial({ color:0xb8b2a8, roughness:.5, metalness:.05, envMapIntensity:.5 }));
+plugBody.position.set(.75 + .52, 0, 0); plug.add(plugBody);
+const tip = new THREE.Mesh(new RoundedBoxGeometry(.56, .2, .58, 4, .09), new THREE.MeshStandardMaterial({ color:0xd8d8dc, metalness:1, roughness:.2 }));
+tip.position.set(.28, 0, 0); plug.add(tip);
+const strain = new THREE.Mesh(new THREE.CylinderGeometry(.17, .2, .5, 24), plugBody.material); strain.rotation.z = Math.PI/2; strain.position.set(2.2, 0, 0); plug.add(strain);
+const cable = new THREE.Mesh(new THREE.CylinderGeometry(.13, .13, 12, 20), plugBody.material); cable.rotation.z = Math.PI/2; cable.position.set(8.4, 0, 0); plug.add(cable);
+const cLight = new THREE.PointLight(0xffb45a, 0, 8, 1.5); cLight.position.set(.8, .9, 1.2); C.add(cLight);
+const cBack = new THREE.PointLight(0xffc070, 2.2, 14, 1.2); cBack.position.set(-2, 2.5, -3); C.add(cBack);
+const NDU = 160, duGeo = new THREE.BufferGeometry(); duGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(NDU*3), 3));
+const duData = []; for (let i=0;i<NDU;i++) duData.push({ o: V(-3 + R()*7, -1.4 + R()*3, -2 + R()*3.5), ph: R()*6.28 });
+const dust = new THREE.Points(duGeo, new THREE.PointsMaterial({ color:0xffcf8a, size:.05, map:DOT, transparent:true, opacity:.8, depthWrite:false, blending:THREE.AdditiveBlending })); C.add(dust);
+
+function updateC(t){
+  const u = eio(ss(24.6, 26.7, t));
+  plug.position.x = lerp(3.4, -.66, u) + (t > 26.7 ? Math.sin((t-26.7)*30)*.01*Math.exp(-(t-26.7)*8) : 0);
+  const hit = ss(26.55, 26.8, t) * (1 - ss(26.9, 28.2, t)*.6);
+  cLight.intensity = 1.8 * hit; C.userData.ring.material.emissiveIntensity = 1.6 * hit;
+  const pos = duGeo.attributes.position.array;
+  duData.forEach((d,i) => { pos[i*3] = d.o.x + Math.sin(t*.5 + d.ph)*.2; pos[i*3+1] = d.o.y + ((t*.12 + d.ph) % 1)*.6; pos[i*3+2] = d.o.z; });
+  duGeo.attributes.position.needsUpdate = true;
+  camera.fov = 34;
+  const k = ss(24.2, 28.4, t);
+  camera.position.set(lerp(4.6, 3.5, k), lerp(.8, .55, k), lerp(5.0, 4.0, k)); camera.lookAt(lerp(.8, .25, k), -.45, 0);
+}
+
+// ======================================================================
+// Overlays: captions, labels, fades
+// ======================================================================
+const CAPS = [
+  [0.3, 4.2,  [['what keeps your',0],['laptop alive?',1]]],
+  [4.5, 9.2,  [["it's",0],['battery.',1]]],
+  [9.9, 14.0, [['inside every cell,',0],['two layers.',1]], 'graphite on one side, metal oxide on the other'],
+  [14.3, 19.0,[['unplugged, lithium ions',0],['swim across.',1]], 'from the graphite to the metal oxide'],
+  [19.2, 24.0,[['their electrons take',0],['the long way.',1]], 'through your laptop — that flow is the power'],
+  [24.5, 28.3,[['on the',0],['charger',1]]],
+  [28.9, 34.6,[['the charger pushes them',0],['back home.',1]], 'energy gets stored in the graphite again'],
+  [35.0, 39.7,[['a few get trapped every cycle,',0],["that's why batteries age.",1]], 'they build a crust on the graphite (the SEI layer)'],
+];
+const capEl = document.getElementById('cap'), subEl = document.getElementById('sub');
+let curCap = -1;
+function updateCaptions(t){
+  const idx = CAPS.findIndex(c => t >= c[0] && t < c[1]);
+  if (idx !== curCap){ curCap = idx; capEl.innerHTML = ''; subEl.textContent = '';
+    if (idx >= 0){ const words = []; CAPS[idx][2].forEach(([txt,b]) => txt.split(' ').forEach(w => words.push([w,b])));
+      const line = document.createElement('div'); line.className = 'line';
+      words.forEach(([w,b]) => { const s = document.createElement('span'); s.className = 'w ' + (b ? 'b' : 'd'); s.textContent = w; line.appendChild(s); });
+      capEl.appendChild(line); subEl.textContent = CAPS[idx][3] || ''; subEl.style.top = (190 + line.offsetHeight + 22) + 'px'; } }
+  if (idx < 0) return;
+  const [a, b] = CAPS[idx]; const out = 1 - ss(b - .35, b, t);
+  [...capEl.querySelectorAll('.w')].forEach((s,i) => { const k = ss(a + i*.09, a + i*.09 + .45, t) * out;
+    s.style.opacity = k; s.style.filter = `blur(${(1-k)*10}px)`; s.style.transform = `translateY(${(1-k)*18}px)`; });
+  const ks = ss(a + .7, a + 1.2, t) * out; subEl.style.opacity = ks; subEl.style.transform = `translateY(${(1-ks)*10}px)`;
+}
+// labels anchored in 3D
+const labelsEl = document.getElementById('labels');
+function mkLabel(html, cls=''){ const d = document.createElement('div'); d.className = 'lbl ' + cls; d.innerHTML = html; labelsEl.appendChild(d); return d; }
+const L = {
+  cath:  { el: mkLabel('Cathode (+)<small>metal oxide</small>'),       p: V(-XC, SLAB_H/2 + .75, 0), win: [10.4, 24.0, 28.9, 34.8] },
+  anode: { el: mkLabel('Anode (−)<small>graphite</small>'),             p: V( XC, SLAB_H/2 + .75, 0), win: [10.7, 24.0, 28.9, 34.8] },
+  sep:   { el: mkLabel('separator<small>lets only ions through</small>'), p: V(0, -SLAB_H/2 - .55, 1.3), win: [11.4, 18.8] },
+  ion:   { el: mkLabel('Li⁺ ion', 'ion'),                                p: null, win: [15.0, 19.0] },
+  el:    { el: mkLabel('e⁻ electrons', 'elec'),                          p: V(-1.55, WY + .5, 0), win: [19.4, 23.8, 29.6, 34.0] },
+  sei:   { el: mkLabel('SEI crust<small>trapped lithium</small>'),        p: V(XC - .7, -SLAB_H/2 - .45, 1.2), win: [36.4, 39.6] },
+};
+const meter = document.createElement('div'); meter.id = 'meter'; meter.innerHTML = '<div class="bat"><div class="fill"></div></div><span class="pct">100%</span><span class="st"></span>'; labelsEl.appendChild(meter);
+const mFill = meter.querySelector('.fill'), mPct = meter.querySelector('.pct'), mSt = meter.querySelector('.st');
+function project(p){ const v = p.clone().project(camera); return [(v.x*.5+.5)*W, (-v.y*.5+.5)*H]; }
+function winAlpha(t, w){ let a = 0; for (let i=0;i<w.length;i+=2) a = Math.max(a, ss(w[i], w[i]+.5, t) * (1 - ss(w[i+1]-.4, w[i+1], t))); return a; }
+function updateLabels(t, inB){
+  for (const k in L){ const o = L[k]; const a = inB ? winAlpha(t, o.win) : 0; o.el.style.opacity = a; if (a <= 0) continue;
+    let p = o.p; if (k === 'ion'){ const tracked = ions.slice().sort((x,y) => x.t0 - y.t0)[6]; p = tracked.m.position.clone().add(V(0, .42, 0)); }
+    const [x,y] = project(B.localToWorld(p.clone())); o.el.style.left = x + 'px'; o.el.style.top = y + 'px'; }
+  // battery meter: discharge 100→18, charge 18→100
+  const ma = inB ? winAlpha(t, [14.0, 24.0, 28.8, 35.2]) : 0; meter.style.opacity = ma;
+  if (ma > 0){ let pct; if (t < 26) pct = lerp(100, 18, ss(14.6, 22.0, t)); else pct = lerp(18, 100, ss(29.2, 34.8, t));
+    mFill.style.width = (pct/100*50) + 'px'; mFill.style.background = pct < 25 ? '#f87171' : pct < 50 ? '#fbbf24' : '#4ade80';
+    mPct.textContent = Math.round(pct) + '%'; mSt.textContent = t < 26 ? 'powering laptop' : '⚡ charging'; }
+}
+const fadeEl = document.getElementById('fade'), flashEl = document.getElementById('flash'), endEl = document.getElementById('end');
+
+// ======================================================================
+window.renderAt = function(t){
+  const inA = t < 9.75, inC = t >= 24.25 && t < 28.65, inB = !inA && !inC && t < 40.4;
+  A.visible = inA; B.visible = inB; C.visible = inC;
+  if (inA) updateA(t); else if (inC) updateC(t); else updateB(Math.min(t, 40.4));
+  camera.aspect = W/H; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
+  bloom.strength = inC ? .45 : .6;
+  const f = Math.max(
+    ss(0, .01, .4 - t) * (1 - t/.4),                             // fade in
+    ss(9.15, 9.75, t) * (1 - ss(9.75, 10.4, t)),                  // dive into cell
+    ss(23.85, 24.25, t) * (1 - ss(24.25, 24.7, t)),               // to plug
+    ss(28.25, 28.65, t) * (1 - ss(28.65, 29.1, t)),               // back to cell
+    ss(39.7, 40.4, t));                                           // to end card
+  fadeEl.style.opacity = clamp(f);
+  flashEl.style.opacity = .9 * ss(4.45, 4.62, t) * (1 - ss(4.62, 5.4, t)) + .3 * ss(26.55, 26.75, t) * (1 - ss(26.75, 27.6, t));
+  const e = ss(40.4, 41.3, t) * (1 - ss(43.4, 44, t)); endEl.style.opacity = e; endEl.style.transform = `scale(${lerp(.96, 1, e)})`;
+  updateCaptions(t); updateLabels(t, inB);
+  composer.render();
+};
+window.DURATION = DURATION;
+window.ready = true;
+
+if (!RECORD){
+  const stage = document.getElementById('stage');
+  const fit = () => { const s = Math.min(innerWidth/W, innerHeight/H); stage.style.transform = `scale(${s})`; }; fit(); addEventListener('resize', fit);
+  const t0 = performance.now();
+  const loop = () => { window.renderAt(((performance.now() - t0)/1000) % DURATION); requestAnimationFrame(loop); }; loop();
+}
+</script>
+</body>
+</html>
