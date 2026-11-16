@@ -1,0 +1,160 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #141414;
+      font-family: "Bebas Neue";
+    }
+    #pl-logo {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      opacity: 0;
+    }
+    #pl-mark {
+      position: absolute;
+      left: 540px;
+      top: 600px;
+      width: 0;
+      height: 0;
+      perspective: 1000px;
+    }
+    .pl-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 26px solid #55524d;
+    }
+    #pl-r1 {
+      left: -240px;
+      top: -240px;
+      width: 480px;
+      height: 480px;
+    }
+    #pl-r2 {
+      left: -172px;
+      top: -172px;
+      width: 344px;
+      height: 344px;
+    }
+    #pl-r3 {
+      left: -104px;
+      top: -104px;
+      width: 208px;
+      height: 208px;
+    }
+    #pl-word {
+      position: absolute;
+      left: 0;
+      width: 1080px;
+      top: 880px;
+      text-align: center;
+      font-size: 190px;
+      line-height: 1;
+      white-space: nowrap;
+      color: #55524d;
+    }
+    #pl-word .l {
+      display: inline-block;
+    }
+    #pl-ecg {
+      position: absolute;
+      left: 0;
+      top: 1090px;
+      width: 1080px;
+      height: 220px;
+    }
+    #pl-flood {
+      position: absolute;
+      left: 440px;
+      top: 500px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: #2337ff;
+      opacity: 0;
+    }
+    #pl-dotp {
+      position: absolute;
+      left: 480px;
+      top: 540px;
+      width: 120px;
+      height: 120px;
+    }
+    #pl-dot {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #e63946;
+    }
+  </style>
+  <div id="root" data-composition-id="pulse" data-width="1080" data-height="1920">
+    <div id="pl-logo" data-layout-allow-overflow>
+      <div id="pl-mark">
+        <div id="pl-r1" class="pl-ring"></div>
+        <div id="pl-r2" class="pl-ring"></div>
+        <div id="pl-r3" class="pl-ring"></div>
+      </div>
+      <div id="pl-word"><span class="l">Y</span><span class="l">O</span><span class="l">U</span><span class="l">R</span> <span class="l">L</span><span class="l">O</span><span class="l">G</span><span class="l">O</span></div>
+      <svg id="pl-ecg" viewBox="0 0 1080 220">
+        <path id="pl-flat" d="M100 110 H980" fill="none" stroke="#55524d" stroke-width="8" stroke-linecap="round" />
+        <path id="pl-beat" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M100 110 H316 l18 -20 l18 20 h22 l20 28 l32 -134 l34 180 l24 -74 h44 q28 -38 56 0 H656 l18 -20 l18 20 h22 l20 28 l32 -134 l34 180 l24 -74 h44 q28 -38 56 0 H980" fill="none" stroke="#e63946" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div id="pl-flood"></div>
+    <div id="pl-dotp"><div id="pl-dot"></div></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const P = "#pl-dotp";
+      const D = "#pl-dot";
+      const BONE = "#f1eee8";
+
+      // a still logo, grey and dead
+      tl.fromTo("#pl-logo", { opacity: 0, scale: 1.14, transformOrigin: "540px 760px" }, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, 0);
+
+      // the dot winds up and dives into the centre
+      tl.fromTo(P, { x: 320, y: -180, scale: 1.833 }, { x: 352, y: -206, duration: 0.2, ease: "power2.out" }, 0.08);
+      tl.to(P, { x: 0, y: 0, scale: 1, duration: 0.35, ease: "power3.in" }, 0.3);
+
+      // 0.65 hit: the logo gets a pulse
+      tl.to(".pl-ring", { borderColor: BONE, duration: 0.1, ease: "none" }, 0.65);
+      tl.to("#pl-word", { color: BONE, duration: 0.1, ease: "none" }, 0.65);
+      tl.to("#pl-r1", { rotationX: 720, duration: 1.65, ease: "power3.out" }, 0.65);
+      tl.to("#pl-r2", { rotationY: -720, duration: 1.8, ease: "power3.out" }, 0.65);
+      tl.to("#pl-r3", { rotationX: 540, rotationY: 360, duration: 1.95, ease: "power3.out" }, 0.65);
+      tl.to("#pl-mark", { keyframes: { scale: [1, 1.12, 1] }, duration: 0.4, ease: "sine.inOut" }, 0.65);
+      function beat(t, s) {
+        tl.to(D, { scale: s, duration: 0.07, ease: "power2.out" }, t);
+        tl.to(D, { scale: 1, duration: 0.14, ease: "power2.inOut" }, t + 0.07);
+      }
+      beat(0.65, 1.7);
+      beat(1.15, 1.5);
+      beat(1.37, 1.3);
+      beat(1.73, 1.5);
+      beat(1.95, 1.3);
+      tl.to("#pl-beat", { strokeDashoffset: 0, duration: 1.5, ease: "none" }, 0.65);
+      tl.to("#pl-word .l", { keyframes: { y: [0, -30, 0] }, duration: 0.26, stagger: 0.025, ease: "sine.inOut" }, 1.15);
+      tl.to("#pl-word .l", { keyframes: { y: [0, -30, 0] }, duration: 0.26, stagger: 0.025, ease: "sine.inOut" }, 1.73);
+      tl.to("#pl-mark", { keyframes: { scale: [1, 1.06, 1] }, duration: 0.22, ease: "sine.inOut" }, 1.15);
+      tl.to("#pl-mark", { keyframes: { scale: [1, 1.06, 1] }, duration: 0.22, ease: "sine.inOut" }, 1.73);
+
+      // exit: rings fold into the dot, the dot squares up into an app icon, its colour floods the ground
+      tl.to(".pl-ring", { scale: 0.2, opacity: 0, duration: 0.3, stagger: 0.04, ease: "power3.in" }, 2.5);
+      tl.to(["#pl-word", "#pl-ecg"], { opacity: 0, filter: "blur(14px)", duration: 0.2, ease: "power2.in" }, 2.55);
+      tl.set("#pl-flood", { opacity: 1 }, 2.72);
+      tl.fromTo("#pl-flood", { scale: 0 }, { scale: 25, duration: 0.44, ease: "power2.inOut" }, 2.72);
+      tl.to(D, { scale: 1.667, borderRadius: "28%", duration: 0.36, ease: "back.out(1.8)" }, 2.78);
+
+      window.__timelines["pulse"] = tl;
+    })();
+  </script>
+</template>

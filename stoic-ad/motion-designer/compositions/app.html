@@ -1,0 +1,217 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #2337ff;
+      font-family: "Bebas Neue";
+    }
+    #ap-rig {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      perspective: 1500px;
+      perspective-origin: 540px 760px;
+    }
+    #ap-phone {
+      position: absolute;
+      left: 280px;
+      top: 230px;
+      width: 520px;
+      height: 1060px;
+      transform-style: preserve-3d;
+    }
+    #ap-shell {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      opacity: 0;
+    }
+    .ap-ext,
+    #ap-body {
+      position: absolute;
+      inset: 0;
+      border-radius: 76px;
+      background: #0a0a0a;
+    }
+    #ap-body {
+      background: #141414;
+    }
+    #ap-screen {
+      position: absolute;
+      inset: 18px;
+      border-radius: 60px;
+      background: #f1eee8;
+    }
+    .ap-layer {
+      position: absolute;
+      opacity: 0;
+    }
+    #ap-head {
+      left: 50px;
+      top: 66px;
+      width: 420px;
+      height: 70px;
+    }
+    #ap-head i {
+      position: absolute;
+      display: block;
+      background: #141414;
+    }
+    #ap-card {
+      left: 50px;
+      top: 166px;
+      width: 420px;
+      height: 310px;
+      border-radius: 28px;
+      background: #141414;
+      box-shadow: -18px 22px 0 rgba(0, 0, 0, 0.16);
+    }
+    #ap-card-t {
+      position: absolute;
+      left: 30px;
+      top: 22px;
+      font-size: 104px;
+      line-height: 1;
+      color: #f1eee8;
+      white-space: nowrap;
+    }
+    .ap-bar {
+      position: absolute;
+      bottom: 30px;
+      width: 52px;
+      border-radius: 10px;
+      background: #f1eee8;
+    }
+    .ap-row {
+      left: 50px;
+      width: 420px;
+      height: 84px;
+    }
+    .ap-row i {
+      position: absolute;
+      display: block;
+    }
+    #ap-iconp {
+      position: absolute;
+      left: 160px;
+      top: 270px;
+      width: 200px;
+      height: 200px;
+    }
+    #ap-icon {
+      width: 200px;
+      height: 200px;
+      border-radius: 28%;
+      background: #e63946;
+    }
+    #ap-zoom {
+      position: absolute;
+      left: 475px;
+      top: 1105px;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #e63946;
+      opacity: 0;
+    }
+  </style>
+  <div id="root" data-composition-id="app" data-width="1080" data-height="1920">
+    <div id="ap-rig" data-layout-allow-overflow>
+      <div id="ap-phone">
+        <div id="ap-shell">
+          <div class="ap-ext" style="transform: translateZ(-50px)"></div>
+          <div class="ap-ext" style="transform: translateZ(-40px)"></div>
+          <div class="ap-ext" style="transform: translateZ(-30px)"></div>
+          <div class="ap-ext" style="transform: translateZ(-20px)"></div>
+          <div class="ap-ext" style="transform: translateZ(-10px)"></div>
+          <div id="ap-body"></div>
+          <div id="ap-screen"></div>
+        </div>
+        <div id="ap-head" class="ap-layer">
+          <i style="left: 0; top: 0; width: 70px; height: 70px; border-radius: 50%"></i>
+          <i style="left: 96px; top: 8px; width: 200px; height: 24px; border-radius: 12px"></i>
+          <i style="left: 96px; top: 44px; width: 130px; height: 16px; border-radius: 8px; background: #b9b3a8"></i>
+        </div>
+        <div id="ap-card" class="ap-layer">
+          <div id="ap-card-t">YOUR APP</div>
+          <div class="ap-bar" style="left: 30px; height: 60px"></div>
+          <div class="ap-bar" style="left: 98px; height: 96px"></div>
+          <div class="ap-bar" style="left: 166px; height: 78px"></div>
+          <div class="ap-bar" style="left: 234px; height: 128px"></div>
+          <div class="ap-bar" style="left: 302px; height: 110px"></div>
+          <div class="ap-bar" style="left: 370px; width: 22px; height: 150px; background: #e63946"></div>
+        </div>
+        <div id="ap-row1" class="ap-layer ap-row" style="top: 506px">
+          <i style="left: 0; top: 0; width: 84px; height: 84px; border-radius: 22px; background: #141414"></i>
+          <i style="left: 110px; top: 14px; width: 240px; height: 24px; border-radius: 12px; background: #141414"></i>
+          <i style="left: 110px; top: 52px; width: 150px; height: 16px; border-radius: 8px; background: #b9b3a8"></i>
+        </div>
+        <div id="ap-row2" class="ap-layer ap-row" style="top: 616px">
+          <i style="left: 0; top: 0; width: 84px; height: 84px; border-radius: 22px; background: #2337ff"></i>
+          <i style="left: 110px; top: 14px; width: 190px; height: 24px; border-radius: 12px; background: #141414"></i>
+          <i style="left: 110px; top: 52px; width: 210px; height: 16px; border-radius: 8px; background: #b9b3a8"></i>
+        </div>
+        <div id="ap-row3" class="ap-layer ap-row" style="top: 726px">
+          <i style="left: 0; top: 0; width: 84px; height: 84px; border-radius: 22px; background: #141414"></i>
+          <i style="left: 110px; top: 14px; width: 260px; height: 24px; border-radius: 12px; background: #141414"></i>
+          <i style="left: 110px; top: 52px; width: 120px; height: 16px; border-radius: 8px; background: #b9b3a8"></i>
+        </div>
+        <div id="ap-iconp"><div id="ap-icon"></div></div>
+      </div>
+    </div>
+    <div id="ap-zoom"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const PH = "#ap-phone";
+      const IP = "#ap-iconp";
+      const IC = "#ap-icon";
+      gsap.set(".ap-bar", { transformOrigin: "50% 100%" });
+
+      // the phone builds around the icon
+      tl.fromTo("#ap-shell", { scale: 0.25, transformOrigin: "260px 370px" }, { scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 0);
+      tl.to("#ap-shell", { opacity: 1, duration: 0.1, ease: "none" }, 0);
+
+      // the icon drops down the screen and becomes the button; the UI springs in as it passes
+      tl.to(IP, { y: -26, duration: 0.12, ease: "power2.out" }, 0.3);
+      tl.to(IP, { y: 570, duration: 0.3, ease: "power2.in" }, 0.42);
+      tl.to(IC, { scale: 0.65, borderRadius: "50%", duration: 0.3, ease: "power2.inOut" }, 0.42);
+      tl.to(IP, { keyframes: { y: [570, 528, 570] }, duration: 0.24, ease: "sine.inOut" }, 0.72);
+      const layers = ["#ap-head", "#ap-card", "#ap-row1", "#ap-row2", "#ap-row3"];
+      const zs = [50, 170, 80, 110, 140];
+      layers.forEach((s, i) => {
+        tl.fromTo(s, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2.2)" }, 0.46 + i * 0.065);
+      });
+      tl.fromTo(".ap-bar", { scaleY: 0 }, { scaleY: 1, duration: 0.4, stagger: 0.05, ease: "back.out(2)" }, 0.9);
+
+      // 3D showcase: the phone turns, the layers lift off the glass
+      tl.to(PH, { rotationY: -38, rotationX: 13, rotationZ: 3, duration: 0.6, ease: "power2.inOut" }, 0.82);
+      layers.forEach((s, i) => {
+        tl.to(s, { z: zs[i], duration: 0.55, ease: "back.out(1.6)" }, 0.95 + i * 0.05);
+      });
+      tl.to(IP, { z: 240, duration: 0.55, ease: "back.out(1.6)" }, 1.2);
+      tl.to(PH, { rotationY: -27, rotationX: 9, duration: 0.5, ease: "none" }, 1.42);
+      tl.to(".ap-bar", { keyframes: { scaleY: [1, 0.55, 1.15, 1] }, duration: 0.5, stagger: 0.04, ease: "sine.inOut" }, 1.4);
+      // settle flat
+      tl.to(PH, { rotationY: 0, rotationX: 0, rotationZ: 0, duration: 0.36, ease: "power3.inOut" }, 1.92);
+      tl.to([...layers, IP], { z: 0, duration: 0.34, ease: "power3.inOut" }, 1.92);
+
+      // press, then zoom through the button
+      tl.to(IC, { scale: 0.52, duration: 0.07, ease: "power2.out" }, 2.3);
+      tl.to(IC, { scale: 0.65, duration: 0.07, ease: "power2.out" }, 2.37);
+      tl.set("#ap-zoom", { opacity: 1 }, 2.38);
+      tl.fromTo("#ap-zoom", { scale: 1 }, { scale: 40, duration: 0.3, ease: "power3.in" }, 2.38);
+
+      window.__timelines["app"] = tl;
+    })();
+  </script>
+</template>

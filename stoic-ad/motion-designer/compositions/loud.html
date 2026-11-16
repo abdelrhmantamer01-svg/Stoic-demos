@@ -1,0 +1,109 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #e63946;
+      font-family: "Bebas Neue";
+    }
+    #ld-shake {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+    #ld-say {
+      position: absolute;
+      left: 136px;
+      top: 196px;
+      font-size: 190px;
+      line-height: 1;
+      white-space: nowrap;
+      color: #f1eee8;
+    }
+    #ld-say .w {
+      display: inline-block;
+      opacity: 0;
+    }
+    #ld-loud {
+      position: absolute;
+      left: 136px;
+      top: 884px;
+      font-size: 520px;
+      line-height: 1;
+      white-space: nowrap;
+      color: #141414;
+      font-kerning: none;
+    }
+    #ld-loud .l {
+      display: inline-block;
+    }
+    #ld-iris {
+      position: absolute;
+      left: 319px;
+      top: 800px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: #f1eee8;
+      opacity: 0;
+    }
+    #ld-dot {
+      position: absolute;
+      left: 359px;
+      top: 840px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #e63946;
+      opacity: 0;
+    }
+  </style>
+  <div id="root" data-composition-id="loud" data-width="1080" data-height="1920">
+    <div id="ld-shake" data-layout-allow-overflow>
+      <div id="ld-say"><span class="w">AND</span> <span class="w">SAY</span> <span class="w">IT</span></div>
+      <div id="ld-loud"><span class="l">L</span><span class="l">O</span><span class="l">U</span><span class="l">D</span></div>
+    </div>
+    <div id="ld-iris"></div>
+    <div id="ld-dot"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const L = gsap.utils.toArray("#ld-loud .l");
+      gsap.set(L, { transformOrigin: "50% 80%" });
+
+      tl.fromTo("#ld-say .w", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.17, ease: "power2.out" }, 0.03);
+
+      // LOUD: each letter slams up to 2.2x its height
+      tl.fromTo(L, { scaleY: 0 }, { scaleY: 2.2, duration: 0.28, stagger: 0.04, ease: "back.out(1.9)" }, 0.66);
+      tl.to("#ld-shake", { keyframes: { x: [0, -16, 12, -7, 4, 0], y: [0, 20, -12, 6, -2, 0] }, duration: 0.34, ease: "none" }, 0.7);
+
+      // the word plays itself like a level meter
+      const eq = [
+        [2.2, 1.25, 2.0, 1.0, 1.7, 2.2],
+        [2.2, 1.9, 1.05, 2.1, 1.3, 2.2],
+        [2.2, 0.95, 1.8, 1.4, 2.15, 2.2],
+        [2.2, 1.6, 1.15, 1.95, 1.05, 2.2],
+      ];
+      L.forEach((el, i) => {
+        tl.to(el, { keyframes: { scaleY: eq[i] }, duration: 1.0, ease: "sine.inOut" }, 1.1 + i * 0.02);
+      });
+
+      // the O swallows hard and spits the dot back out; the ground opens from it
+      tl.to(L[1], { keyframes: { scaleX: [1, 0.78, 1.14, 1] }, duration: 0.24, ease: "sine.inOut" }, 2.16);
+      tl.set("#ld-iris", { opacity: 1 }, 2.34);
+      tl.set("#ld-dot", { opacity: 1 }, 2.34);
+      tl.fromTo("#ld-iris", { scale: 0 }, { scale: 27, duration: 0.5, ease: "power2.inOut" }, 2.34);
+      tl.fromTo("#ld-dot", { scale: 0.3 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 2.34);
+
+      window.__timelines["loud"] = tl;
+    })();
+  </script>
+</template>
