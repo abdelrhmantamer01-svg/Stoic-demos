@@ -1,0 +1,190 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #f6f3f0;
+      font-family: "Inter", sans-serif;
+    }
+    #p-blob {
+      position: absolute;
+      left: 40px;
+      top: 520px;
+      width: 1000px;
+      height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 40%, #ff8a3d 0%, rgba(255, 138, 61, 0) 60%), radial-gradient(circle at 70% 60%, #ff5e8a 0%, rgba(255, 94, 138, 0) 60%), radial-gradient(circle at 50% 30%, #7aa7ff 0%, rgba(122, 167, 255, 0) 55%);
+      filter: blur(90px);
+      opacity: 0.9;
+    }
+    #p-list {
+      position: absolute;
+      left: 110px;
+      top: 200px;
+    }
+    .item {
+      position: relative;
+      font-weight: 700;
+      font-size: 104px;
+      line-height: 124px;
+      letter-spacing: -0.045em;
+      color: #cfc8c2;
+    }
+    .item .on {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #111;
+    }
+    .pdot {
+      position: absolute;
+      left: -54px;
+      top: 50px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e63946;
+    }
+    #p-made {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 300px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 82px;
+      letter-spacing: -0.04em;
+      color: #111;
+    }
+    #p-made .red {
+      color: #e63946;
+    }
+    #p-made .w {
+      display: inline-block;
+      margin: 0 0.1em;
+    }
+    #p-persp {
+      position: absolute;
+      inset: 0;
+      perspective: 2200px;
+      perspective-origin: 540px 1000px;
+    }
+    #p-stack {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      transform-style: preserve-3d;
+    }
+    .pc {
+      position: absolute;
+      left: 60px;
+      top: 650px;
+      width: 960px;
+      height: 654px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 50px 120px rgba(40, 20, 30, 0.28);
+    }
+    .pc .bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 960px;
+      height: 54px;
+      background: #f1efee;
+    }
+    .pc .dot {
+      position: absolute;
+      top: 21px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .pc img {
+      position: absolute;
+      left: 0;
+      top: 54px;
+      width: 960px;
+      height: 600px;
+    }
+    .pc .sw {
+      position: absolute;
+      left: 0;
+      top: 54px;
+      width: 960px;
+      height: 600px;
+    }
+  </style>
+  <div id="root" data-composition-id="pages" data-width="1080" data-height="1920">
+    <div id="p-blob"></div>
+    <div id="p-list">
+      <div class="item" id="it1">Home<span class="on">Home</span><span class="pdot"></span></div>
+      <div class="item" id="it2">Services<span class="on">Services</span><span class="pdot"></span></div>
+      <div class="item" id="it3">Booking<span class="on">Booking</span><span class="pdot"></span></div>
+    </div>
+    <div id="p-made"><span class="w">Made</span><span class="w">for</span><span class="w red">you.</span></div>
+    <div id="p-persp">
+      <div id="p-stack">
+        <div class="pc" id="pc1"><div class="bar"><div class="dot" style="left: 20px; background: #ff5f57"></div><div class="dot" style="left: 40px; background: #febc2e"></div><div class="dot" style="left: 60px; background: #28c840"></div></div><img src="assets/img/nursery-programs.png" /></div>
+        <div class="pc" id="pc2"><div class="bar"><div class="dot" style="left: 20px; background: #ff5f57"></div><div class="dot" style="left: 40px; background: #febc2e"></div><div class="dot" style="left: 60px; background: #28c840"></div></div><img src="assets/img/garage-contact.png" /></div>
+        <div class="pc" id="pc3"><div class="bar"><div class="dot" style="left: 20px; background: #ff5f57"></div><div class="dot" style="left: 40px; background: #febc2e"></div><div class="dot" style="left: 60px; background: #28c840"></div></div><img src="assets/img/nursery-hero.png" /></div>
+        <div class="pc" id="pc4"><div class="bar"><div class="dot" style="left: 20px; background: #ff5f57"></div><div class="dot" style="left: 40px; background: #febc2e"></div><div class="dot" style="left: 60px; background: #28c840"></div></div><img src="assets/img/garage-services.png" /></div>
+        <!-- the main window: its page swaps on each word -->
+        <div class="pc" id="pc0">
+          <div class="bar"><div class="dot" style="left: 20px; background: #ff5f57"></div><div class="dot" style="left: 40px; background: #febc2e"></div><div class="dot" style="left: 60px; background: #28c840"></div></div>
+          <img id="sw1" class="sw" src="assets/img/garage-hero.png" />
+          <img id="sw2" class="sw" src="assets/img/garage-services.png" />
+          <img id="sw3" class="sw" src="assets/img/nursery-contact.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // setup
+    tl.fromTo(".item .on", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+    tl.fromTo(".pdot", { scale: 0 }, { scale: 0, duration: 0.01 }, 0);
+    tl.fromTo(["#sw2", "#sw3"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+    tl.fromTo(["#pc1", "#pc2", "#pc3", "#pc4"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+    tl.fromTo("#p-made .w", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+    // carry-in from the flip: the window arrives from where the nursery was
+    tl.fromTo("#pc0", { y: -90, scale: 1.04 }, { y: 0, scale: 1, duration: 0.6, ease: "expo.out" }, 0);
+    tl.fromTo(".item", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.06, ease: "power4.out" }, 0);
+    // Home (14.35) → Services (14.88) → Booking (15.58)
+    const marks = [0.15, 0.68, 1.38];
+    ["#it1", "#it2", "#it3"].forEach((id, i) => {
+      const t = marks[i];
+      tl.to(id + " .on", { opacity: 1, duration: 0.12, ease: "power2.out" }, t);
+      tl.to(id + " .pdot", { scale: 1, duration: 0.28, ease: "back.out(2.4)" }, t);
+      if (i < 2) {
+        tl.to(id + " .on", { opacity: 0, duration: 0.12, ease: "power2.in" }, marks[i + 1] - 0.02);
+        tl.to(id + " .pdot", { scale: 0, duration: 0.12, ease: "power2.in" }, marks[i + 1] - 0.02);
+      }
+    });
+    tl.fromTo("#sw2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 0.68);
+    tl.fromTo("#sw3", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 1.38);
+    // "Every page, made for you" (16.3 abs → 2.1 local): list leaves, pages fan out in 3D
+    tl.to("#p-list", { opacity: 0, filter: "blur(12px)", duration: 0.18, ease: "power3.in" }, 1.95);
+    tl.to(["#pc1", "#pc2", "#pc3", "#pc4"], { opacity: 1, duration: 0.15 }, 2.05);
+    const fan = [
+      ["#pc1", -330, -120, -420, 34],
+      ["#pc2", 330, -120, -420, -34],
+      ["#pc3", -190, 80, -200, 20],
+      ["#pc4", 190, 80, -200, -20],
+    ];
+    fan.forEach(([id, x, y, z, ry]) => {
+      tl.fromTo(id, { x: 0, y: 0, z: 0, rotationY: 0, scale: 1 }, { x, y, z, rotationY: ry, scale: 0.72, duration: 0.7, ease: "expo.out" }, 2.05);
+    });
+    tl.to("#pc0", { scale: 0.78, y: 120, z: 60, duration: 0.7, ease: "expo.out" }, 2.05);
+    tl.fromTo("#p-made .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, stagger: 0.09, ease: "power4.out" }, 2.45);
+    // collapse toward the center → becomes the phone
+    tl.to(["#pc1", "#pc2", "#pc3", "#pc4"], { x: 0, y: 120, z: -100, rotationY: 0, opacity: 0, duration: 0.4, ease: "power3.in" }, 3.5);
+    tl.to("#pc0", { scaleX: 0.45, scaleY: 1.2, y: 140, duration: 0.4, ease: "power3.in" }, 3.5);
+    tl.to("#p-made", { opacity: 0, filter: "blur(10px)", duration: 0.18, ease: "power3.in" }, 3.55);
+    window.__timelines["pages"] = tl;
+  </script>
+</template>

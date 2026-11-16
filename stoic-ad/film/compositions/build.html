@@ -1,0 +1,167 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #07070a;
+      font-family: "Inter", sans-serif;
+    }
+    #b-glow {
+      position: absolute;
+      left: -300px;
+      top: 700px;
+      width: 1680px;
+      height: 1400px;
+      background: radial-gradient(closest-side, rgba(230, 57, 70, 0.36), rgba(230, 57, 70, 0.08) 55%, rgba(230, 57, 70, 0) 100%);
+    }
+    #b-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 300px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 82px;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+    .w {
+      display: inline-block;
+      margin: 0 0.11em;
+    }
+    .red {
+      color: #e63946;
+    }
+    #b-persp {
+      position: absolute;
+      inset: 0;
+      perspective: 2000px;
+      perspective-origin: 540px 900px;
+    }
+    #b-win {
+      position: absolute;
+      left: 40px;
+      top: 560px;
+      width: 1000px;
+      height: 681px;
+      border-radius: 26px;
+      background: #0a0c0f;
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 70px 160px rgba(0, 0, 0, 0.7);
+      transform-style: preserve-3d;
+    }
+    #b-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1000px;
+      height: 56px;
+      border-radius: 26px 26px 0 0;
+      background: #16181c;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .b-dot {
+      position: absolute;
+      top: 22px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+    }
+    #b-addr {
+      position: absolute;
+      left: 250px;
+      top: 12px;
+      width: 500px;
+      height: 32px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.07);
+      font-size: 18px;
+      line-height: 32px;
+      color: rgba(255, 255, 255, 0.85);
+      text-align: center;
+      font-weight: 500;
+    }
+    #b-addr b {
+      color: #e63946;
+      font-weight: 600;
+    }
+    #b-page {
+      position: absolute;
+      left: 0;
+      top: 56px;
+      width: 1000px;
+      height: 625px;
+      transform-style: preserve-3d;
+      border-radius: 0 0 26px 26px;
+    }
+    .lay {
+      position: absolute;
+      display: block;
+    }
+    #b-real {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1000px;
+      height: 625px;
+      border-radius: 0 0 26px 26px;
+    }
+    #b-iris {
+      position: absolute;
+      left: 540px;
+      top: 780px;
+      width: 1300px;
+      height: 1300px;
+      margin-left: -650px;
+      margin-top: -650px;
+      border-radius: 50%;
+      background: #e63946;
+    }
+  </style>
+  <div id="root" data-composition-id="build" data-width="1080" data-height="1920">
+    <div id="b-glow"></div>
+    <div id="b-title"><span class="w">Then,</span><span class="w">I</span><span class="w">get</span><span class="w red">dressed.</span></div>
+    <div id="b-persp">
+      <div id="b-win">
+        <div id="b-bar">
+          <div class="b-dot" style="left: 22px; background: #ff5f57"></div>
+          <div class="b-dot" style="left: 44px; background: #febc2e"></div>
+          <div class="b-dot" style="left: 66px; background: #28c840"></div>
+          <div id="b-addr" data-layout-ignore>🔒 yourbusiness<b>.com</b></div>
+        </div>
+        <div id="b-page">
+          <!-- original 1440x900 coords x 0.6944 -->
+          <img id="l-nav" class="lay" src="assets/img/gl-nav.png" style="left: 0; top: 0; width: 1000px; height: 50px" />
+          <img id="l-head" class="lay" src="assets/img/gl-head.png" style="left: 149px; top: 142px; width: 340px; height: 208px" />
+          <img id="l-para" class="lay" src="assets/img/gl-para.png" style="left: 149px; top: 358px; width: 340px; height: 181px" />
+          <img id="l-stat" class="lay" src="assets/img/gl-stat.png" style="left: 519px; top: 186px; width: 329px; height: 176px" />
+          <img id="l-cards" class="lay" src="assets/img/gl-cards.png" style="left: 519px; top: 369px; width: 329px; height: 119px" />
+          <img id="b-real" src="assets/img/garage-hero.png" />
+        </div>
+      </div>
+    </div>
+    <div id="b-iris"></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // red from the send button irises open onto the build
+    tl.fromTo("#b-iris", { scale: 1 }, { scale: 0, duration: 0.4, ease: "power3.out" }, 0);
+    // window starts tilted in 3D, flattens as the page completes
+    tl.fromTo("#b-win", { rotationX: 18, rotationY: -26, rotationZ: 3, z: -260, y: 40 }, { rotationX: 8, rotationY: -12, rotationZ: 1, z: -120, y: 10, duration: 1.7, ease: "power2.out" }, 0);
+    tl.to("#b-win", { rotationX: 0, rotationY: 0, rotationZ: 0, z: 0, y: 0, duration: 0.7, ease: "power2.inOut" }, 1.75);
+    // title on the VO (8.75 abs = 0.15 local)
+    tl.fromTo("#b-title .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, stagger: 0.09, ease: "power4.out" }, 0.15);
+    // layers fly in from depth
+    tl.set("#b-real", { opacity: 0 }, 0);
+    tl.fromTo("#l-nav", { opacity: 0, y: -140, z: 220 }, { opacity: 1, y: 0, z: 0, duration: 0.6, ease: "expo.out" }, 0.35);
+    tl.fromTo("#l-head", { opacity: 0, z: 700, x: -60 }, { opacity: 1, z: 0, x: 0, duration: 0.65, ease: "expo.out" }, 0.55);
+    tl.fromTo("#l-para", { opacity: 0, z: 420, y: 80 }, { opacity: 1, z: 0, y: 0, duration: 0.6, ease: "expo.out" }, 0.78);
+    tl.fromTo("#l-stat", { opacity: 0, z: 520, x: 260 }, { opacity: 1, z: 0, x: 0, duration: 0.65, ease: "expo.out" }, 0.95);
+    tl.fromTo("#l-cards", { opacity: 0, z: 380, y: 160 }, { opacity: 1, z: 0, y: 0, duration: 0.6, ease: "expo.out" }, 1.12);
+    // the real page settles in exactly
+    tl.to("#b-real", { opacity: 1, duration: 0.3, ease: "power1.inOut" }, 2.05);
+    tl.to("#b-title", { opacity: 0, filter: "blur(10px)", duration: 0.18, ease: "power3.in" }, 2.35);
+    window.__timelines["build"] = tl;
+  </script>
+</template>

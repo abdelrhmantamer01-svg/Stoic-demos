@@ -1,0 +1,119 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #f6f3f0;
+      font-family: "Inter", sans-serif;
+    }
+    #ph-blob {
+      position: absolute;
+      left: 40px;
+      top: 620px;
+      width: 1000px;
+      height: 1000px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 40%, #e63946 0%, rgba(230, 57, 70, 0) 60%), radial-gradient(circle at 70% 60%, #ff8a3d 0%, rgba(255, 138, 61, 0) 60%), radial-gradient(circle at 50% 25%, #ff5e8a 0%, rgba(255, 94, 138, 0) 55%);
+      filter: blur(100px);
+      opacity: 0.85;
+    }
+    #ph-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 230px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 82px;
+      letter-spacing: -0.04em;
+      color: #111;
+    }
+    #ph-title .w {
+      display: inline-block;
+      margin: 0 0.1em;
+    }
+    #ph-title .red {
+      color: #e63946;
+    }
+    #ph-persp {
+      position: absolute;
+      inset: 0;
+      perspective: 2200px;
+      perspective-origin: 540px 1000px;
+    }
+    .phone {
+      position: absolute;
+      top: 470px;
+      width: 440px;
+      height: 900px;
+      border-radius: 70px;
+      background: #111;
+      padding: 16px;
+      box-shadow: 0 60px 120px rgba(60, 10, 20, 0.35), inset 0 0 0 3px #2a2a2a;
+    }
+    .screen {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 408px;
+      height: 868px;
+      border-radius: 56px;
+      overflow: hidden;
+      background: #000;
+    }
+    .screen img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 408px;
+    }
+    .notch {
+      position: absolute;
+      left: 154px;
+      top: 30px;
+      width: 132px;
+      height: 38px;
+      border-radius: 19px;
+      background: #000;
+    }
+    #ph-a {
+      left: 320px;
+    }
+    #ph-b {
+      left: 320px;
+    }
+  </style>
+  <div id="root" data-composition-id="phone" data-width="1080" data-height="1920">
+    <div id="ph-blob"></div>
+    <div id="ph-title"><span class="w">In</span><span class="w">your</span><span class="w red">pocket.</span></div>
+    <div id="ph-persp">
+      <div class="phone" id="ph-b">
+        <div class="screen"><img id="ph-b-img" src="assets/img/nursery-mobile-scroll.jpg" /></div>
+        <div class="notch"></div>
+      </div>
+      <div class="phone" id="ph-a">
+        <div class="screen"><img id="ph-a-img" src="assets/img/garage-mobile-scroll.jpg" /></div>
+        <div class="notch"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // phone forms out of the collapsing window
+    tl.fromTo("#ph-a", { scale: 1.25, rotationY: 0, rotationX: 0, y: 40, opacity: 0, filter: "blur(10px)" }, { scale: 1, rotationY: -22, rotationX: 6, y: 0, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 0);
+    tl.to("#ph-a", { rotationY: -10, rotationX: 3, duration: 1.35, ease: "power2.inOut" }, 0.6);
+    // second phone slides out from behind
+    tl.fromTo("#ph-b", { x: 0, z: -100, rotationY: -22, opacity: 0 }, { x: -300, z: -260, rotationY: -30, rotationX: 6, opacity: 1, duration: 0.7, ease: "expo.out" }, 0.35);
+    tl.to("#ph-a", { x: 90, duration: 0.7, ease: "expo.out" }, 0.35);
+    // the real mobile sites scroll
+    tl.fromTo("#ph-a-img", { y: 0 }, { y: -1350, duration: 1.7, ease: "power2.inOut" }, 0.55);
+    tl.fromTo("#ph-b-img", { y: 0 }, { y: -900, duration: 1.7, ease: "power2.inOut" }, 0.7);
+    // title on VO (18.2 → 0.1)
+    tl.fromTo("#ph-title .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, stagger: 0.1, ease: "power4.out" }, 0.75);
+    // dive into the phone screen → dark world
+    tl.to("#ph-title", { opacity: 0, filter: "blur(10px)", duration: 0.15, ease: "power3.in" }, 2.0);
+    tl.to("#ph-a", { scale: 3.2, rotationY: 0, rotationX: 0, x: -20, y: 80, duration: 0.4, ease: "power3.in" }, 2.0);
+    window.__timelines["phone"] = tl;
+  </script>
+</template>

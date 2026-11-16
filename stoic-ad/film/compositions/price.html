@@ -1,0 +1,195 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0b0607;
+      font-family: "Inter", sans-serif;
+    }
+    #pr-glow {
+      position: absolute;
+      left: -400px;
+      top: 200px;
+      width: 1880px;
+      height: 1600px;
+      background: radial-gradient(closest-side, rgba(230, 57, 70, 0.4), rgba(230, 57, 70, 0.08) 60%, rgba(230, 57, 70, 0) 100%);
+    }
+    #pr-stage {
+      position: absolute;
+      inset: 0;
+    }
+    #pr-brand {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 220px;
+      text-align: center;
+      font-family: "Bebas Neue";
+      font-size: 64px;
+      letter-spacing: 0.12em;
+      color: #fff;
+    }
+    #pr-brand span {
+      color: #e63946;
+    }
+    #pr-usually {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 400px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 58px;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    #pr-old {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 470px;
+      height: 380px;
+      text-align: center;
+      font-family: "Bebas Neue";
+      font-size: 380px;
+      line-height: 1;
+      color: #fff;
+    }
+    #pr-old span {
+      position: relative;
+      display: inline-block;
+    }
+    #pr-strike {
+      position: absolute;
+      left: -30px;
+      top: 160px;
+      width: calc(100% + 60px);
+      height: 22px;
+      border-radius: 11px;
+      background: #e63946;
+      transform-origin: 0 50%;
+      box-shadow: 0 0 30px rgba(230, 57, 70, 0.8);
+    }
+    #pr-chip {
+      position: absolute;
+      left: 290px;
+      top: 545px;
+      width: 500px;
+      height: 92px;
+      border-radius: 46px;
+      background: #e63946;
+      text-align: center;
+      line-height: 92px;
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: 0.06em;
+      color: #fff;
+      box-shadow: 0 16px 50px rgba(230, 57, 70, 0.5);
+    }
+    #pr-new {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 655px;
+      text-align: center;
+      font-family: "Bebas Neue";
+      font-size: 470px;
+      line-height: 1;
+      color: #e63946;
+      text-shadow: 0 0 80px rgba(230, 57, 70, 0.45);
+    }
+    #pr-wa {
+      position: absolute;
+      left: 140px;
+      top: 1145px;
+      width: 800px;
+      height: 120px;
+      border-radius: 60px;
+      background: #25d366;
+      box-shadow: 0 20px 60px rgba(37, 211, 102, 0.35);
+      color: #fff;
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 120px;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+    #pr-wa svg {
+      display: inline-block;
+      vertical-align: -10px;
+      margin-right: 18px;
+    }
+    #pr-site {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1290px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 40px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.02em;
+    }
+    #pr-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 84px;
+      height: 84px;
+    }
+  </style>
+  <div id="root" data-composition-id="price" data-width="1080" data-height="1920">
+    <div id="pr-glow"></div>
+    <div id="pr-stage">
+      <div id="pr-brand">STOIC <span>AGENCY</span></div>
+      <div id="pr-usually">Usually</div>
+      <div id="pr-old"><span>$1,200<div id="pr-strike"></div></span></div>
+      <div id="pr-chip">THIS MONTH ONLY</div>
+      <div id="pr-new">$500</div>
+      <div id="pr-wa">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3z" /></svg>+971 54 557 2646
+      </div>
+      <div id="pr-site">stoicagency.ae</div>
+    </div>
+    <svg id="pr-cursor" viewBox="0 0 24 24"><path d="M4 2l15 11-6.5 1.2L16 21l-3 1.4-3.4-6.9L4 19z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round" /></svg>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#pr-strike", { scaleX: 0 }, { scaleX: 0, duration: 0.01 }, 0);
+    tl.fromTo(["#pr-chip", "#pr-new", "#pr-wa", "#pr-site"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+    tl.fromTo("#pr-cursor", { x: 1200, y: 1700 }, { x: 1200, y: 1700, duration: 0.01 }, 0);
+    tl.fromTo("#pr-glow", { opacity: 0.5 }, { opacity: 1, duration: 1.2, ease: "power2.out" }, 0);
+    tl.fromTo("#pr-brand", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power4.out" }, 0.05);
+    // "I usually cost" (23.75 → 0.15)
+    tl.fromTo("#pr-usually", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 0.2);
+    // "twelve hundred dollars" (≈ 24.72 → 1.12)
+    tl.fromTo("#pr-old", { opacity: 0, scale: 1.25, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.4, ease: "expo.out" }, 1.08);
+    // "This month only" (26.4 → 2.8): strike, old price steps back
+    tl.to("#pr-usually", { opacity: 0, duration: 0.2 }, 2.8);
+    tl.to("#pr-strike", { scaleX: 1, duration: 0.3, ease: "expo.out" }, 2.85);
+    tl.to("#pr-old", { y: -240, scale: 0.5, opacity: 0.5, duration: 0.6, ease: "expo.out" }, 3.15);
+    tl.fromTo("#pr-chip", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 3.3);
+    // "five hundred" (27.56 → 3.96): the slam
+    tl.fromTo("#pr-new", { opacity: 0, scale: 2.4, filter: "blur(24px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 3.95);
+    tl.fromTo("#pr-stage", { x: 0, y: 0 }, { x: 14, y: -10, duration: 0.04, ease: "none" }, 4.12);
+    tl.to("#pr-stage", { x: -12, y: 8, duration: 0.04, ease: "none" }, 4.16);
+    tl.to("#pr-stage", { x: 7, y: -4, duration: 0.04, ease: "none" }, 4.2);
+    tl.to("#pr-stage", { x: 0, y: 0, duration: 0.06, ease: "power2.out" }, 4.24);
+    tl.fromTo("#pr-glow", { scale: 1 }, { scale: 1.15, duration: 0.5, ease: "expo.out" }, 3.96);
+    // call to action
+    tl.fromTo("#pr-wa", { opacity: 0, y: 40, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 5.1);
+    tl.fromTo("#pr-site", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" }, 5.35);
+    tl.to("#pr-cursor", { x: 820, y: 1205, duration: 0.6, ease: "power3.out" }, 5.5);
+    tl.to("#pr-cursor", { scale: 0.86, duration: 0.07, ease: "power2.in" }, 6.08);
+    tl.to("#pr-cursor", { scale: 1, duration: 0.14, ease: "power2.out" }, 6.15);
+    tl.to("#pr-wa", { scale: 0.95, duration: 0.07, ease: "power2.in" }, 6.08);
+    tl.to("#pr-wa", { scale: 1, duration: 0.25, ease: "back.out(2)" }, 6.15);
+    tl.to("#pr-cursor", { x: 1200, y: 1500, duration: 0.6, ease: "power3.in" }, 6.6);
+    window.__timelines["price"] = tl;
+  </script>
+</template>

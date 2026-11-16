@@ -1,0 +1,171 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #07070a;
+      font-family: "Inter", sans-serif;
+    }
+    #h-glow {
+      position: absolute;
+      left: -300px;
+      top: 900px;
+      width: 1680px;
+      height: 1400px;
+      background: radial-gradient(closest-side, rgba(230, 57, 70, 0.42), rgba(230, 57, 70, 0.1) 55%, rgba(230, 57, 70, 0) 100%);
+    }
+    #h-glow2 {
+      position: absolute;
+      left: 500px;
+      top: -400px;
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(closest-side, rgba(255, 120, 90, 0.16), rgba(255, 120, 90, 0) 100%);
+    }
+    #h-stage {
+      position: absolute;
+      inset: 0;
+    }
+    #h-win {
+      position: absolute;
+      left: 50px;
+      top: 470px;
+      width: 980px;
+      height: 860px;
+      border-radius: 34px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 60px 140px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      overflow: hidden;
+    }
+    #h-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 92px;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+    }
+    .h-dot {
+      position: absolute;
+      top: 36px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+    }
+    #h-addr {
+      position: absolute;
+      left: 170px;
+      top: 20px;
+      width: 640px;
+      height: 54px;
+      border-radius: 27px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+    }
+    #h-addr-caret {
+      position: absolute;
+      left: 30px;
+      top: 14px;
+      width: 3px;
+      height: 26px;
+      background: #fff;
+    }
+    #h-hi {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 230px;
+      text-align: center;
+      font-family: "Bebas Neue";
+      font-size: 300px;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+    #h-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 560px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 76px;
+      letter-spacing: -0.035em;
+      color: #fff;
+    }
+    #h-line .w {
+      display: inline-block;
+      margin: 0 0.12em;
+    }
+    #h-line .red {
+      color: #e63946;
+    }
+    #h-will {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 360px;
+      text-align: center;
+      font-weight: 400;
+      font-size: 64px;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+    }
+    #h-caret {
+      position: absolute;
+      left: 538px;
+      top: 470px;
+      width: 5px;
+      height: 96px;
+      background: #e63946;
+    }
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+  </style>
+  <div id="root" data-composition-id="hello" data-width="1080" data-height="1920">
+    <div id="h-glow"></div>
+    <div id="h-glow2"></div>
+    <div id="h-stage">
+      <div id="h-win">
+        <div id="h-bar">
+          <div class="h-dot" style="left: 40px"></div>
+          <div class="h-dot" style="left: 74px"></div>
+          <div class="h-dot" style="left: 108px"></div>
+          <div id="h-addr"><div id="h-addr-caret"></div></div>
+        </div>
+        <div id="h-hi">Hi.</div>
+        <div id="h-line"><span class="w">I'm</span><span class="w">your</span><span class="w red">website.</span></div>
+        <div id="h-will">well… I will be.</div>
+        <div id="h-caret"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // camera: slow settle of the window
+    tl.fromTo("#h-stage", { scale: 1.05, y: 30 }, { scale: 1, y: 0, duration: 1.6, ease: "power2.out" }, 0);
+    tl.fromTo("#h-glow", { opacity: 0.55 }, { opacity: 1, duration: 2, ease: "power2.inOut" }, 0);
+    // address-bar caret blinks (finite)
+    tl.fromTo("#h-addr-caret", { opacity: 1 }, { opacity: 0, duration: 0.25, repeat: 7, yoyo: true, ease: "steps(1)" }, 0);
+    // "Hi." on the word
+    tl.fromTo("#h-hi", { opacity: 0.25, scale: 1.12, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 0.28);
+    // I'm your website. per word
+    tl.fromTo("#h-line .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.12, ease: "power4.out" }, 0.8);
+    // "well… I will be." — the page empties
+    tl.to(["#h-hi", "#h-line"], { opacity: 0, filter: "blur(14px)", duration: 0.22, ease: "power3.in" }, 2.0);
+    tl.fromTo("#h-will", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 2.25);
+    tl.fromTo("#h-caret", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 2.3);
+    tl.to("#h-caret", { opacity: 0, duration: 0.22, repeat: 3, yoyo: true, ease: "steps(1)" }, 2.5);
+    // push into the address bar → it becomes the domain pill of the next scene
+    tl.to("#h-will", { opacity: 0, duration: 0.15 }, 3.3);
+    tl.to("#h-stage", { scale: 1.55, x: -40, y: 360, duration: 0.5, ease: "power3.in" }, 3.3);
+    tl.to("#h-stage", { opacity: 0, duration: 0.12, ease: "power1.in" }, 3.66);
+    window.__timelines["hello"] = tl;
+  </script>
+</template>
