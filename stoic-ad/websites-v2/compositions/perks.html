@@ -1,0 +1,569 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "DejaVu Arabic";
+      src: url("assets/fonts/dejavu-bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #ffb24d;
+      font-family: "Inter", sans-serif;
+    }
+    #p-strip {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 13440px;
+    }
+    .p-panel {
+      position: absolute;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+    .bone {
+      background: #f2eee8;
+      color: #15120f;
+    }
+    .ink {
+      background: #15120f;
+      color: #f2eee8;
+    }
+    .p-h {
+      position: absolute;
+      left: 90px;
+      top: 200px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 176px;
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .red {
+      color: #e63946;
+    }
+    .green {
+      color: #25d366;
+    }
+    /* P0 domain */
+    #p-pill {
+      position: absolute;
+      left: 90px;
+      top: 600px;
+      width: 900px;
+      height: 128px;
+      border-radius: 64px;
+      background: #fff;
+      box-shadow: 0 22px 48px rgba(21, 18, 15, 0.16);
+    }
+    #p-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 64px;
+      box-shadow: inset 0 0 0 6px #e63946;
+      opacity: 0;
+    }
+    #p-lock {
+      position: absolute;
+      left: 38px;
+      top: 36px;
+      width: 56px;
+      height: 56px;
+    }
+    #p-url {
+      position: absolute;
+      left: 116px;
+      top: 0;
+      line-height: 128px;
+      font-weight: 700;
+      font-size: 56px;
+      letter-spacing: -0.02em;
+      color: #15120f;
+      white-space: nowrap;
+    }
+    #p-caret {
+      display: inline-block;
+      width: 5px;
+      height: 62px;
+      margin-left: 6px;
+      vertical-align: -10px;
+      background: #e63946;
+    }
+    #p-btn {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #e63946;
+    }
+    #p-btn svg {
+      position: absolute;
+      left: 24px;
+      top: 24px;
+      width: 48px;
+      height: 48px;
+    }
+    #p-check {
+      opacity: 0;
+    }
+    #p-page {
+      position: absolute;
+      left: 90px;
+      top: 790px;
+      width: 900px;
+      height: 563px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(21, 18, 15, 0.22);
+      clip-path: inset(0 0 100% 0 round 28px);
+    }
+    #p-page img {
+      display: block;
+      width: 900px;
+      height: 563px;
+    }
+    /* P1 seven days */
+    #p-tile {
+      position: absolute;
+      left: 90px;
+      top: 410px;
+      width: 440px;
+      height: 540px;
+      border-radius: 44px;
+      background: #f2eee8;
+      overflow: hidden;
+    }
+    #p-digits {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 440px;
+    }
+    .p-dig {
+      height: 540px;
+      line-height: 580px;
+      text-align: center;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 540px;
+      color: #15120f;
+    }
+    #p-days {
+      position: absolute;
+      left: 572px;
+      top: 726px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 250px;
+      line-height: 1;
+      opacity: 0;
+    }
+    #p-bars {
+      position: absolute;
+      left: 90px;
+      top: 1040px;
+      width: 900px;
+      height: 64px;
+    }
+    .p-bar {
+      position: absolute;
+      top: 0;
+      width: 110px;
+      height: 64px;
+      border-radius: 14px;
+      background: #f2eee8;
+      opacity: 0.16;
+    }
+    #p-bar6 {
+      background: #e63946;
+    }
+    /* P2 phones */
+    #p-phones {
+      position: absolute;
+      left: 0;
+      top: 590px;
+      width: 1080px;
+      height: 700px;
+      perspective: 2000px;
+    }
+    .p-ph {
+      position: absolute;
+      left: 390px;
+      top: 0;
+      width: 300px;
+      height: 650px;
+      border-radius: 48px;
+      background: #19191c;
+      box-shadow: 0 40px 70px rgba(21, 18, 15, 0.3);
+    }
+    .p-ph .scr {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 276px;
+      height: 626px;
+      border-radius: 37px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .p-ph img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 276px;
+      height: auto;
+      display: block;
+    }
+    /* P3 whatsapp + booking */
+    #p-wa {
+      position: absolute;
+      left: 90px;
+      top: 600px;
+      width: 900px;
+      height: 142px;
+      border-radius: 14px;
+      overflow: hidden;
+      opacity: 0;
+    }
+    #p-wa img {
+      display: block;
+      width: 900px;
+      height: 142px;
+    }
+    #p-dot {
+      position: absolute;
+      left: 485px;
+      top: 616px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      border: 5px solid #fff;
+      opacity: 0;
+    }
+    #p-bubble {
+      position: absolute;
+      left: 90px;
+      top: 800px;
+      width: 760px;
+      padding: 30px 38px 34px;
+      border-radius: 8px 40px 40px 40px;
+      background: #fff;
+      color: #15120f;
+      opacity: 0;
+    }
+    #p-bubble .who {
+      font-weight: 700;
+      font-size: 32px;
+      color: #12a150;
+      margin-bottom: 8px;
+    }
+    #p-bubble .msg {
+      font-weight: 700;
+      font-size: 54px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+    #p-book {
+      position: absolute;
+      left: 90px;
+      top: 1100px;
+      width: 900px;
+      height: 160px;
+      border-radius: 30px;
+      background: #fff;
+      opacity: 0;
+    }
+    #p-book img {
+      position: absolute;
+      left: 16px;
+      top: 32px;
+      width: 868px;
+      height: 96px;
+    }
+    /* P4 arabic + english */
+    #p-flipwrap {
+      position: absolute;
+      left: 90px;
+      top: 610px;
+      width: 900px;
+      height: 460px;
+      perspective: 1800px;
+    }
+    #p-flip {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+    .p-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 40px;
+      backface-visibility: hidden;
+      text-align: center;
+    }
+    #p-ar {
+      background: #15120f;
+      color: #f2eee8;
+      font-family: "DejaVu Arabic", sans-serif;
+      font-weight: 700;
+      font-size: 150px;
+      line-height: 440px;
+      direction: rtl;
+    }
+    #p-en {
+      background: #e63946;
+      color: #fff;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 280px;
+      line-height: 490px;
+      letter-spacing: 0.02em;
+      transform: rotateX(180deg);
+    }
+    #p-toggle {
+      position: absolute;
+      left: 390px;
+      top: 1140px;
+      width: 300px;
+      height: 116px;
+      border-radius: 58px;
+      background: #15120f;
+    }
+    #p-knob {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: #f2eee8;
+    }
+    .p-tl {
+      position: absolute;
+      top: 1146px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 110px;
+      line-height: 1;
+      color: #15120f;
+    }
+    #p-tl-ar {
+      left: 250px;
+      top: 1130px;
+      font-family: "DejaVu Arabic", sans-serif;
+      font-weight: 700;
+      font-size: 96px;
+    }
+    #p-tl-en {
+      left: 726px;
+    }
+    /* P5 free changes */
+    #p-h5b {
+      position: absolute;
+      left: 90px;
+      top: 366px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 128px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    #p-h5b .w {
+      display: inline-block;
+      opacity: 0;
+    }
+    #p-arrows {
+      position: absolute;
+      left: 220px;
+      top: 580px;
+      width: 640px;
+      height: 640px;
+    }
+    #p-face {
+      position: absolute;
+      left: 330px;
+      top: 690px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: #f2eee8;
+    }
+    #p-face svg {
+      position: absolute;
+      inset: 0;
+      width: 420px;
+      height: 420px;
+    }
+    #p-m2,
+    #p-m3 {
+      opacity: 0;
+    }
+    #p-red {
+      background: #e63946;
+    }
+  </style>
+
+  <div id="root" data-composition-id="perks" data-width="1080" data-height="1920">
+    <div id="p-strip" data-layout-allow-overflow>
+      <!-- P0 your own domain -->
+      <div class="p-panel bone" style="top: 0px">
+        <div class="p-h">YOUR OWN<br /><span class="red">DOMAIN</span></div>
+        <div id="p-pill">
+          <svg id="p-lock" viewBox="0 0 56 56"><rect x="9" y="24" width="38" height="28" rx="7" fill="#15120f" /><path d="M17 25 V17 a11 11 0 0 1 22 0 V25" fill="none" stroke="#15120f" stroke-width="6" /></svg>
+          <div id="p-url"><span id="p-typed"></span><span id="p-caret"></span></div>
+          <div id="p-btn">
+            <svg id="p-arrow" viewBox="0 0 48 48"><path d="M8 24 H38 M26 11 L39 24 L26 37" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <svg id="p-check" viewBox="0 0 48 48"><path d="M9 25 L20 36 L40 13" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
+          <div id="p-ring"></div>
+        </div>
+        <div id="p-page"><img src="assets/img/cafe-laptop.jpg" alt="" /></div>
+      </div>
+
+      <!-- P1 seven days -->
+      <div class="p-panel ink" style="top: 1920px">
+        <div class="p-h">LIVE IN</div>
+        <div id="p-tile"><div id="p-digits"><div class="p-dig">1</div><div class="p-dig">2</div><div class="p-dig">3</div><div class="p-dig">4</div><div class="p-dig">5</div><div class="p-dig">6</div><div class="p-dig">7</div></div></div>
+        <div id="p-days">DAYS</div>
+        <div id="p-bars"><div class="p-bar" id="p-bar0" style="left: 0px"></div><div class="p-bar" id="p-bar1" style="left: 132px"></div><div class="p-bar" id="p-bar2" style="left: 263px"></div><div class="p-bar" id="p-bar3" style="left: 395px"></div><div class="p-bar" id="p-bar4" style="left: 527px"></div><div class="p-bar" id="p-bar5" style="left: 658px"></div><div class="p-bar" id="p-bar6" style="left: 790px"></div></div>
+      </div>
+
+      <!-- P2 mobile -->
+      <div class="p-panel bone" style="top: 3840px">
+        <div class="p-h">100% MOBILE<br /><span class="red">FRIENDLY</span></div>
+        <div id="p-phones">
+          <div class="p-ph" id="p-ph1"><div class="scr"><img id="p-pi1" src="assets/img/sc-cafe-p.jpg" alt="" /></div></div>
+          <div class="p-ph" id="p-ph3"><div class="scr"><img id="p-pi3" src="assets/img/sc-realestate-p.jpg" alt="" /></div></div>
+          <div class="p-ph" id="p-ph2"><div class="scr"><img id="p-pi2" src="assets/img/sc-clinic-p.jpg" alt="" /></div></div>
+        </div>
+      </div>
+
+      <!-- P3 whatsapp + booking -->
+      <div class="p-panel ink" style="top: 5760px">
+        <div class="p-h"><span class="green">WHATSAPP</span><br />+ BOOKING</div>
+        <div id="p-wa"><img src="assets/img/crop-wa.png" alt="" /></div>
+        <div id="p-bubble"><div class="who">New customer</div><div class="msg">Hi! Can I book for tomorrow?</div></div>
+        <div id="p-book"><img src="assets/img/crop-booking.png" alt="" /></div>
+        <div id="p-dot"></div>
+      </div>
+
+      <!-- P4 arabic + english -->
+      <div class="p-panel bone" style="top: 7680px">
+        <div class="p-h">ARABIC &amp;<br /><span class="red">ENGLISH</span></div>
+        <div id="p-flipwrap">
+          <div id="p-flip">
+            <div class="p-face" id="p-ar">أهلاً وسهلاً</div>
+            <div class="p-face" id="p-en">WELCOME</div>
+          </div>
+        </div>
+        <div class="p-tl" id="p-tl-ar">ع</div>
+        <div id="p-toggle"><div id="p-knob"></div></div>
+        <div class="p-tl" id="p-tl-en">EN</div>
+      </div>
+
+      <!-- P5 free changes -->
+      <div class="p-panel ink" style="top: 9600px">
+        <div class="p-h">FREE CHANGES</div>
+        <div id="p-h5b"><span class="w" id="p-u1">UNTIL&nbsp;</span><span class="w" id="p-u2">YOU'RE&nbsp;</span><span class="w red" id="p-u3">HAPPY</span></div>
+        <svg id="p-arrows" viewBox="0 0 640 640">
+          <circle cx="320" cy="320" r="290" fill="none" stroke="#f2eee8" stroke-width="24" stroke-dasharray="759 152" />
+          <path d="M38.9 413.0 L37.2 490.2 L106.5 450.2 Z M601.1 227.0 L602.8 149.8 L533.5 189.8 Z" fill="#f2eee8" />
+        </svg>
+        <div id="p-face">
+          <svg viewBox="0 0 420 420">
+            <circle cx="145" cy="165" r="26" fill="#15120f" />
+            <circle cx="275" cy="165" r="26" fill="#15120f" />
+            <path id="p-m1" d="M130 310 Q210 240 290 310" fill="none" stroke="#15120f" stroke-width="22" stroke-linecap="round" />
+            <path id="p-m2" d="M130 285 L290 285" fill="none" stroke="#15120f" stroke-width="22" stroke-linecap="round" />
+            <path id="p-m3" d="M115 255 Q210 370 305 255" fill="none" stroke="#e63946" stroke-width="24" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- P6 red: hands off to the price -->
+      <div class="p-panel" id="p-red" style="top: 11520px"></div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // panel k is in frame from P[k] (local seconds)
+      const P = [0, 1.05, 2.3, 3.75, 5.45, 6.65];
+
+      tl.fromTo("#p-strip", { y: 1920 }, { y: 0, duration: 0.3, ease: "power3.out" }, 0);
+      for (let k = 1; k < 6; k++) {
+        tl.fromTo("#p-strip", { y: -1920 * (k - 1) }, { y: -1920 * k, duration: 0.34, ease: "power3.inOut", immediateRender: false }, P[k] - 0.17);
+      }
+      tl.fromTo("#p-strip", { y: -9600 }, { y: -11520, duration: 0.35, ease: "power3.inOut", immediateRender: false }, 8.3);
+
+      // P0 "Your own domain." typed into the bar
+      const url = "yourbusiness.com";
+      const typed = document.getElementById("p-typed");
+      const st = { n: 0 };
+      tl.fromTo(st, { n: 0 }, { n: url.length, duration: 0.55, ease: "none", onUpdate: () => (typed.textContent = url.slice(0, Math.round(st.n))) }, 0.16);
+      tl.fromTo("#p-page", { clipPath: "inset(0 0 100% 0 round 28px)" }, { clipPath: "inset(0 0 0% 0 round 28px)", duration: 0.4, ease: "power3.out" }, 0.34);
+      tl.fromTo("#p-caret", { opacity: 1 }, { opacity: 0, duration: 0.05 }, 0.72);
+      tl.fromTo("#p-ring", { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.74);
+      tl.fromTo("#p-arrow", { opacity: 1 }, { opacity: 0, duration: 0.06 }, 0.74);
+      tl.fromTo("#p-check", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.24, ease: "back.out(2.6)" }, 0.76);
+
+      // P1 "Live in seven days." the tile rolls 1 -> 7
+      tl.fromTo("#p-digits", { y: 0 }, { y: -3240, duration: 0.62, ease: "power2.out" }, 1.14);
+      for (let i = 0; i < 7; i++) {
+        tl.fromTo("#p-bar" + i, { opacity: 0.16 }, { opacity: 1, duration: 0.08 }, 1.16 + i * 0.085);
+      }
+      tl.fromTo("#p-tile", { backgroundColor: "#f2eee8" }, { backgroundColor: "#e63946", duration: 0.14 }, 1.72);
+      tl.fromTo(".p-dig", { color: "#15120f" }, { color: "#ffffff", duration: 0.14 }, 1.72);
+      tl.fromTo("#p-tile", { scale: 1 }, { scale: 1.07, duration: 0.09, ease: "power2.out" }, 1.72);
+      tl.fromTo("#p-tile", { scale: 1.07 }, { scale: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, 1.81);
+      tl.fromTo("#p-days", { opacity: 0, filter: "blur(14px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 1.6);
+
+      // P2 "Perfect on every phone." three real sites fan out
+      tl.fromTo("#p-ph1", { x: 0, rotationY: 0, rotation: 0, z: -60 }, { x: -268, rotationY: 32, rotation: -6, z: -160, duration: 0.55, ease: "back.out(1.3)" }, 2.42);
+      tl.fromTo("#p-ph3", { x: 0, rotationY: 0, rotation: 0, z: -60 }, { x: 268, rotationY: -32, rotation: 6, z: -160, duration: 0.55, ease: "back.out(1.3)" }, 2.46);
+      tl.fromTo("#p-ph2", { scale: 0.9 }, { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 2.4);
+      tl.fromTo(["#p-pi1", "#p-pi2", "#p-pi3"], { y: 0 }, { y: -330, duration: 1.3, ease: "power1.inOut" }, 2.5);
+
+      // P3 "WhatsApp and booking, built in."
+      tl.fromTo("#p-wa", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, 3.78);
+      tl.fromTo("#p-dot", { x: 260, y: 520, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.28, ease: "power3.out" }, 4.02);
+      tl.fromTo("#p-dot", { scale: 1 }, { scale: 0.74, duration: 0.06 }, 4.3);
+      tl.fromTo("#p-wa", { scale: 1 }, { scale: 0.95, duration: 0.06, immediateRender: false }, 4.3);
+      tl.fromTo("#p-wa", { scale: 0.95 }, { scale: 1, duration: 0.25, ease: "back.out(2.5)", immediateRender: false }, 4.36);
+      tl.fromTo("#p-dot", { scale: 0.74, opacity: 1 }, { scale: 1.2, opacity: 0, duration: 0.2, immediateRender: false }, 4.36);
+      tl.fromTo("#p-bubble", { opacity: 0, scale: 0.2, transformOrigin: "50% 0%" }, { opacity: 1, scale: 1, duration: 0.34, ease: "back.out(1.7)" }, 4.38);
+      tl.fromTo("#p-book", { opacity: 1, x: 1100 }, { opacity: 1, x: 0, duration: 0.42, ease: "expo.out" }, 4.8);
+
+      // P4 "Arabic and English." the card flips language
+      tl.fromTo("#p-flip", { rotationX: 0 }, { rotationX: 180, duration: 0.42, ease: "power3.inOut" }, 5.92);
+      tl.fromTo("#p-knob", { x: 0 }, { x: 184, duration: 0.3, ease: "power3.inOut" }, 5.98);
+
+      // P5 "Free changes until you're happy."
+      tl.fromTo("#p-arrows", { rotation: 0, transformOrigin: "50% 50%" }, { rotation: 180, duration: 0.4, ease: "power3.inOut" }, 7.0);
+      tl.fromTo("#p-m1", { opacity: 1 }, { opacity: 0, duration: 0.01 }, 7.2);
+      tl.fromTo("#p-m2", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 7.2);
+      tl.fromTo("#p-arrows", { rotation: 180 }, { rotation: 360, duration: 0.4, ease: "power3.inOut", immediateRender: false }, 7.55);
+      tl.fromTo("#p-m2", { opacity: 1 }, { opacity: 0, duration: 0.01, immediateRender: false }, 7.78);
+      tl.fromTo("#p-m3", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 7.78);
+      tl.fromTo("#p-face", { scale: 1 }, { scale: 1.12, duration: 0.1, ease: "power2.out" }, 7.78);
+      tl.fromTo("#p-face", { scale: 1.12 }, { scale: 1, duration: 0.35, ease: "back.out(2)", immediateRender: false }, 7.88);
+      [7.02, 7.2, 7.5].forEach((t, i) => {
+        tl.fromTo("#p-u" + (i + 1), { opacity: 0, filter: "blur(12px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, t);
+      });
+
+      window.__timelines["perks"] = tl;
+    })();
+  </script>
+</template>

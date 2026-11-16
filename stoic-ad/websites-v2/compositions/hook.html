@@ -1,0 +1,304 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #15120f;
+      font-family: "Inter", sans-serif;
+    }
+    .h-line {
+      position: absolute;
+      left: 90px;
+      white-space: nowrap;
+      font-family: "Bebas Neue", sans-serif;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: #f2eee8;
+    }
+    #h-l1 {
+      top: 185px;
+      font-size: 130px;
+    }
+    #h-l2 {
+      top: 298px;
+      font-size: 204px;
+      color: #e63946;
+      opacity: 0;
+    }
+    #h-l3 {
+      top: 482px;
+      font-size: 170px;
+      opacity: 0;
+    }
+    #h-l4 {
+      top: 632px;
+      font-size: 204px;
+      opacity: 0;
+    }
+    /* the bad website */
+    #h-site {
+      position: absolute;
+      left: 90px;
+      top: 880px;
+      width: 900px;
+      height: 1120px;
+      background: #c0c0c0;
+      border: 5px solid #dfdfdf;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+      font-family: "EB Garamond", serif;
+      color: #000;
+    }
+    #h-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 890px;
+      height: 74px;
+      background: #000080;
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 74px;
+      padding-left: 24px;
+    }
+    #h-x {
+      position: absolute;
+      left: 800px;
+      top: 10px;
+      width: 62px;
+      height: 54px;
+      background: #c0c0c0;
+      border: 4px solid #fff;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      color: #000;
+      font-family: "Inter", sans-serif;
+      font-weight: 900;
+      font-size: 34px;
+      line-height: 46px;
+      text-align: center;
+    }
+    #h-welcome {
+      position: absolute;
+      left: 30px;
+      top: 104px;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.02;
+      color: #ff0000;
+      background: #ffff00;
+      padding: 4px 14px;
+    }
+    #h-link {
+      position: absolute;
+      left: 34px;
+      top: 262px;
+      font-size: 40px;
+      color: #0000ee;
+      text-decoration: underline;
+    }
+    #h-img {
+      position: absolute;
+      left: 34px;
+      top: 340px;
+      width: 330px;
+      height: 250px;
+      background: #fff;
+      border: 3px solid #808080;
+    }
+    #h-img svg {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 50px;
+      height: 50px;
+    }
+    #h-img span {
+      position: absolute;
+      left: 76px;
+      top: 16px;
+      font-size: 34px;
+    }
+    #h-spin {
+      position: absolute;
+      left: 110px;
+      top: 640px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 22px solid #8a8a8a;
+      border-top-color: #000080;
+    }
+    #h-loading {
+      position: absolute;
+      left: 34px;
+      top: 850px;
+      font-size: 46px;
+      font-style: italic;
+    }
+    #h-stripe {
+      position: absolute;
+      left: 0;
+      top: 960px;
+      width: 890px;
+      height: 70px;
+      background: repeating-linear-gradient(135deg, #ffd400 0 40px, #111 40px 80px);
+    }
+    /* the invoice */
+    #h-rcpt {
+      position: absolute;
+      left: 520px;
+      top: 960px;
+      width: 420px;
+      height: 620px;
+      clip-path: inset(0 0 100% 0);
+    }
+    #h-paper {
+      position: absolute;
+      inset: 0;
+      background: #fffdf6;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      padding: 26px 26px 0 26px;
+      font-family: "Space Mono", monospace;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 1.5;
+      color: #15120f;
+      white-space: nowrap;
+    }
+    #h-paper .hd {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 84px;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+    #h-paper .rule {
+      height: 0;
+      border-top: 4px dashed #15120f;
+      margin: 18px 0 14px;
+    }
+    #h-paper .tot {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 100px;
+      line-height: 1;
+      color: #e63946;
+    }
+    #h-paper .row {
+      display: flex;
+      justify-content: space-between;
+    }
+    /* the turn */
+    #h-look {
+      position: absolute;
+      left: 90px;
+      top: 330px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 310px;
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      color: #f2eee8;
+      white-space: nowrap;
+    }
+    #h-look .w {
+      display: inline-block;
+      opacity: 0;
+    }
+    #h-look .red {
+      color: #e63946;
+    }
+    #h-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      opacity: 0;
+    }
+  </style>
+
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+    <div id="h-lines">
+      <div class="h-line" id="h-l1">TIRED OF</div>
+      <div class="h-line" id="h-l2">EXPENSIVE,</div>
+      <div class="h-line" id="h-l3">LOW-QUALITY</div>
+      <div class="h-line" id="h-l4">WEBSITES?</div>
+    </div>
+
+    <div id="h-junk" data-layout-allow-overflow>
+      <div id="h-site">
+        <div id="h-bar">My Bussiness - Home Page</div>
+        <div id="h-x">X</div>
+        <div id="h-welcome">WELCOME TO OUR<br />WEB SITE!!!</div>
+        <div id="h-link">Click here to enter &gt;&gt;</div>
+        <div id="h-img">
+          <svg viewBox="0 0 50 50"><rect x="2" y="2" width="46" height="46" fill="#fff" stroke="#808080" stroke-width="3" /><path d="M13 13 L37 37 M37 13 L13 37" stroke="#e00000" stroke-width="6" /></svg>
+          <span>photo1.jpg</span>
+        </div>
+        <div id="h-spin"></div>
+        <div id="h-loading">Loading... please wait</div>
+        <div id="h-stripe"></div>
+      </div>
+      <div id="h-rcpt">
+        <div id="h-paper">
+          <div class="hd">INVOICE</div>
+          <div class="row"><span>Logo</span><span>$$$</span></div>
+          <div class="row"><span>"Extras"</span><span>$$$$</span></div>
+          <div class="row"><span>1 tiny fix</span><span>$$</span></div>
+          <div class="row"><span>Hosting??</span><span>$$$</span></div>
+          <div class="rule"></div>
+          <div class="row"><span>TOTAL</span><span></span></div>
+          <div class="tot">TOO MUCH</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="h-look"><span class="w" id="h-k1">TAKE A</span><br /><span class="w" id="h-k2">LOOK AT</span><br /><span class="w red" id="h-k3">THIS.</span></div>
+
+    <svg id="h-cursor" viewBox="0 0 92 92"><path d="M10 6 L10 70 L28 54 L40 82 L52 77 L40 50 L64 50 Z" fill="#15120f" stroke="#fff" stroke-width="6" stroke-linejoin="round" /></svg>
+  </div>
+
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+
+      // frame 0: the bad site is already loading (and will never finish)
+      tl.fromTo("#h-site", { rotation: -2.5 }, { rotation: -2.5, duration: 0.01 }, 0);
+      tl.fromTo("#h-spin", { rotation: 0 }, { rotation: 1260, duration: 3.5, ease: "none" }, 0);
+
+      // "expensive," the invoice prints out over it
+      tl.fromTo("#h-l2", { opacity: 0, scale: 1.5, transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, duration: 0.16, ease: "power3.in" }, 0.96);
+      tl.fromTo("#h-rcpt", { clipPath: "inset(0 0 100% 0)", rotation: 5, y: -60 }, { clipPath: "inset(0 0 0% 0)", rotation: 5, y: 0, duration: 0.7, ease: "steps(9)" }, 0.98);
+      // "low-quality"
+      tl.fromTo("#h-l3", { opacity: 0, scale: 1.5, transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, duration: 0.16, ease: "power3.in" }, 1.54);
+      tl.fromTo("#h-site", { rotation: -2.5 }, { rotation: -5.5, duration: 0.5, ease: "elastic.out(1.4, 0.3)", immediateRender: false }, 1.7);
+      // "websites?"
+      tl.fromTo("#h-l4", { opacity: 0, filter: "blur(14px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 2.12);
+
+      // "Well..." the cursor closes the window
+      tl.fromTo("#h-cursor", { x: 640, y: 1500, opacity: 1 }, { x: 912, y: 918, opacity: 1, duration: 0.36, ease: "power3.out" }, 3.0);
+      tl.fromTo("#h-cursor", { scale: 1, transformOrigin: "10% 8%" }, { scale: 0.82, duration: 0.05 }, 3.38);
+      tl.fromTo("#h-cursor", { scale: 0.82 }, { scale: 1, duration: 0.14, immediateRender: false }, 3.43);
+      tl.fromTo("#h-junk", { y: 0, rotation: 0, transformOrigin: "20% 60%" }, { y: 1500, rotation: -16, duration: 0.4, ease: "power3.in" }, 3.42);
+      tl.fromTo("#h-lines", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(16px)", duration: 0.16, ease: "power2.in" }, 3.4);
+      tl.fromTo("#h-cursor", { opacity: 1 }, { opacity: 0, duration: 0.12, immediateRender: false }, 3.6);
+
+      // "let's take a look at this."
+      [3.56, 3.78, 4.05].forEach((t, i) => {
+        tl.fromTo("#h-k" + (i + 1), { opacity: 0, filter: "blur(16px)", scale: 1.12, transformOrigin: "0% 50%" }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.18, ease: "power3.out" }, t);
+      });
+      // whip left into the showcase
+      tl.fromTo("#h-look", { x: 0, filter: "blur(0px)" }, { x: -1350, filter: "blur(18px)", duration: 0.24, ease: "power3.in" }, 4.36);
+
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>
