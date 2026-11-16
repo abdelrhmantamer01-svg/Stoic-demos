@@ -1,19 +1,19 @@
-# Storylines — Stoic Agency "websites" ad v2
+# Storylines — Stoic Agency "websites" ad v2 (client structure, round 2)
 
-Recommendation: **A · 11:47 PM** — it is the only one with a person in it (a customer searching at night), so a shop owner recognises the loss before we sell the fix.
+The client fixed the order: hook question → "let's take a look at this" → 3D showcase (laptop + phone) → fast advantages → price last.
+The three ideas below are three ways to carry that order. Picked: **A · Close the bad window**, because the pain is a joke the owner recognises in one second and a single click causes everything after it.
 
-## A · 11:47 PM (picked)
-Device: a moment in someone's day + one object across the film. Form: one frame that rebuilds around a single bar.
-A customer searches for the owner's kind of shop after closing time and finds everyone else. The same search bar then becomes the owner's own address bar, grows a real site under it, turns into a phone, and comes back at the end carrying the WhatsApp number.
-- First 2 s: a rolled-down shop shutter, a giant clock "11:47 PM", a red CLOSED sign still swinging.
-- Beats: closed shop → search finds "not you" → click, daylight → your own domain (3D name wheel) → the site is assembled slice by slice in 3D → pages turn on a 3D prism → phone, one tap, WhatsApp message at 11:48 PM → 7 days → red flood → $1,200 struck → $500.
-- Look: three flat colour worlds (night shutter #0F1115, daylight bone #F2EEE8, Stoic red #E63946), Bebas Neue at poster size, real site screenshots as the only "photography". No glass, no glow.
-- Sound: no music (none available). Voice is the clock; keys under typing, one click per cursor press, a whoosh per world change, riser into one bass impact on $500.
+## A · Close the bad window (picked)
+Device: life before and after. Form: three flat colour worlds, each entered by a move (click-and-drop, turntable, vertical reel, red flood).
+A 2003-looking site that never finishes loading and an invoice that prints "TOTAL: TOO MUCH" sit under the question. A cursor closes the window, the junk falls off the frame, and a turntable swings five real sites past, each opening on a laptop with its phone beside it while the whole ground takes that brand's colour. Six advantages snap past on a vertical reel, the last panel is solid red, and the price lands on it.
+- First 2 s: "TIRED OF EXPENSIVE, LOW-QUALITY WEBSITES?" stamped line by line over the bad site and the invoice.
+- Look: flat grounds (ink #15120F, bone #F2EEE8, each site's own colour, Stoic red #E63946), Bebas Neue at poster size, real screenshots only. No glass, no glow.
+- Sound: no music (client adds it in-app). Voice is the clock; one click per cursor press, a whoosh per world change, riser into one bass impact on $500.
 
-## B · The Sign Painter
-Device: the object is the explanation. Form: match cuts.
-A hand-painted shop sign is lifted off a wall and each part of it (name, phone number, opening hours) match-cuts into the same part of a website. Calm, craft-like. Weaker: needs photographs of real signs we do not have, and the domain beat has no natural place.
+## B · The invoice shredder
+Device: a number lands. Form: one continuous take down a long receipt.
+The camera travels down one endless invoice; every overpriced line is torn off and replaced by a real site. Weaker: laptop + phone pairs have no natural place on a receipt.
 
-## C · Seven Days (the bold one)
-Device: a number lands. Form: cut on the beat.
-A seven-tile calendar counts Monday → Sunday; every tile is one hard cut of the build (domain, logo, pages, phone, WhatsApp), the seventh tile is the live site and the price. Punchy, but it is a feature list with a clock on it, and without music the beat cuts have nothing to land on.
+## C · Swipe right (the bold one)
+Device: a character does the work. Form: a dating-app card stack.
+Bad sites get swiped left, the five real ones swiped right, "it's a match" becomes the price. Funny, but it borrows another app's whole interface and buries the advantages.
