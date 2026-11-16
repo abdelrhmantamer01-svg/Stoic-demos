@@ -113,7 +113,7 @@
   </div>
   <script>
     (function () {
-      const tl = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
       const P = "#pl-dotp";
       const D = "#pl-dot";
       const BONE = "#f1eee8";
@@ -154,7 +154,9 @@
       tl.fromTo("#pl-flood", { scale: 0 }, { scale: 25, duration: 0.44, ease: "power2.inOut" }, 2.72);
       tl.to(D, { scale: 1.667, borderRadius: "28%", duration: 0.36, ease: "back.out(1.8)" }, 2.78);
 
-      window.__timelines["pulse"] = tl;
+      const root = gsap.timeline({ paused: true });
+      root.add(tl.timeScale(1.2), 0);
+      window.__timelines["pulse"] = root;
     })();
   </script>
 </template>

@@ -38,7 +38,7 @@
     }
     .st-cap {
       position: absolute;
-      left: 110px;
+      left: 120px;
       line-height: 1;
       white-space: nowrap;
     }
@@ -66,7 +66,7 @@
     #st-stay {
       position: absolute;
       left: 157px;
-      top: 456px;
+      top: 438px;
       font-size: 500px;
       line-height: 1;
       white-space: nowrap;
@@ -116,7 +116,7 @@
   </div>
   <script>
     (function () {
-      const tl = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
       const P = "#st-dotp";
       const D = "#st-dot";
       const SH = "#st-shadow";
@@ -136,8 +136,8 @@
 
       // 1.45 "Dot." — it perks up
       tl.to(D, { scaleX: 1.12, scaleY: 0.86, duration: 0.08, ease: "power2.out" }, 1.4);
-      tl.to(D, { scaleX: 0.92, scaleY: 1.1, duration: 0.07, ease: "power2.out" }, 1.48);
-      tl.to(P, { y: -110, duration: 0.14, ease: "power2.out" }, 1.48);
+      tl.to(D, { scaleX: 0.96, scaleY: 1.04, duration: 0.07, ease: "power2.out" }, 1.48);
+      tl.to(P, { y: -42, duration: 0.14, ease: "power2.out" }, 1.48);
       tl.to(P, { y: 0, duration: 0.14, ease: "power2.in" }, 1.62);
       squash(1.76, 1.14, 0.86, 0.12);
 
@@ -193,7 +193,7 @@
 
       // caption 2 word by word
       tl.fromTo("#st-cap2 .w", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.2, ease: "power2.out" }, 3.2);
-      tl.to("#st-cap2", { opacity: 0, filter: "blur(12px)", duration: 0.14, ease: "power2.in" }, 4.28);
+      tl.to("#st-cap2", { opacity: 0, filter: "blur(12px)", duration: 0.14, ease: "power2.in" }, 4.36);
 
       // 4.45 FINE. — the dot sulks
       tl.fromTo("#st-fine", { opacity: 0, scale: 1.25, filter: "blur(16px)", transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 4.45);
@@ -207,7 +207,9 @@
       // whip: the camera chases it up
       tl.to("#st-world", { y: 1940, filter: "blur(22px)", duration: 0.25, ease: "power3.in" }, 5.17);
 
-      window.__timelines["stay"] = tl;
+      const root = gsap.timeline({ paused: true });
+      root.add(tl.timeScale(1.15), 0);
+      window.__timelines["stay"] = root;
     })();
   </script>
 </template>

@@ -252,7 +252,7 @@
   </div>
   <script>
     (function () {
-      const tl = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
       const P = "#cf-dotp";
       const POS = "#cf-poster";
       gsap.set("#cf-cup", { transformOrigin: "40% 100%" });
@@ -280,7 +280,7 @@
       tl.to("#cf-cup", { scaleX: 1.08, scaleY: 0.9, duration: 0.07, ease: "power2.out" }, 0.76);
       tl.to("#cf-cup", { scaleX: 1, scaleY: 1, duration: 0.5, ease: "elastic.out(1,0.4)" }, 0.83);
       tl.to("#cf-title .l", { keyframes: { y: [0, -44, 0], scaleY: [1, 1.12, 1] }, duration: 0.36, stagger: 0.06, ease: "sine.inOut" }, 0.88);
-      tl.to("#cf-sub", { letterSpacing: "0.34em", textIndent: "0.34em", duration: 0.5, ease: "expo.out" }, 0.9);
+      tl.to("#cf-sub", { scaleX: 1.14, duration: 0.5, ease: "expo.out" }, 0.9);
       tl.to("#cf-tag .w", { keyframes: { scale: [1, 1.16, 1] }, duration: 0.3, stagger: 0.09, ease: "sine.inOut" }, 1.0);
       tl.to("#cf-tick", { x: -420, duration: 2.6, ease: "none" }, 0.78);
 
@@ -291,7 +291,7 @@
       tl.to("#cf-sun", { keyframes: { y: [0, -70, 0], scale: [1, 1.12, 1] }, duration: 0.5, ease: "sine.inOut" }, 1.78);
       tl.to(".cf-ray-i", { keyframes: { scaleY: [1, 1.7, 1] }, duration: 0.4, stagger: { each: 0.025, from: "edges" }, ease: "sine.inOut" }, 1.85);
       tl.to("#cf-title .l", { keyframes: { y: [0, -44, 0], scaleY: [1, 1.12, 1] }, duration: 0.36, stagger: { each: 0.06, from: "end" }, ease: "sine.inOut" }, 1.95);
-      tl.to("#cf-sub", { letterSpacing: "0.24em", textIndent: "0.24em", duration: 0.5, ease: "power2.inOut" }, 2.0);
+      tl.to("#cf-sub", { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 2.0);
 
       // exit: the sun hops out and flips the poster onto its back — the back is the next world
       tl.to("#cf-sun", { y: -60, duration: 0.1, ease: "power2.out" }, 2.92);
@@ -303,7 +303,9 @@
       tl.to(POS, { rotationY: 180, scale: 2.3, duration: 0.6, ease: "power2.inOut" }, 3.1);
       tl.to("#cf-wall", { backgroundColor: "#141414", duration: 0.12, ease: "none" }, 3.56);
 
-      window.__timelines["cafe"] = tl;
+      const root = gsap.timeline({ paused: true });
+      root.add(tl.timeScale(1.2), 0);
+      window.__timelines["cafe"] = root;
     })();
   </script>
 </template>

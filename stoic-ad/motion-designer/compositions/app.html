@@ -171,7 +171,7 @@
   </div>
   <script>
     (function () {
-      const tl = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
       const PH = "#ap-phone";
       const IP = "#ap-iconp";
       const IC = "#ap-icon";
@@ -211,7 +211,9 @@
       tl.set("#ap-zoom", { opacity: 1 }, 2.38);
       tl.fromTo("#ap-zoom", { scale: 1 }, { scale: 40, duration: 0.3, ease: "power3.in" }, 2.38);
 
-      window.__timelines["app"] = tl;
+      const root = gsap.timeline({ paused: true });
+      root.add(tl.timeScale(1.15), 0);
+      window.__timelines["app"] = root;
     })();
   </script>
 </template>
