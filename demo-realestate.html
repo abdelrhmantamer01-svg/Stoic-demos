@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Saadiyat Estates | Luxury Homes · Abu Dhabi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --night:#0c0c0e; --gold:#c9a45c; --sand:#e9e1d2; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--night); color:var(--sand); font-family:'Manrope',sans-serif; }
+  .hero { position:relative; height:900px; overflow:hidden; background:
+      linear-gradient(180deg,rgba(12,12,14,.35) 0%,rgba(12,12,14,0) 35%,rgba(12,12,14,.92) 100%),
+      linear-gradient(180deg,#1d2a3a 0%,#58607a 28%,#c7966a 48%,#e3b07a 58%,#2a2522 59%,#151413 100%); }
+  .sun { position:absolute; left:70%; top:22%; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle,#ffe2b0 0%,#f2b16b 55%,rgba(242,177,107,0) 72%); }
+  .villa { position:absolute; left:46%; right:0; bottom:330px; height:260px; }
+  .villa div { position:absolute; bottom:0; background:#0f0f11; }
+  .glow { background:linear-gradient(#f6c983,#d9934f) !important; }
+  nav { position:absolute; left:0; right:0; top:0; display:flex; justify-content:space-between; align-items:center; padding:30px 64px; z-index:2; }
+  .logo { font-family:'Cormorant Garamond',serif; font-size:30px; letter-spacing:.32em; font-weight:600; }
+  .links { display:flex; gap:40px; font-size:13px; letter-spacing:.2em; text-transform:uppercase; }
+  .btn { border:1px solid var(--gold); color:var(--gold); padding:14px 28px; font-size:13px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; display:inline-block; }
+  .btn.fill { background:var(--gold); color:var(--night); }
+  .copy { position:absolute; left:64px; right:64px; bottom:70px; z-index:2; display:flex; justify-content:space-between; align-items:flex-end; }
+  .kicker { color:var(--gold); font-size:13px; letter-spacing:.32em; text-transform:uppercase; margin-bottom:18px; }
+  h1 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:150px; line-height:.86; letter-spacing:-0.02em; }
+  h1 i { color:var(--gold); }
+  .side { max-width:330px; font-size:16px; line-height:1.7; color:#cfc6b6; }
+  .side .btn { margin-top:24px; }
+  section { padding:100px 64px; }
+  .head { display:flex; justify-content:space-between; align-items:flex-end; }
+  h2 { font-family:'Cormorant Garamond',serif; font-size:72px; font-weight:500; line-height:1; } h2 i { color:var(--gold); }
+  .props { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:22px; margin-top:50px; }
+  .prop .img { height:420px; }
+  .prop h3 { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:500; margin-top:20px; }
+  .prop p { color:#a39b8d; font-size:14px; letter-spacing:.08em; margin-top:6px; }
+  .prop b { color:var(--gold); font-weight:500; display:block; margin-top:10px; letter-spacing:.06em; }
+  @media (max-width:800px) {
+    .hero { height:780px; } nav { padding:22px; } .links, nav .btn { display:none; } .logo { font-size:22px; }
+    .copy { left:22px; right:22px; bottom:40px; flex-direction:column; align-items:flex-start; gap:24px; }
+    h1 { font-size:84px; } .sun { left:58%; top:13%; width:150px; height:150px; } .villa { left:20%; bottom:470px; height:200px; }
+    section { padding:60px 22px; } .head { flex-direction:column; align-items:flex-start; gap:20px; } h2 { font-size:50px; }
+    .props { grid-template-columns:1fr; } .prop .img { height:300px; }
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="sun"></div>
+    <div class="villa">
+      <div style="left:8%;width:46%;height:120px"></div>
+      <div style="left:18%;width:26%;height:210px"></div>
+      <div class="glow" style="left:22%;width:6%;height:70px;bottom:20px"></div>
+      <div class="glow" style="left:31%;width:9%;height:70px;bottom:20px"></div>
+      <div class="glow" style="left:24%;width:16%;height:40px;bottom:140px"></div>
+      <div style="left:54%;width:40%;height:70px"></div>
+      <div style="left:0;width:100%;height:14px;background:#1a1816"></div>
+    </div>
+    <nav><div class="logo">SAADIYAT</div><div class="links"><span>Residences</span><span>Off-plan</span><span>Invest</span><span>About</span></div><a class="btn" href="#">Private Viewing</a></nav>
+    <div class="copy">
+      <div><div class="kicker">Beachfront villas · Saadiyat Island</div><h1>Live where<br/>the <i>sun</i> sets.</h1></div>
+      <div class="side">Hand-picked villas and penthouses on Abu Dhabi's cultural island, steps from the sea and the Louvre.<br/><a class="btn fill" href="#">View Residences</a></div>
+    </div>
+  </div>
+  <section id="residences">
+    <div class="head"><h2>Featured <i>residences</i></h2><a class="btn" href="#">All 24 listings</a></div>
+    <div class="props">
+      <div class="prop"><div class="img" style="background:linear-gradient(160deg,#3a4256,#c7966a 70%,#1a1715 71%)"></div><h3>Villa Mar</h3><p>5 BED · PRIVATE BEACH · 7,800 SQFT</p><b>AED 18,500,000</b></div>
+      <div class="prop"><div class="img" style="background:linear-gradient(200deg,#2b3240,#8a7a6a 60%,#121110 61%)"></div><h3>Sky Penthouse</h3><p>4 BED · SEA VIEW · 5,200 SQFT</p><b>AED 12,900,000</b></div>
+      <div class="prop"><div class="img" style="background:linear-gradient(170deg,#45506a,#d9a873 65%,#16130f 66%)"></div><h3>Dune House</h3><p>6 BED · GARDEN · 9,100 SQFT</p><b>AED 22,000,000</b></div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Qahwa House | Specialty Coffee · Abu Dhabi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --cream:#f4ebdd; --bean:#2b1a12; --clay:#c8643b; --sage:#7f8f6a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--cream); color:var(--bean); font-family:'DM Sans',sans-serif; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:26px 64px; }
+  .logo { font-family:'Fraunces',serif; font-weight:800; font-size:28px; letter-spacing:-0.02em; }
+  .logo span { color:var(--clay); font-style:italic; font-weight:500; }
+  .links { display:flex; gap:34px; font-size:15px; font-weight:500; }
+  .btn { background:var(--bean); color:var(--cream); padding:13px 26px; border-radius:999px; font-weight:700; font-size:14px; text-decoration:none; display:inline-block; }
+  .btn.clay { background:var(--clay); }
+  .hero { display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; padding:30px 64px 70px; align-items:stretch; }
+  .eyebrow { font-size:13px; letter-spacing:0.22em; text-transform:uppercase; color:var(--clay); font-weight:700; margin-bottom:22px; }
+  h1 { font-family:'Fraunces',serif; font-weight:600; font-size:104px; line-height:0.95; letter-spacing:-0.035em; }
+  h1 em { font-style:italic; font-weight:500; color:var(--clay); }
+  .lead { font-size:19px; line-height:1.6; max-width:470px; margin:28px 0 34px; color:#5b4637; }
+  .cta { display:flex; gap:14px; align-items:center; }
+  .open { margin-top:40px; display:flex; gap:38px; }
+  .open b { display:block; font-family:'Fraunces',serif; font-size:34px; }
+  .open small { font-size:13px; color:#7a6555; }
+  .art { position:relative; border-radius:220px 220px 28px 28px; background:linear-gradient(170deg,#d9774c,#8c3d22); overflow:hidden; min-height:560px; }
+  .cup { position:absolute; left:50%; top:54%; width:300px; height:220px; transform:translate(-50%,-50%); background:var(--cream); border-radius:0 0 150px 150px; box-shadow:0 30px 60px rgba(0,0,0,.3); }
+  .cup::after { content:""; position:absolute; right:-70px; top:30px; width:90px; height:110px; border:22px solid var(--cream); border-radius:50%; }
+  .coffee { position:absolute; left:50%; top:calc(54% - 110px); width:300px; height:56px; transform:translateX(-50%); background:radial-gradient(ellipse at center,#6d3b22 0%,#3a1d10 70%); border-radius:50%; }
+  .steam { position:absolute; left:50%; top:16%; width:16px; height:110px; border-radius:20px; background:linear-gradient(rgba(244,235,221,0),rgba(244,235,221,.6)); }
+  .saucer { position:absolute; left:50%; top:calc(54% + 112px); width:440px; height:60px; transform:translateX(-50%); background:#efe2cf; border-radius:50%; }
+  .badge { position:absolute; right:30px; top:40px; width:130px; height:130px; border-radius:50%; background:var(--sage); color:var(--cream); display:flex; align-items:center; justify-content:center; text-align:center; font-family:'Fraunces',serif; font-style:italic; font-size:19px; line-height:1.1; transform:rotate(-12deg); }
+  section { padding:80px 64px; }
+  h2 { font-family:'Fraunces',serif; font-size:64px; letter-spacing:-0.03em; font-weight:600; }
+  h2 em { color:var(--clay); font-style:italic; font-weight:500; }
+  .menu { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px; }
+  .item { background:#fff8ee; border-radius:26px; padding:30px; border:1px solid #e6d6bf; }
+  .dot { width:70px; height:70px; border-radius:50%; margin-bottom:22px; }
+  .item h3 { font-family:'Fraunces',serif; font-size:28px; }
+  .item p { color:#6d5848; margin:10px 0 18px; line-height:1.5; }
+  .price { font-weight:700; color:var(--clay); font-size:18px; }
+  .band { background:var(--bean); color:var(--cream); border-radius:40px; margin:0 64px 80px; padding:60px 64px; display:flex; justify-content:space-between; align-items:center; }
+  .band h2 { color:var(--cream); font-size:54px; }
+  @media (max-width: 800px) {
+    nav { padding:20px 22px; } .links { display:none; }
+    .hero { grid-template-columns:1fr; padding:10px 22px 40px; }
+    h1 { font-size:64px; } .art { min-height:380px; border-radius:180px 180px 24px 24px; }
+    .cup { width:200px; height:150px; } .coffee { width:200px; top:calc(54% - 75px); height:40px; } .saucer { width:300px; top:calc(54% + 76px); }
+    .cup::after { right:-50px; width:64px; height:80px; border-width:16px; }
+    section { padding:50px 22px; } h2 { font-size:42px; } .menu { grid-template-columns:1fr; }
+    .band { margin:0 22px 40px; padding:40px 28px; flex-direction:column; gap:22px; align-items:flex-start; } .band h2 { font-size:38px; }
+  }
+</style>
+</head>
+<body>
+  <nav><div class="logo">Qahwa <span>House</span></div>
+    <div class="links"><span>Menu</span><span>Our Beans</span><span>Visit</span><span>Events</span></div>
+    <a class="btn" href="#">Order Online</a></nav>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Specialty coffee · Al Bateen</div>
+      <h1>Slow coffee for <em>fast</em> mornings.</h1>
+      <p class="lead">Single-origin beans roasted every Thursday, cardamom lattes, and fresh date pastries. Sit in, pick up, or get it delivered warm.</p>
+      <div class="cta"><a class="btn clay" href="#">See the Menu</a><a class="btn" href="#">Reserve a Table</a></div>
+      <div class="open"><div><b>7am</b><small>Opens daily</small></div><div><b>12</b><small>Origins on bar</small></div><div><b>4.9★</b><small>Google reviews</small></div></div>
+    </div>
+    <div class="art"><div class="steam" style="margin-left:-40px"></div><div class="steam" style="margin-left:10px;height:140px"></div><div class="steam" style="margin-left:56px"></div><div class="saucer"></div><div class="cup"></div><div class="coffee"></div><div class="badge">Roasted<br/>this week</div></div>
+  </div>
+  <section id="menu">
+    <h2>This week's <em>favourites</em></h2>
+    <div class="menu">
+      <div class="item"><div class="dot" style="background:radial-gradient(circle at 35% 35%,#e8b78f,#8c4a28)"></div><h3>Cardamom Latte</h3><p>Double ristretto, steamed milk, crushed green cardamom.</p><div class="price">AED 22</div></div>
+      <div class="item"><div class="dot" style="background:radial-gradient(circle at 35% 35%,#c9d3b6,#5f6f4c)"></div><h3>Pistachio Cold Brew</h3><p>18-hour cold brew over house pistachio cream.</p><div class="price">AED 26</div></div>
+      <div class="item"><div class="dot" style="background:radial-gradient(circle at 35% 35%,#f1d39b,#a8682a)"></div><h3>Date Croissant</h3><p>Laminated butter dough, Medjool date and tahini.</p><div class="price">AED 18</div></div>
+    </div>
+  </section>
+  <div class="band"><h2>Your table is waiting.</h2><a class="btn clay" href="#">Book on WhatsApp</a></div>
+</body>
+</html>
