@@ -1,0 +1,137 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #05060a;
+      font-family: "Bebas Neue";
+      color: #ffffff;
+    }
+    .gold {
+      background: linear-gradient(172deg, #fdf3b4 0%, #ecc95f 26%, #c9962b 54%, #8a5a12 78%, #e2b94a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ln {
+      position: absolute;
+      left: 120px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .ln .l,
+    .ln .w {
+      display: inline-block;
+    }
+    .mq {
+      position: absolute;
+      left: 0;
+      top: 1470px;
+      font-size: 340px;
+      line-height: 1;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 3px rgba(212, 165, 55, 0.42);
+    }
+    .ad-p { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: #05060a; }
+    .ad-g { position: absolute; inset: 0; }
+    #ad-g1 { background: radial-gradient(1000px 900px at 200px 500px, #17307a 0%, rgba(13, 26, 66, 0.5) 45%, rgba(5, 6, 10, 0) 72%); }
+    #ad-g2 { background: radial-gradient(1100px 1000px at 900px 1300px, #17307a 0%, rgba(13, 26, 66, 0.5) 45%, rgba(5, 6, 10, 0) 72%); }
+    #ad-g3 { background: radial-gradient(1000px 1000px at 540px 1500px, #17307a 0%, rgba(13, 26, 66, 0.5) 45%, rgba(5, 6, 10, 0) 72%); }
+    #ad-g4 { background: radial-gradient(1200px 900px at 300px 1400px, #17307a 0%, rgba(13, 26, 66, 0.5) 45%, rgba(5, 6, 10, 0) 72%); }
+    .ad-a { top: 330px; font-size: 300px; opacity: 0; }
+    .ad-b { top: 620px; font-size: 300px; }
+    .ad-b .l { opacity: 0; }
+    #ad-3b { font-size: 270px; top: 630px; }
+    #ad-4b { font-size: 190px; top: 640px; }
+    #ad-wave { position: absolute; left: 0; top: 1040px; width: 3240px; height: 1000px; }
+    #ad-circ { position: absolute; left: 20px; top: 1120px; width: 1040px; height: 1040px; border-radius: 50%; border: 14px solid #d4a537; background: radial-gradient(circle at 40% 25%, rgba(253, 243, 180, 0.22), rgba(138, 90, 18, 0.05) 60%); }
+    #ad-line { position: absolute; left: 120px; top: 940px; width: 840px; height: 8px; background: #ffffff; }
+    #ad-hair { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #ad-orb { position: absolute; left: 540px; top: 1500px; width: 0; height: 0; }
+    #ad-orb i { position: absolute; left: 385px; top: -35px; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 55%, #8a5a12); }
+    .ad-gd { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 55%, #8a5a12); }
+    #ad-p5 { background: #008080; }
+  </style>
+  <div id="root" data-composition-id="adv" data-width="1080" data-height="1920">
+    <div id="ad-p1" class="ad-p">
+      <div id="ad-g1" class="ad-g"></div>
+      <svg id="ad-wave" viewBox="0 0 3240 1000" data-layout-ignore>
+        <defs><linearGradient id="ad-wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf3b4" /><stop offset="0.12" stop-color="#e2b94a" /><stop offset="0.5" stop-color="#b07f1f" /><stop offset="1" stop-color="#5d3c0a" /></linearGradient></defs>
+        <path id="ad-w2" d="M0 150 Q135 230 270 150 Q405 70 540 150 Q675 230 810 150 Q945 70 1080 150 Q1215 230 1350 150 Q1485 70 1620 150 Q1755 230 1890 150 Q2025 70 2160 150 Q2295 230 2430 150 Q2565 70 2700 150 Q2835 230 2970 150 Q3105 70 3240 150 V1000 H0 Z" fill="#7a5412" />
+        <path id="ad-w1" d="M0 80 Q135 0 270 80 Q405 160 540 80 Q675 0 810 80 Q945 160 1080 80 Q1215 0 1350 80 Q1485 160 1620 80 Q1755 0 1890 80 Q2025 160 2160 80 Q2295 0 2430 80 Q2565 160 2700 80 Q2835 0 2970 80 Q3105 160 3240 80 V1000 H0 Z" fill="url(#ad-wg)" />
+      </svg>
+      <div id="ad-1a" class="ln ad-a">LIQUID</div>
+      <div id="ad-1b" class="ln ad-b"><span class="l gold">S</span><span class="l gold">M</span><span class="l gold">O</span><span class="l gold">O</span><span class="l gold">T</span><span class="l gold">H</span><span class="l gold">.</span></div>
+    </div>
+    <div id="ad-p2" class="ad-p">
+      <div id="ad-g2" class="ad-g"></div>
+      <div id="ad-circ" data-layout-ignore></div>
+      <div id="ad-line"></div>
+      <div id="ad-2a" class="ln ad-a">DEAD</div>
+      <div id="ad-2b" class="ln ad-b"><span class="l gold">S</span><span class="l gold">I</span><span class="l gold">M</span><span class="l gold">P</span><span class="l gold">L</span><span class="l gold">E</span><span class="l gold">.</span></div>
+    </div>
+    <div id="ad-p3" class="ad-p">
+      <div id="ad-g3" class="ad-g"></div>
+      <svg id="ad-hair" viewBox="0 0 1080 1920" data-layout-ignore><circle cx="540" cy="1500" r="180" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" /><circle cx="540" cy="1500" r="300" fill="none" stroke="#ffffff" stroke-opacity="0.42" stroke-width="2" /><circle cx="540" cy="1500" r="420" fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="2" /><circle cx="540" cy="1500" r="560" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2" /><circle cx="540" cy="1500" r="720" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2" /><circle cx="540" cy="1500" r="900" fill="none" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2" /><circle cx="540" cy="1500" r="1100" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2" /></svg>
+      <div id="ad-orb"><i></i></div>
+      <div id="ad-3a" class="ln ad-a">PURE</div>
+      <div id="ad-3b" class="ln ad-b"><span class="l gold">P</span><span class="l gold">R</span><span class="l gold">E</span><span class="l gold">M</span><span class="l gold">I</span><span class="l gold">U</span><span class="l gold">M</span><span class="l gold">.</span></div>
+    </div>
+    <div id="ad-p4" class="ad-p">
+      <div id="ad-g4" class="ad-g"></div>
+      <div id="ad-grid" data-layout-ignore><div class="ad-gd" style="left:70px; top:1060px"></div><div class="ad-gd" style="left:240px; top:1060px"></div><div class="ad-gd" style="left:410px; top:1060px"></div><div class="ad-gd" style="left:580px; top:1060px"></div><div class="ad-gd" style="left:750px; top:1060px"></div><div class="ad-gd" style="left:920px; top:1060px"></div><div class="ad-gd" style="left:70px; top:1230px"></div><div class="ad-gd" style="left:240px; top:1230px"></div><div class="ad-gd" style="left:410px; top:1230px"></div><div class="ad-gd" style="left:580px; top:1230px"></div><div class="ad-gd" style="left:750px; top:1230px"></div><div class="ad-gd" style="left:920px; top:1230px"></div><div class="ad-gd" style="left:70px; top:1400px"></div><div class="ad-gd" style="left:240px; top:1400px"></div><div class="ad-gd" style="left:410px; top:1400px"></div><div class="ad-gd" style="left:580px; top:1400px"></div><div class="ad-gd" style="left:750px; top:1400px"></div><div class="ad-gd" style="left:920px; top:1400px"></div><div class="ad-gd" style="left:70px; top:1570px"></div><div class="ad-gd" style="left:240px; top:1570px"></div><div class="ad-gd" style="left:410px; top:1570px"></div><div class="ad-gd" style="left:580px; top:1570px"></div><div class="ad-gd" style="left:750px; top:1570px"></div><div class="ad-gd" style="left:920px; top:1570px"></div><div class="ad-gd" style="left:70px; top:1740px"></div><div class="ad-gd" style="left:240px; top:1740px"></div><div class="ad-gd" style="left:410px; top:1740px"></div><div class="ad-gd" style="left:580px; top:1740px"></div><div class="ad-gd" style="left:750px; top:1740px"></div><div class="ad-gd" style="left:920px; top:1740px"></div></div>
+      <div id="ad-4a" class="ln ad-a">ALIVE IN</div>
+      <div id="ad-4b" class="ln ad-b"><span class="l gold">E</span><span class="l gold">V</span><span class="l gold">E</span><span class="l gold">R</span><span class="l gold">Y</span> <span class="l gold">F</span><span class="l gold">R</span><span class="l gold">A</span><span class="l gold">M</span><span class="l gold">E</span><span class="l gold">.</span></div>
+    </div>
+    <div id="ad-p5" class="ad-p"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#ad-line", { transformOrigin: "0% 50%" });
+      gsap.set("#ad-hair", { transformOrigin: "540px 1500px" });
+      const S = [0, 1.5, 3.0, 4.5];
+      // panels push up through each other, the outgoing one blurs away
+      for (let k = 2; k <= 5; k++) {
+        const s = k === 5 ? 6.0 : S[k - 1];
+        tl.fromTo("#ad-p" + k, { y: 1920 }, { y: 0, duration: 0.4, ease: "power3.inOut" }, s - 0.2);
+        tl.to("#ad-p" + (k - 1), { y: -520, filter: "blur(22px)", duration: 0.4, ease: "power3.inOut" }, s - 0.2);
+        tl.set("#ad-p" + (k - 1), { opacity: 0 }, s + 0.2);
+      }
+      S.forEach((s, i) => {
+        const k = i + 1;
+        // beat 0: line one blurs in
+        tl.fromTo("#ad-" + k + "a", { opacity: 0, filter: "blur(18px)", scale: 1.08, transformOrigin: "0% 60%" }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.2, ease: "power4.out" }, s + (k === 1 ? 0.0 : 0.02));
+        // beat 1: the gold word, letter by letter
+        tl.fromTo("#ad-" + k + "b .l", { opacity: 0, filter: "blur(12px)", y: 40 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.2, stagger: 0.03, ease: "power3.out" }, s + 0.5);
+      });
+      // 1 liquid smooth: a gold tide rolls in and keeps flowing
+      tl.fromTo("#ad-wave", { y: 900 }, { y: 0, duration: 0.7, ease: "expo.out" }, 0);
+      tl.fromTo("#ad-w1", { x: 0 }, { x: -1080, duration: 2.0, ease: "none" }, 0);
+      tl.fromTo("#ad-w2", { x: -1080 }, { x: -270, duration: 2.0, ease: "none" }, 0);
+      tl.to("#ad-wave", { keyframes: { y: [0, -70, 0] }, duration: 0.5, ease: "sine.inOut" }, 1.0);
+      // 2 dead simple: one circle, one line
+      tl.fromTo("#ad-circ", { y: 900 }, { y: 0, duration: 0.6, ease: "expo.out" }, 1.4);
+      tl.fromTo("#ad-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "expo.out" }, 2.5);
+      // 3 pure premium: hairline rings breathe, a gold bead orbits
+      tl.fromTo("#ad-hair", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: "expo.out" }, 2.9);
+      tl.fromTo("#ad-orb", { rotation: -150 }, { rotation: 20, duration: 1.9, ease: "power1.out" }, 2.85);
+      tl.to("#ad-hair", { keyframes: { scale: [1, 1.07, 1] }, duration: 0.5, ease: "sine.inOut" }, 4.0);
+      // 4 alive in every frame: the grid does a wave on each beat, the letters ripple
+      tl.fromTo(".ad-gd", { scale: 0 }, { scale: 1, duration: 0.3, stagger: { each: 0.012, from: "start" }, ease: "back.out(2.4)" }, 4.4);
+      [5.0, 5.5].forEach((t) => {
+        tl.to(".ad-gd", { keyframes: { scale: [1, 0.35, 1.15, 1] }, duration: 0.42, stagger: { amount: 0.3, grid: [5, 6], from: "start", axis: "x" }, ease: "sine.inOut" }, t);
+      });
+      tl.to("#ad-4b .l", { keyframes: { y: [0, -34, 0] }, duration: 0.3, stagger: 0.03, ease: "sine.inOut" }, 5.5);
+      tl.to("#ad-4a", { keyframes: { scale: [1, 1.06, 1] }, duration: 0.3, ease: "sine.inOut" }, 5.5);
+
+      window.__timelines["adv"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,157 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #05060a;
+      font-family: "Bebas Neue";
+      color: #ffffff;
+    }
+    .gold {
+      background: linear-gradient(172deg, #fdf3b4 0%, #ecc95f 26%, #c9962b 54%, #8a5a12 78%, #e2b94a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ln {
+      position: absolute;
+      left: 120px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .ln .l,
+    .ln .w {
+      display: inline-block;
+    }
+    .mq {
+      position: absolute;
+      left: 0;
+      top: 1470px;
+      font-size: 340px;
+      line-height: 1;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 3px rgba(212, 165, 55, 0.42);
+    }
+    #sh-glow { position: absolute; left: -460px; top: -240px; width: 2000px; height: 2000px; background: radial-gradient(closest-side, #1a3585 0%, rgba(13, 26, 66, 0.55) 45%, rgba(5, 6, 10, 0) 100%); }
+    #sh-rays { position: absolute; left: 540px; top: 760px; width: 0; height: 0; }
+    .sh-ray { position: absolute; left: -3px; top: -1500px; width: 6px; height: 1500px; transform-origin: 50% 100%; }
+    .sh-ray i { display: block; width: 6px; height: 1500px; background: linear-gradient(0deg, rgba(212, 165, 55, 0) 0%, rgba(212, 165, 55, 0) 18%, #d4a537 40%, rgba(253, 243, 180, 0.15) 100%); }
+    #sh-mark { position: absolute; left: 540px; top: 760px; width: 0; height: 0; perspective: 1100px; }
+    .sh-ring { position: absolute; border-radius: 50%; border-style: solid; }
+    #sh-r1 { left: -450px; top: -450px; width: 900px; height: 900px; border-width: 34px; border-color: #fdf3b4 #d4a537 #8a5a12 #d4a537; }
+    #sh-r2 { left: -320px; top: -320px; width: 640px; height: 640px; border-width: 30px; border-color: #d4a537 #8a5a12 #d4a537 #fdf3b4; }
+    #sh-r3 { left: -195px; top: -195px; width: 390px; height: 390px; border-width: 26px; border-color: #ffffff #d9d9d9 #8f97ad #d9d9d9; }
+    #sh-dot { position: absolute; left: 460px; top: 680px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 55%, #8a5a12); }
+    #sh-p2 { position: absolute; inset: 0; opacity: 0; }
+    #sh-make { top: 196px; font-size: 190px; }
+    #sh-move { position: absolute; left: 122px; top: 900px; font-size: 500px; line-height: 1; white-space: nowrap; font-kerning: none; }
+    #sh-move .l { display: inline-block; }
+    .sh-bar { position: absolute; top: 1400px; width: 96px; height: 520px; background: linear-gradient(180deg, #fdf3b4 0%, #d4a537 30%, #8a5a12 100%); }
+    #sh-p3 { position: absolute; inset: 0; opacity: 0; }
+    #sh-we { top: 196px; font-size: 190px; }
+    #sh-rig { position: absolute; left: 300px; top: 560px; width: 480px; height: 480px; perspective: 1500px; }
+    #sh-tilt { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(-16deg); }
+    #sh-cube { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .sh-f { position: absolute; inset: 0; font-size: 200px; line-height: 480px; text-align: center; backface-visibility: hidden; }
+    #sh-f1 { background: linear-gradient(172deg, #fdf3b4 0%, #ecc95f 26%, #c9962b 54%, #8a5a12 78%, #e2b94a 100%); color: #05060a; transform: translateZ(240px); }
+    #sh-f2 { background: #0f2360; color: #ffffff; transform: rotateY(90deg) translateZ(240px); }
+    #sh-f3 { background: #ffffff; color: #05060a; transform: rotateY(180deg) translateZ(240px); }
+    #sh-f4 { background: #0a1640; color: #ecc95f; transform: rotateY(270deg) translateZ(240px); }
+    #sh-f5 { background: #162d78; transform: rotateX(90deg) translateZ(240px); }
+    #sh-shadow { position: absolute; left: 240px; top: 1130px; width: 600px; height: 70px; border-radius: 50%; background: rgba(0, 0, 0, 0.6); }
+    #sh-out { position: absolute; left: 505px; top: 765px; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 55%, #8a5a12); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="show" data-width="1080" data-height="1920">
+    <div id="sh-glow" data-layout-ignore></div>
+    <div id="sh-rays" data-layout-ignore><div class="sh-ray" style="transform: rotate(0.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(22.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(45.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(67.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(90.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(112.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(135.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(157.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(180.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(202.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(225.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(247.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(270.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(292.5deg)"><i></i></div><div class="sh-ray" style="transform: rotate(315.0deg)"><i></i></div><div class="sh-ray" style="transform: rotate(337.5deg)"><i></i></div></div>
+    <div id="sh-mark" data-layout-ignore><div id="sh-r1" class="sh-ring"></div><div id="sh-r2" class="sh-ring"></div><div id="sh-r3" class="sh-ring"></div></div>
+    <div id="sh-dot"></div>
+    <div id="sh-p2" data-layout-allow-overflow>
+      <div id="sh-make" class="ln"><span class="w">MAKE</span> <span class="w">IT</span></div>
+      <div id="sh-move"><span class="l gold">M</span><span class="l gold">O</span><span class="l gold">V</span><span class="l gold">E</span></div>
+      <div id="sh-bars" data-layout-ignore><div class="sh-bar" style="left:12px"></div><div class="sh-bar" style="left:132px"></div><div class="sh-bar" style="left:252px"></div><div class="sh-bar" style="left:372px"></div><div class="sh-bar" style="left:492px"></div><div class="sh-bar" style="left:612px"></div><div class="sh-bar" style="left:732px"></div><div class="sh-bar" style="left:852px"></div><div class="sh-bar" style="left:972px"></div></div>
+    </div>
+    <div id="sh-p3" data-layout-allow-overflow>
+      <div id="sh-we" class="ln"><span class="w">WE</span> <span class="w">ANIMATE</span></div>
+      <div id="sh-shadow"></div>
+      <div id="sh-rig"><div id="sh-tilt"><div id="sh-cube">
+        <div id="sh-f1" class="sh-f">ADS</div><div id="sh-f2" class="sh-f" data-layout-ignore>LOGOS</div><div id="sh-f3" class="sh-f" data-layout-ignore>APPS</div><div id="sh-f4" class="sh-f" data-layout-ignore>TYPE</div><div id="sh-f5" class="sh-f"></div>
+      </div></div></div>
+      <div id="sh-mq" class="mq" data-layout-ignore>ADS — LOGOS — APPS — TYPE — ADS — LOGOS — APPS — TYPE —</div>
+    </div>
+    <div id="sh-out" data-layout-ignore></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const L = gsap.utils.toArray("#sh-move .l");
+      const BARS = gsap.utils.toArray(".sh-bar");
+      gsap.set(L, { transformOrigin: "50% 80%" });
+      gsap.set(BARS, { transformOrigin: "50% 100%" });
+      gsap.set(".sh-ray i", { transformOrigin: "50% 100%" });
+      tl.fromTo("#sh-glow", { x: 0, y: 0 }, { x: 160, y: 500, duration: 5, ease: "sine.inOut" }, 0);
+
+      // PART 1 (beats 0-1): the gold bead detonates into a gyroscope
+      tl.fromTo("#sh-dot", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 0);
+      tl.fromTo(".sh-ray i", { scaleY: 0 }, { scaleY: 1, duration: 0.5, stagger: { each: 0.012, from: "random" }, ease: "expo.out" }, 0.02);
+      tl.fromTo("#sh-rays", { rotation: 0 }, { rotation: 40, duration: 1.2, ease: "power1.out" }, 0);
+      tl.fromTo("#sh-r1", { scale: 0, rotationX: 0 }, { scale: 1, rotationX: 540, duration: 0.62, ease: "power3.out" }, 0.02);
+      tl.fromTo("#sh-r2", { scale: 0, rotationY: 0 }, { scale: 1, rotationY: -720, duration: 0.62, ease: "power3.out" }, 0.06);
+      tl.fromTo("#sh-r3", { scale: 0, rotationX: 0, rotationY: 0 }, { scale: 1, rotationX: 360, rotationY: 540, duration: 0.62, ease: "power3.out" }, 0.1);
+      tl.to("#sh-dot", { keyframes: { scale: [1, 1.5, 1] }, duration: 0.3, ease: "sine.inOut" }, 0.5);
+      // out: rings rush past the camera
+      tl.to(".sh-ring", { scale: 5, opacity: 0, filter: "blur(14px)", duration: 0.3, stagger: 0.03, ease: "power3.in" }, 0.72);
+      tl.to("#sh-rays", { scale: 3, opacity: 0, duration: 0.3, ease: "power3.in" }, 0.74);
+      tl.to("#sh-dot", { scale: 0, duration: 0.2, ease: "power3.in" }, 0.8);
+
+      // PART 2 (beats 2-4): MAKE IT / MOVE — the word is a level meter, the floor is too
+      tl.set("#sh-p2", { opacity: 1 }, 0.95);
+      tl.fromTo("#sh-make .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.12, ease: "power2.out" }, 0.86);
+      tl.fromTo(L, { scaleY: 0 }, { scaleY: 2.05, duration: 0.26, stagger: 0.035, ease: "back.out(1.5)" }, 1.0);
+      tl.fromTo("#sh-p2", { y: 0 }, { keyframes: { y: [0, 22, -10, 0] }, duration: 0.3, ease: "none" }, 1.02);
+      const lv = [
+        [1.1, 2.05, 1.5, 1.9],
+        [1.9, 1.2, 2.05, 1.0],
+        [1.3, 1.8, 1.0, 2.05],
+        [2.05, 2.05, 2.05, 2.05],
+      ];
+      [1.25, 1.5, 1.75, 2.0].forEach((t, j) => {
+        L.forEach((el, i) => tl.to(el, { scaleY: lv[j][i], duration: 0.2, ease: "back.out(2)" }, t));
+      });
+      const bh = [0.35, 0.8, 0.5, 1, 0.6, 0.9, 0.4, 0.75, 0.55];
+      tl.fromTo(BARS, { scaleY: 0 }, { scaleY: (i) => bh[i], duration: 0.25, stagger: 0.02, ease: "back.out(2)" }, 1.0);
+      [1.25, 1.5, 1.75, 2.0, 2.25].forEach((t, j) => {
+        tl.to(BARS, { scaleY: (i) => bh[(i + 2 * j + 3) % 9], duration: 0.2, ease: "back.out(2)" }, t);
+      });
+      // out: blur push down
+      tl.to("#sh-p2", { y: 700, opacity: 0, filter: "blur(26px)", duration: 0.3, ease: "power3.in" }, 2.2);
+
+      // PART 3 (beats 5-8): a cube turns one face per beat
+      tl.set("#sh-p3", { opacity: 1 }, 2.42);
+      tl.fromTo("#sh-we .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.12, ease: "power2.out" }, 2.44);
+      tl.fromTo("#sh-rig", { scale: 0, y: -900 }, { scale: 1, y: 0, duration: 0.36, ease: "back.out(1.5)" }, 2.42);
+      tl.fromTo("#sh-cube", { rotationY: 200 }, { rotationY: 0, duration: 0.5, ease: "back.out(1.4)" }, 2.42);
+      tl.fromTo("#sh-shadow", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.36, ease: "power2.out" }, 2.45);
+      tl.fromTo("#sh-mq", { x: 200, opacity: 0 }, { x: -700, opacity: 1, duration: 2.6, ease: "none" }, 2.42);
+      [3.0, 3.5, 4.0].forEach((t, j) => {
+        tl.to("#sh-cube", { rotationY: -90 * (j + 1), duration: 0.34, ease: "back.out(1.7)" }, t);
+        tl.to("#sh-rig", { keyframes: { y: [0, -46, 0] }, duration: 0.34, ease: "sine.inOut" }, t);
+        tl.to("#sh-shadow", { keyframes: { scale: [1, 0.8, 1] }, duration: 0.34, ease: "sine.inOut" }, t);
+      });
+      // beat 9: the cube spins itself down into the bead, everything blurs out
+      tl.to("#sh-cube", { rotationY: -990, duration: 0.42, ease: "power2.in" }, 4.5);
+      tl.to("#sh-rig", { scale: 0.08, duration: 0.42, ease: "power3.in" }, 4.5);
+      tl.to(["#sh-we", "#sh-mq", "#sh-shadow"], { opacity: 0, filter: "blur(20px)", duration: 0.25, ease: "power2.in" }, 4.5);
+      tl.set("#sh-out", { opacity: 1 }, 4.88);
+      tl.set("#sh-rig", { opacity: 0 }, 4.9);
+
+      window.__timelines["show"] = tl;
+    })();
+  </script>
+</template>

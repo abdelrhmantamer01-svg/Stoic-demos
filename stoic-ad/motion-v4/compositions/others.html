@@ -1,0 +1,122 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #05060a;
+      font-family: "Bebas Neue";
+      color: #ffffff;
+    }
+    .gold {
+      background: linear-gradient(172deg, #fdf3b4 0%, #ecc95f 26%, #c9962b 54%, #8a5a12 78%, #e2b94a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ln {
+      position: absolute;
+      left: 120px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .ln .l,
+    .ln .w {
+      display: inline-block;
+    }
+    .mq {
+      position: absolute;
+      left: 0;
+      top: 1470px;
+      font-size: 340px;
+      line-height: 1;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 3px rgba(212, 165, 55, 0.42);
+    }
+    #ot-desk { position: absolute; inset: 0; background: #008080; }
+    #ot-h1 { top: 180px; font-size: 130px; color: #ffffff; }
+    #ot-h2 { top: 300px; font-size: 130px; color: #ffffff; }
+    .ot-h { opacity: 0; }
+    .ot-wp { position: absolute; width: 660px; height: 300px; }
+    .ot-win { position: absolute; left: 0; top: 0; width: 660px; height: 300px; background: #c0c0c0; border: 4px solid; border-color: #ffffff #404040 #404040 #ffffff; font-family: "Roboto", sans-serif; color: #000000; box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.45); opacity: 0; }
+    .ot-bar { height: 56px; background: #000080; color: #ffffff; font-weight: 700; font-size: 30px; line-height: 56px; padding-left: 16px; }
+    .ot-bar b { position: absolute; right: 8px; top: 8px; width: 44px; height: 40px; background: #c0c0c0; color: #000; font-size: 28px; line-height: 36px; text-align: center; border: 3px solid; border-color: #ffffff #404040 #404040 #ffffff; }
+    .ot-ic { position: absolute; left: 28px; top: 92px; width: 96px; height: 96px; font-weight: 700; font-size: 70px; line-height: 96px; text-align: center; }
+    .ot-x { border-radius: 50%; background: #ff0000; color: #ffffff; }
+    .ot-w { background: #ffe600; color: #000000; border: 5px solid #000000; line-height: 86px; }
+    .ot-msg { position: absolute; left: 150px; top: 100px; font-weight: 700; font-size: 62px; line-height: 80px; white-space: nowrap; }
+    .ot-gl { position: absolute; left: 150px; top: 106px; width: 400px; height: 24px; background: #808080; }
+    .ot-ok { position: absolute; left: 260px; top: 214px; width: 150px; height: 56px; font-size: 30px; font-weight: 700; line-height: 50px; text-align: center; border: 3px solid; border-color: #ffffff #404040 #404040 #ffffff; }
+    #ot-sweep { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: #05060a; }
+    #ot-sg { position: absolute; inset: 0; background: radial-gradient(1000px 1000px at 540px 760px, #17307a 0%, rgba(13, 26, 66, 0.5) 45%, rgba(5, 6, 10, 0) 72%); }
+    #ot-ball { position: absolute; left: 240px; top: 500px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 50%, #8a5a12 85%); }
+    #ot-conv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; }
+    #ot-watch { top: 470px; font-size: 330px; opacity: 0; }
+    #ot-this { top: 760px; font-size: 330px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="others" data-width="1080" data-height="1920">
+    <div id="ot-desk"></div>
+    <div id="ot-h1" class="ln ot-h">WHAT OTHERS</div>
+    <div id="ot-h2" class="ln ot-h">CALL MOTION:</div>
+    <div class="ot-wp" style="left:80px; top:470px"><div class="ot-rot" style="transform: rotate(-3deg)"><div id="ot-w1" class="ot-win">
+      <div class="ot-bar">ad_final_v7.mp4<b>x</b></div><div class="ot-ic ot-w">!</div><div class="ot-msg">CHOPPY.</div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div class="ot-wp" style="left:300px; top:650px"><div class="ot-rot" style="transform: rotate(2.5deg)"><div id="ot-w2" class="ot-win">
+      <div class="ot-bar">logo.gif<b>x</b></div><div class="ot-ic ot-x">X</div><div class="ot-msg">CLIP-ART.</div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div class="ot-wp" style="left:110px; top:840px"><div class="ot-rot" style="transform: rotate(-1.5deg)"><div id="ot-w3" class="ot-win">
+      <div class="ot-bar">template_0412<b>x</b></div><div class="ot-ic ot-w">!</div><div class="ot-msg">COPY-PASTE.</div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div class="ot-wp" style="left:280px; top:1030px"><div class="ot-rot" style="transform: rotate(3deg)"><div id="ot-w4" class="ot-win">
+      <div class="ot-bar">promo (1)(1)<b>x</b></div><div class="ot-ic ot-x">X</div><div class="ot-msg">FLAT &amp; LIFELESS.</div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div class="ot-wp" style="left:40px; top:1310px"><div class="ot-rot" style="transform: rotate(2deg)"><div id="ot-w5" class="ot-win" data-layout-ignore>
+      <div class="ot-bar">error<b>x</b></div><div class="ot-ic ot-x">X</div><div class="ot-gl"></div><div class="ot-gl" style="top:150px;width:260px"></div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div class="ot-wp" style="left:400px; top:1480px"><div class="ot-rot" style="transform: rotate(-4deg)"><div id="ot-w6" class="ot-win" data-layout-ignore>
+      <div class="ot-bar">error<b>x</b></div><div class="ot-ic ot-w">!</div><div class="ot-gl"></div><div class="ot-gl" style="top:150px;width:260px"></div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div class="ot-wp" style="left:130px; top:1660px"><div class="ot-rot" style="transform: rotate(3deg)"><div id="ot-w7" class="ot-win" data-layout-ignore>
+      <div class="ot-bar">error<b>x</b></div><div class="ot-ic ot-x">X</div><div class="ot-gl"></div><div class="ot-gl" style="top:150px;width:260px"></div><div class="ot-ok">OK</div>
+    </div></div></div>
+    <div id="ot-sweep"><div id="ot-sg"></div></div>
+    <div id="ot-ball" data-layout-ignore></div>
+    <svg id="ot-conv" viewBox="0 0 1080 1920" data-layout-ignore><circle cx="540" cy="760" r="240" fill="none" stroke="#d4a537" stroke-opacity=".7" stroke-width="3" /><circle cx="540" cy="760" r="420" fill="none" stroke="#d4a537" stroke-opacity=".7" stroke-width="3" /><circle cx="540" cy="760" r="620" fill="none" stroke="#d4a537" stroke-opacity=".7" stroke-width="3" /><circle cx="540" cy="760" r="860" fill="none" stroke="#d4a537" stroke-opacity=".7" stroke-width="3" /><circle cx="540" cy="760" r="1140" fill="none" stroke="#d4a537" stroke-opacity=".7" stroke-width="3" /></svg>
+    <div id="ot-watch" class="ln">WATCH</div>
+    <div id="ot-this" class="ln gold">THIS.</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#ot-conv", { transformOrigin: "540px 760px" });
+      // header
+      tl.fromTo(".ot-h", { opacity: 0, filter: "blur(14px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, stagger: 0.1, ease: "power2.out" }, 0.04);
+      // cheap windows pop on the beat, with a cheap stepped ease
+      const pops = [0.3, 0.8, 1.3, 1.8, 2.05, 2.3, 2.55];
+      pops.forEach((t, i) => {
+        tl.fromTo("#ot-w" + (i + 1), { opacity: 1, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.14, ease: "steps(3)", immediateRender: false }, t);
+        tl.set("#ot-w" + (i + 1), { opacity: 1 }, t);
+      });
+      // 12.0 (local 2.8): one gold ball bowls the lot off screen; the dark follows it in
+      tl.fromTo("#ot-ball", { x: -1100, rotation: 0 }, { x: 1300, rotation: 360, duration: 0.56, ease: "power1.in" }, 2.5);
+      tl.fromTo("#ot-sweep", { x: -1090 }, { x: 0, duration: 0.42, ease: "power2.in" }, 2.6);
+      [4, 2, 3, 1, 6, 7, 5].forEach((n, j) => {
+        tl.to("#ot-w" + n, { x: 1500, y: -200 + j * 60, rotation: 50 + j * 12, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, 2.62 + j * 0.012);
+      });
+      tl.to(".ot-h", { x: 1300, filter: "blur(16px)", duration: 0.36, ease: "power2.in" }, 2.66);
+      // 12.5: WATCH / 12.75: THIS. — rings converge like an intake of breath
+      tl.set("#ot-conv", { opacity: 1 }, 3.05);
+      tl.fromTo("#ot-conv", { scale: 2.6 }, { scale: 0.2, duration: 0.75, ease: "power2.in" }, 3.05);
+      tl.fromTo("#ot-watch", { opacity: 0, filter: "blur(18px)", scale: 1.1, transformOrigin: "0% 60%" }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.18, ease: "power4.out" }, 3.05);
+      tl.fromTo("#ot-this", { opacity: 0, filter: "blur(18px)", scale: 1.1, transformOrigin: "0% 60%" }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.18, ease: "power4.out" }, 3.3);
+      tl.to(["#ot-watch", "#ot-this"], { opacity: 0, filter: "blur(24px)", scale: 0.8, duration: 0.16, ease: "power3.in" }, 3.62);
+
+      window.__timelines["others"] = tl;
+    })();
+  </script>
+</template>

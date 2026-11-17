@@ -1,0 +1,109 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #05060a;
+      font-family: "Bebas Neue";
+      color: #ffffff;
+    }
+    .gold {
+      background: linear-gradient(172deg, #fdf3b4 0%, #ecc95f 26%, #c9962b 54%, #8a5a12 78%, #e2b94a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ln {
+      position: absolute;
+      left: 120px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .ln .l,
+    .ln .w {
+      display: inline-block;
+    }
+    .mq {
+      position: absolute;
+      left: 0;
+      top: 1470px;
+      font-size: 340px;
+      line-height: 1;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 3px rgba(212, 165, 55, 0.42);
+    }
+    #in-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(1100px 1100px at 540px 1560px, #17307a 0%, rgba(13, 26, 66, 0.55) 42%, rgba(5, 6, 10, 0) 72%);
+    }
+    #in-rings {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+    #in-t1 { top: 300px; font-size: 360px; }
+    #in-t2 { top: 600px; font-size: 360px; opacity: 0; }
+    #in-t3 { top: 960px; font-size: 200px; }
+    #in-t3 .l { opacity: 0; }
+    #in-bar {
+      position: absolute;
+      left: 120px;
+      top: 1170px;
+      width: 840px;
+      height: 10px;
+      background: linear-gradient(90deg, #fdf3b4, #c9962b 60%, #8a5a12);
+    }
+    #in-dotp { position: absolute; left: 905px; top: 818px; width: 70px; height: 70px; }
+    #in-dot { width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 55%, #8a5a12); }
+    #in-all { position: absolute; inset: 0; }
+  </style>
+  <div id="root" data-composition-id="intro" data-width="1080" data-height="1920">
+    <div id="in-glow"></div>
+    <svg id="in-rings" viewBox="0 0 1080 1920" data-layout-ignore><circle cx="540" cy="1560" r="260" fill="none" stroke="#d4a537" stroke-opacity="0.9" stroke-width="3" /><circle cx="540" cy="1560" r="480" fill="none" stroke="#d4a537" stroke-opacity="0.7" stroke-width="3" /><circle cx="540" cy="1560" r="720" fill="none" stroke="#d4a537" stroke-opacity="0.55" stroke-width="3" /><circle cx="540" cy="1560" r="980" fill="none" stroke="#d4a537" stroke-opacity="0.42" stroke-width="3" /><circle cx="540" cy="1560" r="1260" fill="none" stroke="#d4a537" stroke-opacity="0.32" stroke-width="3" /><circle cx="540" cy="1560" r="1560" fill="none" stroke="#d4a537" stroke-opacity="0.24" stroke-width="3" /></svg>
+    <div id="in-mq" class="mq" data-layout-ignore>AT ITS FINEST — AT ITS FINEST — AT ITS FINEST —</div>
+    <div id="in-all">
+      <div id="in-t1" class="ln">MOTION</div>
+      <div id="in-t2" class="ln">DESIGN</div>
+      <div id="in-dotp"><div id="in-dot"></div></div>
+      <div id="in-t3" class="ln"><span class="l gold">A</span><span class="l gold">T</span> <span class="l gold">I</span><span class="l gold">T</span><span class="l gold">S</span> <span class="l gold">F</span><span class="l gold">I</span><span class="l gold">N</span><span class="l gold">E</span><span class="l gold">S</span><span class="l gold">T</span><span class="l gold">.</span></div>
+      <div id="in-bar"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#in-rings", { transformOrigin: "540px 1560px" });
+      gsap.set("#in-bar", { transformOrigin: "0% 50%" });
+      gsap.set("#in-dot", { transformOrigin: "50% 100%" });
+      // beat pulse on the rings, every beat
+      for (let b = 0; b < 6; b++) tl.to("#in-rings", { keyframes: { scale: [1, 1.06, 1] }, duration: 0.5, ease: "power2.out" }, b * 0.5);
+      tl.to("#in-mq", { x: -520, duration: 3, ease: "none" }, 0);
+      // beat 0: MOTION (already on screen at frame 0, settling)
+      tl.fromTo("#in-t1", { scale: 1.1, filter: "blur(8px)", transformOrigin: "0% 60%" }, { scale: 1, filter: "blur(0px)", duration: 0.32, ease: "power4.out" }, 0);
+      // beat 1: DESIGN
+      tl.fromTo("#in-t2", { opacity: 0, scale: 1.16, filter: "blur(18px)", transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.5);
+      // beat 2: the gold full stop drops in
+      tl.fromTo("#in-dotp", { y: -1100 }, { y: 0, duration: 0.3, ease: "power2.in" }, 0.7);
+      tl.to("#in-dot", { keyframes: { scaleX: [1, 1.5, 1], scaleY: [1, 0.55, 1] }, duration: 0.3, ease: "sine.inOut" }, 1.0);
+      tl.to("#in-all", { keyframes: { y: [0, 14, 0] }, duration: 0.22, ease: "sine.inOut" }, 1.0);
+      // beat 3: AT ITS FINEST.
+      tl.fromTo("#in-t3 .l", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.028, ease: "power2.out" }, 1.5);
+      // beat 4: gold rule
+      tl.fromTo("#in-bar", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "expo.out" }, 2.0);
+      // beat 5 -> 6: blur push up and out
+      tl.to("#in-all", { y: -500, opacity: 0, filter: "blur(26px)", duration: 0.34, ease: "power3.in" }, 2.64);
+      tl.to(["#in-rings", "#in-mq", "#in-glow"], { y: -700, opacity: 0, duration: 0.34, ease: "power3.in" }, 2.64);
+
+      window.__timelines["intro"] = tl;
+    })();
+  </script>
+</template>

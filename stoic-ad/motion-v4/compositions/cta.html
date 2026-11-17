@@ -1,0 +1,116 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #05060a;
+      font-family: "Bebas Neue";
+      color: #ffffff;
+    }
+    .gold {
+      background: linear-gradient(172deg, #fdf3b4 0%, #ecc95f 26%, #c9962b 54%, #8a5a12 78%, #e2b94a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ln {
+      position: absolute;
+      left: 120px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .ln .l,
+    .ln .w {
+      display: inline-block;
+    }
+    .mq {
+      position: absolute;
+      left: 0;
+      top: 1470px;
+      font-size: 340px;
+      line-height: 1;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 3px rgba(212, 165, 55, 0.42);
+    }
+    #ct-glow { position: absolute; inset: 0; background: radial-gradient(1300px 1100px at 540px 2000px, #1a3585 0%, rgba(13, 26, 66, 0.55) 45%, rgba(5, 6, 10, 0) 75%), radial-gradient(900px 700px at 900px 300px, rgba(19, 42, 107, 0.7) 0%, rgba(5, 6, 10, 0) 70%); }
+    #ct-rings { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #ct-mq { top: 1520px; font-size: 300px; }
+    #ct-q { top: 196px; font-size: 100px; }
+    #ct-q .w { opacity: 0; }
+    #ct-dm { top: 300px; font-size: 400px; opacity: 0; }
+    #ct-dotp { position: absolute; left: 884px; top: 544px; width: 76px; height: 76px; }
+    #ct-dot { width: 76px; height: 76px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fdf3b4, #d4a537 55%, #8a5a12); }
+    #ct-rig { position: absolute; left: 120px; top: 690px; width: 840px; height: 440px; perspective: 1500px; }
+    #ct-card { position: absolute; inset: 0; transform-style: preserve-3d; opacity: 0; }
+    .ct-side { position: absolute; inset: 0; border-radius: 26px; background: #0f2360; }
+    #ct-face { position: absolute; inset: 0; border-radius: 26px; background: linear-gradient(135deg, #fdf3b4 0%, #ecc95f 22%, #c9962b 52%, #a87320 74%, #e8c358 100%); color: #05060a; overflow: hidden; }
+    #ct-sheen { position: absolute; left: -400px; top: -100px; width: 220px; height: 700px; background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0)); }
+    #ct-h { position: absolute; left: 50px; top: 40px; font-size: 58px; line-height: 1; letter-spacing: 0.03em; white-space: nowrap; }
+    #ct-price { position: absolute; left: 46px; top: 100px; height: 250px; overflow: hidden; font-size: 250px; line-height: 1; white-space: nowrap; font-kerning: none; }
+    #ct-price .l { display: inline-block; }
+    #ct-per { position: absolute; left: 480px; top: 126px; font-size: 80px; line-height: 0.96; white-space: nowrap; }
+    #ct-terms { position: absolute; left: 50px; top: 352px; font-size: 56px; line-height: 1; letter-spacing: 0.02em; white-space: nowrap; }
+    #ct-name { top: 1160px; font-size: 66px; clip-path: inset(0 100% 0 0); }
+    #ct-wa { top: 1232px; font-size: 88px; clip-path: inset(0 100% 0 0); }
+  </style>
+  <div id="root" data-composition-id="cta" data-width="1080" data-height="1920">
+    <div id="ct-glow"></div>
+    <svg id="ct-rings" viewBox="0 0 1080 1920" data-layout-ignore><circle cx="540" cy="2250" r="760" fill="none" stroke="#d4a537" stroke-opacity="1" stroke-width="10" /><circle cx="540" cy="2250" r="900" fill="none" stroke="#d4a537" stroke-opacity="0.6" stroke-width="3" /><circle cx="540" cy="2250" r="1040" fill="none" stroke="#d4a537" stroke-opacity="0.45" stroke-width="3" /><circle cx="540" cy="2250" r="1200" fill="none" stroke="#d4a537" stroke-opacity="0.32" stroke-width="3" /></svg>
+    <div id="ct-mq" class="mq" data-layout-ignore>NOVEMBER DEAL — NOVEMBER DEAL — NOVEMBER DEAL —</div>
+    <div id="ct-q" class="ln"><span class="w">WANT</span> <span class="w">TO</span> <span class="w">WORK</span> <span class="w">WITH</span> <span class="w">US?</span></div>
+    <div id="ct-dm" class="ln">DM US</div>
+    <div id="ct-dotp"><div id="ct-dot"></div></div>
+    <div id="ct-rig" data-layout-allow-overflow>
+      <div id="ct-card">
+        <div class="ct-side" style="transform: translateZ(-36px)"></div><div class="ct-side" style="transform: translateZ(-27px)"></div><div class="ct-side" style="transform: translateZ(-18px)"></div><div class="ct-side" style="transform: translateZ(-9px)"></div>
+        <div id="ct-face">
+          <div id="ct-h">DON'T MISS THE NOVEMBER DEAL</div>
+          <div id="ct-price"><span class="l">$</span><span class="l">3</span><span class="l">0</span><span class="l">0</span></div>
+          <div id="ct-per">PER<br />ANIMATED<br />AD</div>
+          <div id="ct-terms">FIRST 5 CLIENTS · NOVEMBER ONLY</div>
+          <div id="ct-sheen"></div>
+        </div>
+      </div>
+    </div>
+    <div id="ct-name" class="ln">ABDELRAHMAN — MOTION DESIGNER</div>
+    <div id="ct-wa" class="ln"><span class="gold">WHATSAPP</span> +971 54 557 2646</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#ct-rings", { transformOrigin: "540px 2250px" });
+      gsap.set("#ct-card", { transformOrigin: "50% 100%" });
+      gsap.set("#ct-dot", { transformOrigin: "50% 100%" });
+      // the bead from the showpiece opens into the ground rings
+      tl.fromTo("#ct-rings", { scale: 0.05, y: -1480 }, { scale: 1, y: 0, duration: 0.6, ease: "expo.out" }, 0);
+      tl.fromTo("#ct-glow", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0);
+      tl.fromTo("#ct-mq", { x: 300, opacity: 0 }, { x: -800, opacity: 1, duration: 5.9, ease: "none" }, 0.1);
+      for (let b = 1; b < 12; b++) tl.to("#ct-rings", { keyframes: { scale: [1, 1.035, 1] }, duration: 0.5, ease: "power2.out" }, b * 0.5);
+      // beat 0: the question
+      tl.fromTo("#ct-q .w", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.07, ease: "power2.out" }, 0.04);
+      // beat 1: DM US + beat 2: full stop
+      tl.fromTo("#ct-dm", { opacity: 0, scale: 1.25, filter: "blur(20px)", transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.5);
+      tl.fromTo("#ct-dotp", { y: -1000 }, { y: 0, duration: 0.3, ease: "power2.in" }, 0.7);
+      tl.to("#ct-dot", { keyframes: { scaleX: [1, 1.5, 1], scaleY: [1, 0.55, 1] }, duration: 0.3, ease: "sine.inOut" }, 1.0);
+      // beat 3: the deal card hinges up in 3D
+      tl.to("#ct-card", { opacity: 1, duration: 0.05, ease: "none" }, 1.5);
+      tl.fromTo("#ct-card", { rotationX: -98, rotationY: -12 }, { rotationX: 7, rotationY: -12, duration: 0.7, ease: "elastic.out(1,0.6)" }, 1.5);
+      tl.fromTo("#ct-price .l", { y: 260 }, { y: 0, duration: 0.4, stagger: 0.05, ease: "expo.out" }, 1.72);
+      tl.fromTo("#ct-sheen", { x: 0 }, { x: 1500, duration: 0.6, ease: "power2.inOut" }, 2.0);
+      // beats 5, 6: who and where
+      tl.to("#ct-name", { clipPath: "inset(0 0% 0 0)", duration: 0.4, ease: "expo.out" }, 2.5);
+      tl.to("#ct-wa", { clipPath: "inset(0 0% 0 0)", duration: 0.4, ease: "expo.out" }, 3.0);
+      // slow orbit of the card while the offer is read
+      tl.to("#ct-card", { rotationY: 9, rotationX: 3, duration: 3.6, ease: "sine.inOut" }, 2.3);
+      tl.fromTo("#ct-sheen", { x: 0 }, { x: 1500, duration: 0.7, ease: "power2.inOut", immediateRender: false }, 3.9);
+
+      window.__timelines["cta"] = tl;
+    })();
+  </script>
+</template>
