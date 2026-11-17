@@ -1,12 +1,12 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #fff3e2; font-family: "Archivo Black", sans-serif; }
-    #h-cam { position: absolute; inset: 0; transform-origin: 780px 820px; }
+    #h-cam { position: absolute; inset: 0; transform-origin: 750px 824px; }
     #h-title { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 96px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; }
     #h-title span { color: #ff6b2c; }
     #h-sub { position: absolute; left: 0; right: 0; top: 452px; text-align: center; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 46px; color: rgba(27, 21, 48, 0.55); }
     .h-let { position: absolute; top: 700px; width: 160px; height: 220px; text-align: center; font-size: 200px; line-height: 220px; color: #1b1530; transform-origin: 50% 100%; }
-    #h-hole { position: absolute; left: 744px; top: 776px; width: 72px; height: 96px; border-radius: 50%; background: #2d4bff; }
+    #h-hole { position: absolute; left: 714px; top: 776px; width: 72px; height: 96px; border-radius: 50%; background: #2d4bff; }
     #h-floor { position: absolute; left: 60px; top: 936px; width: 960px; height: 14px; border-radius: 7px; background: #1b1530; }
     .dots { position: absolute; border-radius: 50%; }
     .ball { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffc49a 0%, #ff6b2c 48%, #d9480f 100%); box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.08); }
@@ -23,12 +23,12 @@
       <div id="h-title">FOLLOW THE <span>BALL.</span></div>
       <div id="h-sub">a tiny journey in motion</div>
       <div id="h-hole"></div>
-      <div class="h-let" id="hl0" style="left: 60px">M</div>
-      <div class="h-let" id="hl1" style="left: 220px">O</div>
-      <div class="h-let" id="hl2" style="left: 380px">T</div>
-      <div class="h-let" id="hl3" style="left: 540px">I</div>
-      <div class="h-let" id="hl4" style="left: 700px">O</div>
-      <div class="h-let" id="hl5" style="left: 860px">N</div>
+      <div class="h-let" id="hl0" style="left: 75px; width: 190px">M</div>
+      <div class="h-let" id="hl1" style="left: 265px; width: 170px">O</div>
+      <div class="h-let" id="hl2" style="left: 435px; width: 150px">T</div>
+      <div class="h-let" id="hl3" style="left: 585px; width: 80px">I</div>
+      <div class="h-let" id="hl4" style="left: 665px; width: 170px">O</div>
+      <div class="h-let" id="hl5" style="left: 835px; width: 170px">N</div>
       <div id="h-floor"></div>
       <div id="h-shadow"></div>
       <div class="ball" id="h-ball"><i class="eye" style="left: 34px"><b></b></i><i class="eye" style="left: 64px"><b></b></i></div>
@@ -37,8 +37,9 @@
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
-      const B = 120, topY = 708; // ball size, letter tops
-      const cx = (i) => 60 + i * 160 + 80 - B / 2;
+      const B = 120, topY = 738; // ball size, letter tops
+      const CX = [170, 350, 510, 625, 750, 920];
+      const cx = (i) => CX[i] - B / 2;
       // ball starts above the M, already in frame (thumbnail)
       tl.set("#h-ball", { x: cx(0) - 40, y: 520 }, 0);
       tl.set("#h-shadow", { x: cx(0) - 35, y: 945, scale: 0.6, opacity: 0.6 }, 0);
@@ -71,7 +72,7 @@
       tl.to("#h-ball .eye b", { x: 0, y: 8, duration: 0.2 }, 2.5);
       // last hop: up, then dive into the O's blue hole
       tl.to("#h-ball", { y: topY - B - 260, duration: 0.28, ease: "power2.out" }, 2.6);
-      tl.to("#h-ball", { x: 780 - B / 2, y: 820 - B / 2, scale: 0.45, duration: 0.3, ease: "power2.in" }, 2.88);
+      tl.to("#h-ball", { x: 750 - B / 2, y: 824 - B / 2, scale: 0.45, duration: 0.3, ease: "power2.in" }, 2.88);
       tl.to("#h-shadow", { opacity: 0, duration: 0.2 }, 2.7);
       tl.to("#h-ball", { opacity: 0, duration: 0.06 }, 3.16);
       // the camera dives into the hole

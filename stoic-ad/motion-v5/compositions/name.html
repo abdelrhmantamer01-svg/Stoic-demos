@@ -1,7 +1,7 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #ff6b2c; font-family: "Archivo Black", sans-serif; }
-    .n-row { position: absolute; left: 0; right: 0; text-align: center; font-size: 186px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; white-space: nowrap; }
+    .n-row { position: absolute; left: 0; right: 0; text-align: center; font-size: 168px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; white-space: nowrap; }
     #n-r1 { top: 560px; }
     #n-r2 { top: 760px; }
     .n-row .l { display: inline-block; opacity: 0; }
@@ -32,10 +32,10 @@
       tl.fromTo("#n-r2 .l", { opacity: 0, y: -260 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.09, ease: "bounce.out" }, 0.95);
       // a little cream ball drops in and lands as the full stop after RAHMAN
       // RAHMAN centred ~ 6 letters; full stop sits just right of the N
-      tl.fromTo("#n-ball", { x: 900, y: -100 }, { x: 930, y: 880, duration: 0.5, ease: "power2.in" }, 1.75);
+      tl.fromTo("#n-ball", { x: 930, y: -100 }, { x: 958, y: 836, duration: 0.5, ease: "power2.in" }, 1.75);
       tl.to("#n-ball", { scaleY: 0.7, scaleX: 1.3, duration: 0.06 }, 2.25);
-      tl.to("#n-ball", { y: 800, scaleY: 1.1, scaleX: 0.92, duration: 0.18, ease: "power2.out" }, 2.31);
-      tl.to("#n-ball", { y: 880, scaleY: 1, scaleX: 1, duration: 0.18, ease: "power2.in" }, 2.49);
+      tl.to("#n-ball", { y: 756, scaleY: 1.1, scaleX: 0.92, duration: 0.18, ease: "power2.out" }, 2.31);
+      tl.to("#n-ball", { y: 836, scaleY: 1, scaleX: 1, duration: 0.18, ease: "power2.in" }, 2.49);
       tl.to("#n-ball", { scaleY: 0.85, scaleX: 1.12, duration: 0.05 }, 2.67);
       tl.to("#n-ball", { scaleY: 1, scaleX: 1, duration: 0.3, ease: "elastic.out(1.2, 0.4)" }, 2.72);
       tl.fromTo("#n-sub", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 2.75);
