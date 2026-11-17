@@ -1,0 +1,73 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #2ee6a6; font-family: "Archivo Black", sans-serif; }
+    #y-words { position: absolute; left: 0; right: 0; top: 240px; height: 150px; }
+    .y-w { position: absolute; left: 0; right: 0; text-align: center; font-size: 140px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; opacity: 0; }
+    .ball { position: absolute; left: 0; top: 0; width: 140px; height: 140px; border-radius: 50%; }
+    .eye { position: absolute; top: 36px; width: 30px; height: 38px; border-radius: 50%; background: #fff; }
+    .eye b { position: absolute; left: 10px; top: 14px; width: 15px; height: 18px; border-radius: 50%; background: #1b1530; }
+    #y-a { background: radial-gradient(circle at 34% 30%, #ffc49a 0%, #ff6b2c 48%, #d9480f 100%); }
+    #y-b { background: radial-gradient(circle at 34% 30%, #8fa0ff 0%, #2d4bff 55%, #1a2fd1 100%); opacity: 0; }
+    #y-c { background: radial-gradient(circle at 34% 30%, #ffb3d4 0%, #ff5fa2 55%, #e03a83 100%); opacity: 0; }
+    #y-ring { position: absolute; left: 290px; top: 760px; width: 500px; height: 500px; border-radius: 50%; border: 10px dashed rgba(27, 21, 48, 0.25); }
+  </style>
+  <div id="root" data-composition-id="play" data-width="1080" data-height="1920">
+    <div id="y-words"><div class="y-w" id="yw0">SQUASH.</div><div class="y-w" id="yw1">STRETCH.</div><div class="y-w" id="yw2">SPIN.</div></div>
+    <div id="y-ring" data-layout-ignore></div>
+    <div class="ball" id="y-b"><i class="eye" style="left: 40px"><b></b></i><i class="eye" style="left: 74px"><b></b></i></div>
+    <div class="ball" id="y-c"><i class="eye" style="left: 40px"><b></b></i><i class="eye" style="left: 74px"><b></b></i></div>
+    <div class="ball" id="y-a"><i class="eye" style="left: 40px"><b></b></i><i class="eye" style="left: 74px"><b></b></i></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const C = [470, 940]; // centre of the ring minus half a ball
+      tl.fromTo("#y-ring", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.1);
+      tl.fromTo("#y-a", { x: C[0], y: C[1], scale: 0.2 }, { scale: 1, duration: 0.4, ease: "back.out(2.5)" }, 0);
+      tl.set(["#y-b", "#y-c"], { x: C[0], y: C[1] }, 0);
+      // split into three
+      tl.set(["#y-b", "#y-c"], { opacity: 1 }, 0.55);
+      tl.to("#y-a", { x: C[0], y: C[1] - 250, duration: 0.45, ease: "back.out(1.8)" }, 0.55);
+      tl.to("#y-b", { x: C[0] - 216, y: C[1] + 125, duration: 0.45, ease: "back.out(1.8)" }, 0.55);
+      tl.to("#y-c", { x: C[0] + 216, y: C[1] + 125, duration: 0.45, ease: "back.out(1.8)" }, 0.55);
+      // SQUASH (all three squash on the beat)
+      tl.to("#yw0", { opacity: 1, duration: 0.01 }, 1.1);
+      tl.fromTo("#yw0", { scaleY: 0.4, scaleX: 1.4 }, { scaleY: 1, scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.4)", immediateRender: false }, 1.1);
+      tl.to(".ball", { scaleY: 0.55, scaleX: 1.45, duration: 0.12, ease: "power2.out" }, 1.1);
+      tl.to(".ball", { scaleY: 1, scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.35)" }, 1.22);
+      // STRETCH
+      tl.to("#yw0", { opacity: 0, duration: 0.1 }, 1.85);
+      tl.to("#yw1", { opacity: 1, duration: 0.01 }, 1.9);
+      tl.fromTo("#yw1", { scaleX: 0.5 }, { scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.4)", immediateRender: false }, 1.9);
+      tl.to(".ball", { scaleY: 1.6, scaleX: 0.7, duration: 0.14, ease: "power2.out" }, 1.9);
+      tl.to(".ball", { scaleY: 1, scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.35)" }, 2.04);
+      // SPIN: all three orbit the centre once
+      tl.to("#yw1", { opacity: 0, duration: 0.1 }, 2.65);
+      tl.to("#yw2", { opacity: 1, duration: 0.01 }, 2.7);
+      tl.fromTo("#yw2", { rotation: -25 }, { rotation: 0, duration: 0.5, ease: "back.out(3)", immediateRender: false }, 2.7);
+      const R = 250, steps = 24;
+      [["#y-a", -90], ["#y-b", 150], ["#y-c", 30]].forEach(([id, a0]) => {
+        const xs = [], ys = [];
+        for (let k = 0; k <= steps; k++) {
+          const a = ((a0 + (360 * k) / steps) * Math.PI) / 180;
+          xs.push(C[0] + R * Math.cos(a));
+          ys.push(C[1] + R * Math.sin(a));
+        }
+        tl.to(id, { keyframes: { x: xs, y: ys }, duration: 0.9, ease: "power2.inOut" }, 2.7);
+        tl.to(id, { rotation: 360, duration: 0.9, ease: "power2.inOut" }, 2.7);
+      });
+      tl.to("#y-ring", { rotation: 180, duration: 0.9, ease: "power2.inOut" }, 2.7);
+      // merge back into one ball
+      tl.to("#yw2", { opacity: 0, duration: 0.12 }, 3.55);
+      tl.to(["#y-a", "#y-b", "#y-c"], { x: C[0], y: C[1], duration: 0.3, ease: "power3.in" }, 3.6);
+      tl.set(["#y-b", "#y-c"], { opacity: 0 }, 3.9);
+      tl.fromTo("#y-a", { scale: 1 }, { scale: 1.3, duration: 0.12, ease: "power2.out", immediateRender: false }, 3.9);
+      tl.to("#y-ring", { scale: 0, opacity: 0, duration: 0.25, ease: "power2.in" }, 3.7);
+      // the ball flies at the camera until it fills the frame
+      tl.to("#y-a .eye b", { y: 6, x: 0, duration: 0.1 }, 4.0);
+      tl.to("#y-a", { scale: 22, duration: 0.6, ease: "power3.in" }, 4.05);
+      tl.to("#y-a .eye", { opacity: 0, duration: 0.1 }, 4.3);
+      window.__timelines["play"] = tl;
+    })();
+  </script>
+</template>

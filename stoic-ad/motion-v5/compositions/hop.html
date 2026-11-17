@@ -1,0 +1,82 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #fff3e2; font-family: "Archivo Black", sans-serif; }
+    #h-cam { position: absolute; inset: 0; transform-origin: 780px 820px; }
+    #h-title { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 96px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; }
+    #h-title span { color: #ff6b2c; }
+    #h-sub { position: absolute; left: 0; right: 0; top: 452px; text-align: center; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 46px; color: rgba(27, 21, 48, 0.55); }
+    .h-let { position: absolute; top: 700px; width: 160px; height: 220px; text-align: center; font-size: 200px; line-height: 220px; color: #1b1530; transform-origin: 50% 100%; }
+    #h-hole { position: absolute; left: 744px; top: 776px; width: 72px; height: 96px; border-radius: 50%; background: #2d4bff; }
+    #h-floor { position: absolute; left: 60px; top: 936px; width: 960px; height: 14px; border-radius: 7px; background: #1b1530; }
+    .dots { position: absolute; border-radius: 50%; }
+    .ball { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffc49a 0%, #ff6b2c 48%, #d9480f 100%); box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.08); }
+    .ball .eye { position: absolute; top: 30px; width: 26px; height: 34px; border-radius: 50%; background: #fff; }
+    .ball .eye b { position: absolute; left: 9px; top: 12px; width: 13px; height: 16px; border-radius: 50%; background: #1b1530; }
+    #h-ball { transform-origin: 50% 100%; }
+    #h-shadow { position: absolute; left: 0; top: 0; width: 110px; height: 20px; border-radius: 50%; background: rgba(27, 21, 48, 0.18); }
+  </style>
+  <div id="root" data-composition-id="hop" data-width="1080" data-height="1920">
+    <div class="dots" style="left: -120px; top: 1180px; width: 520px; height: 520px; background: #ffd8b8" data-layout-ignore></div>
+    <div class="dots" style="left: 760px; top: 1320px; width: 420px; height: 420px; background: #c9f7e7" data-layout-ignore></div>
+    <div class="dots" style="left: 820px; top: 120px; width: 180px; height: 180px; background: #ffd3e6" data-layout-ignore></div>
+    <div id="h-cam">
+      <div id="h-title">FOLLOW THE <span>BALL.</span></div>
+      <div id="h-sub">a tiny journey in motion</div>
+      <div id="h-hole"></div>
+      <div class="h-let" id="hl0" style="left: 60px">M</div>
+      <div class="h-let" id="hl1" style="left: 220px">O</div>
+      <div class="h-let" id="hl2" style="left: 380px">T</div>
+      <div class="h-let" id="hl3" style="left: 540px">I</div>
+      <div class="h-let" id="hl4" style="left: 700px">O</div>
+      <div class="h-let" id="hl5" style="left: 860px">N</div>
+      <div id="h-floor"></div>
+      <div id="h-shadow"></div>
+      <div class="ball" id="h-ball"><i class="eye" style="left: 34px"><b></b></i><i class="eye" style="left: 64px"><b></b></i></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const B = 120, topY = 708; // ball size, letter tops
+      const cx = (i) => 60 + i * 160 + 80 - B / 2;
+      // ball starts above the M, already in frame (thumbnail)
+      tl.set("#h-ball", { x: cx(0) - 40, y: 520 }, 0);
+      tl.set("#h-shadow", { x: cx(0) - 35, y: 945, scale: 0.6, opacity: 0.6 }, 0);
+      const hops = [0.45, 0.95, 1.45, 1.95, 2.45];
+      let px = cx(0) - 40, py = 520;
+      // first drop onto M
+      tl.to("#h-ball", { y: topY - B, duration: 0.45, ease: "power2.in" }, 0);
+      tl.to("#h-ball", { x: cx(0), duration: 0.45, ease: "none" }, 0);
+      tl.to("#h-shadow", { x: cx(0) + 5, scale: 1, opacity: 1, duration: 0.45, ease: "power2.in" }, 0);
+      for (let i = 0; i < 5; i++) {
+        const t = hops[i];
+        // land: squash ball and letter
+        tl.to("#h-ball", { scaleY: 0.72, scaleX: 1.24, duration: 0.06, ease: "power2.out" }, t);
+        tl.to("#h-ball", { scaleY: 1.12, scaleX: 0.9, duration: 0.08, ease: "power2.out" }, t + 0.06);
+        tl.to("#h-ball", { scaleY: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, t + 0.14);
+        tl.fromTo("#hl" + i, { scaleY: 1, scaleX: 1 }, { scaleY: 0.82, scaleX: 1.08, duration: 0.07, ease: "power2.out", immediateRender: false }, t);
+        tl.to("#hl" + i, { scaleY: 1, scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.35)" }, t + 0.07);
+        if (i < 4) {
+          // hop to the next letter
+          const n = i + 1, d = hops[n] - t;
+          tl.to("#h-ball", { x: cx(n), duration: d, ease: "none" }, t + 0.02);
+          tl.to("#h-ball", { y: topY - B - 190, duration: d / 2, ease: "power2.out" }, t + 0.02);
+          tl.to("#h-ball", { y: topY - B, duration: d / 2 - 0.02, ease: "power2.in" }, t + 0.02 + d / 2);
+          tl.to("#h-shadow", { x: cx(n) + 5, duration: d, ease: "none" }, t + 0.02);
+          tl.to("#h-shadow", { keyframes: { scale: [1, 0.6, 1], opacity: [1, 0.5, 1] }, duration: d, ease: "none" }, t + 0.02);
+        }
+      }
+      // the eyes look ahead, then down into the O
+      tl.to("#h-ball .eye b", { x: 4, duration: 0.2 }, 0.5);
+      tl.to("#h-ball .eye b", { x: 0, y: 8, duration: 0.2 }, 2.5);
+      // last hop: up, then dive into the O's blue hole
+      tl.to("#h-ball", { y: topY - B - 260, duration: 0.28, ease: "power2.out" }, 2.6);
+      tl.to("#h-ball", { x: 780 - B / 2, y: 820 - B / 2, scale: 0.45, duration: 0.3, ease: "power2.in" }, 2.88);
+      tl.to("#h-shadow", { opacity: 0, duration: 0.2 }, 2.7);
+      tl.to("#h-ball", { opacity: 0, duration: 0.06 }, 3.16);
+      // the camera dives into the hole
+      tl.fromTo("#h-cam", { scale: 1 }, { scale: 26, duration: 0.5, ease: "power3.in", immediateRender: false }, 3.1);
+      window.__timelines["hop"] = tl;
+    })();
+  </script>
+</template>
