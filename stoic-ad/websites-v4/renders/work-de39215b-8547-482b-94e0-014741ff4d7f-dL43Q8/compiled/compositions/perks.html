@@ -1,0 +1,416 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0d0b0b;
+      font-family: "Inter", sans-serif;
+    }
+    .k-panel {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+    .k-h {
+      position: absolute;
+      left: 120px;
+      top: 270px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 190px;
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .wht {
+      color: #f5f2ee;
+    }
+    .blk {
+      color: #0d0b0b;
+    }
+    .red {
+      color: #e63946;
+    }
+    /* a: depth */
+    #k-disc {
+      position: absolute;
+      left: -60px;
+      top: 700px;
+      width: 1200px;
+      height: 1200px;
+      border-radius: 50%;
+      background: #b3132b;
+    }
+    #k-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+      perspective-origin: 540px 1180px;
+    }
+    #k-tilt {
+      position: absolute;
+      left: 470px;
+      top: 1190px;
+      width: 0;
+      height: 0;
+      transform: rotateX(-14deg) scale(1.06);
+      transform-style: preserve-3d;
+    }
+    #k-turn,
+    .dv-pair {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      transform-style: preserve-3d;
+    }
+    .dv-deck {
+      position: absolute;
+      left: -470px;
+      top: 200px;
+      width: 860px;
+      height: 520px;
+      border-radius: 10px 10px 34px 34px;
+      background: #dcdce1;
+      transform-origin: 50% 0%;
+      transform: rotateX(90deg);
+      box-shadow: 0 0 0 3px #b9b9c0 inset;
+    }
+    .dv-keys {
+      position: absolute;
+      left: 50px;
+      top: 34px;
+      width: 760px;
+      height: 250px;
+      border-radius: 10px;
+      background-color: #2b2b30;
+      background-image: repeating-linear-gradient(90deg, transparent 0 46px, #dcdce1 46px 52px), repeating-linear-gradient(0deg, transparent 0 44px, #dcdce1 44px 50px);
+    }
+    .dv-pad {
+      position: absolute;
+      left: 290px;
+      top: 320px;
+      width: 280px;
+      height: 160px;
+      border-radius: 14px;
+      background: #c8c8cf;
+    }
+    .dv-lid {
+      position: absolute;
+      left: -440px;
+      top: -320px;
+      width: 800px;
+      height: 520px;
+      border-radius: 26px 26px 6px 6px;
+      background: #19191c;
+      box-shadow: 0 0 0 3px #4a4a52 inset;
+      backface-visibility: hidden;
+    }
+    .dv-lscreen {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 768px;
+      height: 480px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .dv-lscreen img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 768px;
+      height: auto;
+      display: block;
+    }
+    .dv-phonepos {
+      position: absolute;
+      left: 200px;
+      top: -330px;
+      width: 250px;
+      height: 530px;
+      transform: translateZ(320px);
+      transform-style: preserve-3d;
+    }
+    .dv-phone {
+      position: absolute;
+      inset: 0;
+      border-radius: 42px;
+      background: #19191c;
+      box-shadow: 0 0 0 3px #4a4a52 inset, -30px 30px 50px rgba(0, 0, 0, 0.4);
+      backface-visibility: hidden;
+    }
+    .dv-pscreen {
+      position: absolute;
+      left: 11px;
+      top: 11px;
+      width: 228px;
+      height: 508px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .dv-pscreen img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 228px;
+      height: auto;
+      display: block;
+    }
+    /* b: domain */
+    #k-pill {
+      position: absolute;
+      left: 90px;
+      top: 700px;
+      width: 900px;
+      height: 128px;
+      border-radius: 64px;
+      background: #fff;
+      box-shadow: 0 22px 48px rgba(13, 11, 11, 0.2);
+    }
+    #k-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 64px;
+      box-shadow: inset 0 0 0 6px #e63946;
+      opacity: 0;
+    }
+    #k-lock {
+      position: absolute;
+      left: 38px;
+      top: 36px;
+      width: 56px;
+      height: 56px;
+    }
+    #k-url {
+      position: absolute;
+      left: 116px;
+      top: 0;
+      line-height: 128px;
+      font-weight: 700;
+      font-size: 58px;
+      letter-spacing: -0.02em;
+      color: #0d0b0b;
+      white-space: nowrap;
+    }
+    #k-caret {
+      display: inline-block;
+      width: 5px;
+      height: 62px;
+      margin-left: 6px;
+      vertical-align: -10px;
+      background: #e63946;
+    }
+    #k-btn {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #e63946;
+    }
+    #k-btn svg {
+      position: absolute;
+      left: 24px;
+      top: 24px;
+      width: 48px;
+      height: 48px;
+    }
+    #k-check {
+      opacity: 0;
+    }
+    .k-card {
+      position: absolute;
+      left: 90px;
+      width: 900px;
+      height: 563px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(13, 11, 11, 0.25);
+    }
+    .k-card img {
+      display: block;
+      width: 900px;
+      height: 563px;
+    }
+    #k-card1 {
+      top: 890px;
+    }
+    #k-card2 {
+      top: 1500px;
+    }
+    /* c: silk */
+    #k-phone {
+      position: absolute;
+      left: 250px;
+      top: 720px;
+      width: 580px;
+      height: 1250px;
+      border-radius: 86px;
+      background: #19191c;
+      box-shadow: 0 60px 120px rgba(0, 0, 0, 0.45);
+    }
+    #k-phone .scr {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 540px;
+      height: 1210px;
+      border-radius: 68px;
+      overflow: hidden;
+      background: #fff;
+    }
+    #k-phone img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 540px;
+      height: auto;
+      display: block;
+    }
+    /* d: money */
+    #k-dstage {
+      position: absolute;
+      inset: 0;
+      perspective: 2000px;
+      perspective-origin: 540px 1100px;
+    }
+    #k-dlap {
+      position: absolute;
+      left: 60px;
+      top: 760px;
+      width: 960px;
+      height: 600px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 60px 120px rgba(0, 0, 0, 0.6), 0 0 0 4px #3a3030;
+    }
+    #k-dlap img {
+      display: block;
+      width: 960px;
+      height: 600px;
+    }
+    #k-dph {
+      position: absolute;
+      left: 610px;
+      top: 1040px;
+      width: 360px;
+      height: 780px;
+      border-radius: 56px;
+      background: #19191c;
+      box-shadow: -40px 40px 90px rgba(0, 0, 0, 0.6), 0 0 0 3px #4a4a52 inset;
+    }
+    #k-dph .scr {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 332px;
+      height: 752px;
+      border-radius: 44px;
+      overflow: hidden;
+    }
+    #k-dph img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 332px;
+      height: auto;
+      display: block;
+    }
+    #k-dbar {
+      position: absolute;
+      left: 0;
+      top: 1500px;
+      width: 1080px;
+      height: 420px;
+      background: #b3132b;
+    }
+  </style>
+  <div id="root" data-composition-id="perks" data-width="1080" data-height="1920">
+    <div class="k-panel" id="k-p0" data-layout-allow-overflow>
+      <div id="k-disc" data-layout-ignore></div>
+      <div id="k-stage"><div id="k-tilt"><div id="k-turn">
+            <div class="dv-pair" id="k-pair">
+              <div class="dv-deck"><div class="dv-keys"></div><div class="dv-pad"></div></div>
+              <div class="dv-lid" id="k-pair-lid"><div class="dv-lscreen"><img id="k-pair-li" src="assets/img/sc-cafe-l.jpg" alt="" /></div></div>
+              <div class="dv-phonepos"><div class="dv-phone" id="k-pair-ph"><div class="dv-pscreen"><img id="k-pair-pi" src="assets/img/sc-cafe-p.jpg" alt="" /></div></div></div>
+            </div>
+      </div></div></div>
+      <div class="k-h wht">DEPTH YOU<br />CAN <span class="red">FEEL.</span></div>
+    </div>
+
+    <div class="k-panel" id="k-p1" data-layout-allow-overflow>
+      <div class="k-h blk">YOUR NAME.<br /><span class="red">DOT COM.</span></div>
+      <div class="k-card" id="k-card1"><img src="assets/img/cafe-laptop.jpg" alt="" /></div>
+      <div class="k-card" id="k-card2"><img src="assets/img/clinic-laptop.jpg" alt="" /></div>
+      <div id="k-pill">
+        <svg id="k-lock" viewBox="0 0 56 56"><rect x="9" y="24" width="38" height="28" rx="7" fill="#0d0b0b" /><path d="M17 25 V17 a11 11 0 0 1 22 0 V25" fill="none" stroke="#0d0b0b" stroke-width="6" /></svg>
+        <div id="k-url"><span id="k-typed"></span><span id="k-caret"></span></div>
+        <div id="k-btn">
+          <svg id="k-arrow" viewBox="0 0 48 48"><path d="M8 24 H38 M26 11 L39 24 L26 37" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <svg id="k-check" viewBox="0 0 48 48"><path d="M9 25 L20 36 L40 13" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </div>
+        <div id="k-ring"></div>
+      </div>
+    </div>
+
+    <div class="k-panel" id="k-p2" data-layout-allow-overflow>
+      <div class="k-h wht">MOTION<br />LIKE SILK.</div>
+      <div id="k-phone"><div class="scr"><img id="k-pimg" src="assets/img/sc-clinic-p.jpg" alt="" /></div></div>
+    </div>
+
+    <div class="k-panel" id="k-p3" data-layout-allow-overflow>
+      <div id="k-dbar" data-layout-ignore></div>
+      <div id="k-dstage">
+        <div id="k-dlap"><img src="assets/img/estate-laptop.jpg" alt="" /></div>
+        <div id="k-dph"><div class="scr"><img id="k-dimg" src="assets/img/sc-realestate-p.jpg" alt="" /></div></div>
+      </div>
+      <div class="k-h wht">LOOKS LIKE<br /><span class="red">MONEY.</span></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const grounds = ["#0d0b0b", "#f5f2ee", "#b3132b", "#0d0b0b"];
+      // one phrase per bar (2 beats = 1 s); each blurs into the next on the beat
+      for (let k = 0; k < 4; k++) {
+        tl.fromTo("#k-p" + k, { opacity: 0, filter: "blur(24px)", scale: 1.06 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.2, ease: "power2.out" }, k);
+        tl.fromTo("#k-p" + k, { opacity: 1, filter: "blur(0px)", scale: 1 }, { opacity: 0, filter: "blur(24px)", scale: 0.95, duration: 0.14, ease: "power2.in", immediateRender: false }, k + 0.86);
+        if (k > 0) tl.fromTo("#root", { backgroundColor: grounds[k - 1] }, { backgroundColor: grounds[k], duration: 0.2, ease: "power2.inOut", immediateRender: false }, k - 0.1);
+      }
+      // a: the laptop opens and the pair turns in real 3D
+      tl.fromTo("#k-turn", { rotationY: -38 }, { rotationY: 20, duration: 1.05, ease: "power2.out" }, 0);
+      tl.fromTo("#k-pair-lid", { rotationX: -86, transformOrigin: "50% 100%" }, { rotationX: 7, duration: 0.5, ease: "back.out(1.25)" }, 0.02);
+      tl.fromTo("#k-pair-ph", { rotationY: 96 }, { rotationY: -16, duration: 0.55, ease: "power3.out" }, 0.08);
+      tl.fromTo(["#k-pair-li", "#k-pair-pi"], { y: 0 }, { y: -220, duration: 0.8, ease: "power1.inOut" }, 0.2);
+      // b: the name is typed, ticked on the half beat, the site drops in under it
+      const url = "yourname.com";
+      const typed = document.getElementById("k-typed");
+      const st = { n: 0 };
+      tl.fromTo(st, { n: 0 }, { n: url.length, duration: 0.36, ease: "none", onUpdate: () => (typed.textContent = url.slice(0, Math.round(st.n))) }, 1.08);
+      tl.fromTo(["#k-card1", "#k-card2"], { y: 420 }, { y: 0, duration: 0.6, ease: "expo.out" }, 1.0);
+      tl.fromTo("#k-caret", { opacity: 1 }, { opacity: 0, duration: 0.04 }, 1.48);
+      tl.fromTo("#k-ring", { opacity: 0 }, { opacity: 1, duration: 0.08 }, 1.5);
+      tl.fromTo("#k-arrow", { opacity: 1 }, { opacity: 0, duration: 0.05 }, 1.5);
+      tl.fromTo("#k-check", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.6)" }, 1.5);
+      // c: one long silky scroll
+      tl.fromTo("#k-phone", { rotation: -9, y: 160 }, { rotation: -5, y: 0, duration: 0.9, ease: "expo.out" }, 2.0);
+      tl.fromTo("#k-pimg", { y: 0 }, { y: -900, duration: 0.95, ease: "power2.inOut" }, 2.02);
+      // d: the luxury site, laptop and phone
+      tl.fromTo("#k-dlap", { rotationY: -34, rotationX: 10, x: 120 }, { rotationY: -12, rotationX: 4, x: 0, duration: 0.95, ease: "expo.out" }, 3.0);
+      tl.fromTo("#k-dph", { rotationY: 30, y: 260, z: 120 }, { rotationY: -10, y: 0, z: 120, duration: 0.8, ease: "expo.out" }, 3.06);
+      tl.fromTo("#k-dimg", { y: 0 }, { y: -240, duration: 0.9, ease: "power1.inOut" }, 3.05);
+      window.__timelines["perks"] = tl;
+    })();
+  </script>
+</template>
