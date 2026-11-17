@@ -1,0 +1,118 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #fff3e2; font-family: "Archivo Black", sans-serif; }
+    #h-grid { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: radial-gradient(circle, rgba(27, 21, 48, 0.09) 3px, transparent 3.5px); background-size: 56px 56px; }
+    #h-cam { position: absolute; inset: 0; transform-origin: 750px 824px; }
+    #h-title { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 96px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; }
+    #h-title span.o { color: #ff6b2c; }
+    #h-title .w { display: inline-block; }
+    #h-sub { position: absolute; left: 0; right: 0; top: 452px; text-align: center; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 46px; color: rgba(27, 21, 48, 0.55); }
+    .h-let { position: absolute; top: 700px; height: 220px; text-align: center; font-size: 200px; line-height: 220px; color: #1b1530; transform-origin: 50% 100%; }
+    #h-hole { position: absolute; left: 714px; top: 776px; width: 72px; height: 96px; border-radius: 50%; background: #2d4bff; }
+    #h-floor { position: absolute; left: 60px; top: 936px; width: 960px; height: 14px; border-radius: 7px; background: #1b1530; }
+    .dots { position: absolute; border-radius: 50%; }
+    .ball { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffc49a 0%, #ff6b2c 48%, #d9480f 100%); box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.08); }
+    .ball .eye { position: absolute; top: 30px; width: 26px; height: 34px; border-radius: 50%; background: #fff; }
+    .ball .eye b { position: absolute; left: 9px; top: 12px; width: 13px; height: 16px; border-radius: 50%; background: #1b1530; }
+    .ghost { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: #ff6b2c; }
+    #h-ball { transform-origin: 50% 100%; }
+    #h-shadow { position: absolute; left: 0; top: 0; width: 110px; height: 20px; border-radius: 50%; background: rgba(27, 21, 48, 0.18); }
+    .cf { position: absolute; left: 0; top: 0; width: 22px; height: 22px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="hop" data-width="1080" data-height="1920">
+    <div id="h-grid" data-layout-ignore></div>
+    <div class="dots" id="h-d1" style="left: -120px; top: 1180px; width: 520px; height: 520px; background: #ffd8b8" data-layout-ignore></div>
+    <div class="dots" id="h-d2" style="left: 760px; top: 1320px; width: 420px; height: 420px; background: #c9f7e7" data-layout-ignore></div>
+    <div class="dots" id="h-d3" style="left: 820px; top: 120px; width: 180px; height: 180px; background: #ffd3e6" data-layout-ignore></div>
+    <div id="h-cam">
+      <div id="h-title"><span class="w">FOLLOW</span> <span class="w">THE</span> <span class="w o">BALL.</span></div>
+      <div id="h-sub">a tiny journey in motion</div>
+      <div id="h-hole"></div>
+      <div class="h-let" id="hl0" style="left: 75px; width: 190px">M</div>
+      <div class="h-let" id="hl1" style="left: 265px; width: 170px">O</div>
+      <div class="h-let" id="hl2" style="left: 435px; width: 150px">T</div>
+      <div class="h-let" id="hl3" style="left: 585px; width: 80px">I</div>
+      <div class="h-let" id="hl4" style="left: 665px; width: 170px">O</div>
+      <div class="h-let" id="hl5" style="left: 835px; width: 170px">N</div>
+      <div id="h-floor"></div>
+      <div id="h-fx" data-layout-ignore></div>
+      <div id="h-shadow"></div>
+      <div class="ghost" id="h-g3" style="opacity: 0.1"></div>
+      <div class="ghost" id="h-g2" style="opacity: 0.18"></div>
+      <div class="ghost" id="h-g1" style="opacity: 0.3"></div>
+      <div class="ball" id="h-ball"><i class="eye" style="left: 34px"><b></b></i><i class="eye" style="left: 64px"><b></b></i></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const B = 120, topY = 738;
+      const CX = [170, 350, 510, 625, 750, 920];
+      const cx = (i) => CX[i] - B / 2;
+      const hops = [0.45, 0.95, 1.45, 1.95, 2.45];
+      const pal = ["#ff6b2c", "#2d4bff", "#ff5fa2", "#2ee6a6", "#ffb703"];
+      let seed = 11;
+      const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const fx = document.getElementById("h-fx");
+      const burst = (x, y, t, n, spread) => {
+        for (let k = 0; k < n; k++) {
+          const p = document.createElement("div");
+          p.className = "cf";
+          p.style.background = pal[k % pal.length];
+          p.style.borderRadius = k % 3 === 0 ? "50%" : k % 3 === 1 ? "4px" : "0";
+          if (k % 3 === 2) p.style.height = "10px";
+          fx.appendChild(p);
+          const a = -Math.PI * (0.1 + 0.8 * (k / (n - 1))) + (rnd() - 0.5) * 0.3;
+          const r = spread * (0.6 + rnd() * 0.6);
+          tl.fromTo(p, { x, y, scale: 0.4, rotation: 0, opacity: 1 }, { x: x + Math.cos(a) * r, y: y + Math.sin(a) * r, scale: 1, rotation: 200 + rnd() * 300, duration: 0.55, ease: "power3.out" }, t);
+          tl.to(p, { y: "+=90", opacity: 0, duration: 0.4, ease: "power1.in" }, t + 0.5);
+        }
+      };
+      tl.fromTo("#h-grid", { x: 0, y: 0 }, { x: -56, y: -112, duration: 3.6, ease: "none" }, 0);
+      tl.fromTo(["#h-d1", "#h-d2", "#h-d3"], { scale: 0.85 }, { scale: 1.05, duration: 3.6, ease: "sine.inOut" }, 0);
+      tl.fromTo("#h-title .w", { y: 0 }, { keyframes: { y: [0, -16, 0] }, duration: 0.4, stagger: 0.12, ease: "sine.inOut", immediateRender: false }, 0.1);
+      // the ball's path, reused for its motion-trail ghosts
+      const path = (sel, dt) => {
+        tl.set(sel, { x: cx(0) - 40, y: 520 }, 0);
+        tl.to(sel, { y: topY - B, duration: 0.45, ease: "power2.in" }, dt);
+        tl.to(sel, { x: cx(0), duration: 0.45, ease: "none" }, dt);
+        for (let i = 0; i < 4; i++) {
+          const t = hops[i], n = i + 1, d = hops[n] - t;
+          tl.to(sel, { x: cx(n), duration: d, ease: "none" }, t + 0.02 + dt);
+          tl.to(sel, { y: topY - B - 190, duration: d / 2, ease: "power2.out" }, t + 0.02 + dt);
+          tl.to(sel, { y: topY - B, duration: d / 2 - 0.02, ease: "power2.in" }, t + 0.02 + d / 2 + dt);
+        }
+        tl.to(sel, { y: topY - B - 260, duration: 0.28, ease: "power2.out" }, 2.6 + dt);
+        tl.to(sel, { x: 750 - B / 2, y: 824 - B / 2, scale: 0.45, duration: 0.3, ease: "power2.in" }, 2.88 + dt);
+        tl.to(sel, { opacity: 0, duration: 0.06 }, 3.16 + dt);
+      };
+      path("#h-g3", 0.09);
+      path("#h-g2", 0.06);
+      path("#h-g1", 0.03);
+      path("#h-ball", 0);
+      tl.set("#h-shadow", { x: cx(0) - 35, y: 945, scale: 0.6, opacity: 0.6 }, 0);
+      tl.to("#h-shadow", { x: cx(0) + 5, scale: 1, opacity: 1, duration: 0.45, ease: "power2.in" }, 0);
+      for (let i = 0; i < 5; i++) {
+        const t = hops[i];
+        tl.to("#h-ball", { scaleY: 0.72, scaleX: 1.24, duration: 0.06, ease: "power2.out" }, t);
+        tl.to("#h-ball", { scaleY: 1.12, scaleX: 0.9, duration: 0.08, ease: "power2.out" }, t + 0.06);
+        tl.to("#h-ball", { scaleY: 1, scaleX: 1, duration: 0.2, ease: "power2.out" }, t + 0.14);
+        tl.fromTo("#hl" + i, { scaleY: 1, scaleX: 1 }, { scaleY: 0.82, scaleX: 1.08, duration: 0.07, ease: "power2.out", immediateRender: false }, t);
+        tl.to("#hl" + i, { scaleY: 1, scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.35)" }, t + 0.07);
+        tl.to("#hl" + i, { color: pal[i], duration: 0.12 }, t);
+        burst(CX[i], topY - 10, t, 8, 150);
+        if (i < 4) {
+          const n = i + 1, d = hops[n] - t;
+          tl.to("#h-shadow", { x: cx(n) + 5, duration: d, ease: "none" }, t + 0.02);
+          tl.to("#h-shadow", { keyframes: { scale: [1, 0.6, 1], opacity: [1, 0.5, 1] }, duration: d, ease: "none" }, t + 0.02);
+        }
+      }
+      tl.to("#hl5", { color: pal[4], duration: 0.12 }, 2.7);
+      tl.to("#h-ball .eye b", { x: 4, duration: 0.2 }, 0.5);
+      tl.to("#h-ball .eye b", { x: 0, y: 8, duration: 0.2 }, 2.5);
+      tl.to("#h-shadow", { opacity: 0, duration: 0.2 }, 2.7);
+      tl.fromTo("#h-cam", { scale: 1 }, { scale: 26, duration: 0.5, ease: "power3.in", immediateRender: false }, 3.1);
+      window.__timelines["hop"] = tl;
+    })();
+  </script>
+</template>

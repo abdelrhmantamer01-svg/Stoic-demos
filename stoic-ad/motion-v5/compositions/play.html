@@ -9,11 +9,17 @@
     #y-a { background: radial-gradient(circle at 34% 30%, #ffc49a 0%, #ff6b2c 48%, #d9480f 100%); }
     #y-b { background: radial-gradient(circle at 34% 30%, #8fa0ff 0%, #2d4bff 55%, #1a2fd1 100%); opacity: 0; }
     #y-c { background: radial-gradient(circle at 34% 30%, #ffb3d4 0%, #ff5fa2 55%, #e03a83 100%); opacity: 0; }
+    #y-sun { position: absolute; left: -460px; top: -10px; width: 2000px; height: 2000px; border-radius: 50%; background: repeating-conic-gradient(rgba(255,255,255,0.16) 0 10deg, rgba(255,255,255,0) 10deg 20deg); }
+    .tr { position: absolute; left: 0; top: 0; width: 140px; height: 140px; border-radius: 50%; }
     #y-ring { position: absolute; left: 290px; top: 760px; width: 500px; height: 500px; border-radius: 50%; border: 10px dashed rgba(27, 21, 48, 0.25); }
   </style>
   <div id="root" data-composition-id="play" data-width="1080" data-height="1920">
+    <div id="y-sun" data-layout-ignore></div>
     <div id="y-words"><div class="y-w" id="yw0">SQUASH.</div><div class="y-w" id="yw1">STRETCH.</div><div class="y-w" id="yw2">SPIN.</div></div>
     <div id="y-ring" data-layout-ignore></div>
+    <div class="tr" id="tr-a1" style="background:#ff6b2c;opacity:0"></div><div class="tr" id="tr-a2" style="background:#ff6b2c;opacity:0"></div>
+    <div class="tr" id="tr-b1" style="background:#2d4bff;opacity:0"></div><div class="tr" id="tr-b2" style="background:#2d4bff;opacity:0"></div>
+    <div class="tr" id="tr-c1" style="background:#ff5fa2;opacity:0"></div><div class="tr" id="tr-c2" style="background:#ff5fa2;opacity:0"></div>
     <div class="ball" id="y-b"><i class="eye" style="left: 40px"><b></b></i><i class="eye" style="left: 74px"><b></b></i></div>
     <div class="ball" id="y-c"><i class="eye" style="left: 40px"><b></b></i><i class="eye" style="left: 74px"><b></b></i></div>
     <div class="ball" id="y-a"><i class="eye" style="left: 40px"><b></b></i><i class="eye" style="left: 74px"><b></b></i></div>
@@ -22,6 +28,7 @@
     (() => {
       const tl = gsap.timeline({ paused: true });
       const C = [470, 940]; // centre of the ring minus half a ball
+      tl.fromTo("#y-sun", { rotation: 0 }, { rotation: 90, duration: 4.7, ease: "none" }, 0);
       tl.fromTo("#y-ring", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.1);
       tl.fromTo("#y-a", { x: C[0], y: C[1], scale: 0.2 }, { scale: 1, duration: 0.4, ease: "back.out(2.5)" }, 0);
       tl.set(["#y-b", "#y-c"], { x: C[0], y: C[1] }, 0);
@@ -54,6 +61,13 @@
           ys.push(C[1] + R * Math.sin(a));
         }
         tl.to(id, { keyframes: { x: xs, y: ys }, duration: 0.9, ease: "power2.inOut" }, 2.7);
+        const key = id.slice(-1);
+        [[1, 0.05, 0.35], [2, 0.1, 0.18]].forEach(([n, dt, op]) => {
+          const g = "#tr-" + key + n;
+          tl.set(g, { x: xs[0], y: ys[0], opacity: op }, 2.7);
+          tl.to(g, { keyframes: { x: xs, y: ys }, duration: 0.9, ease: "power2.inOut" }, 2.7 + dt);
+          tl.set(g, { opacity: 0 }, 3.62 + dt);
+        });
         tl.to(id, { rotation: 360, duration: 0.9, ease: "power2.inOut" }, 2.7);
       });
       tl.to("#y-ring", { rotation: 180, duration: 0.9, ease: "power2.inOut" }, 2.7);

@@ -1,7 +1,8 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #ff5fa2; font-family: "Archivo Black", sans-serif; }
-    #p-cam { position: absolute; inset: 0; transform-origin: 540px 1282px; }
+    #p-cam { position: absolute; inset: 0; transform-origin: 540px 1282px; perspective: 1800px; }
+    #p-bg { position: absolute; left: -400px; top: -400px; width: 1880px; height: 2720px; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.10) 0 40px, rgba(255,255,255,0) 40px 110px); }
     #p-word { position: absolute; left: 0; right: 0; top: 210px; text-align: center; font-size: 150px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; }
     #p-word .w { display: inline-block; opacity: 0; }
     #p-phone { position: absolute; left: 250px; top: 420px; width: 580px; height: 1040px; border-radius: 80px; background: #1b1530; box-shadow: 0 40px 0 rgba(27, 21, 48, 0.2); }
@@ -17,6 +18,7 @@
     .ball .eye b { position: absolute; left: 7px; top: 10px; width: 11px; height: 13px; border-radius: 50%; background: #1b1530; }
   </style>
   <div id="root" data-composition-id="phone" data-width="1080" data-height="1920">
+    <div id="p-bg" data-layout-ignore></div>
     <div id="p-word"><span class="w">BOOP.</span> <span class="w">BOOP.</span></div>
     <div id="p-cam">
       <div id="p-phone">
@@ -28,6 +30,7 @@
           <div class="plus" id="pp0" style="left: 300px; top: 120px">+1</div>
           <div class="plus" id="pp1" style="left: 160px; top: 340px">♥</div>
           <div class="plus" id="pp2" style="left: 320px; top: 560px">★</div>
+          <div id="p-fx" data-layout-ignore></div>
           <div class="ball" id="p-ball"><i class="eye" style="left: 28px"><b></b></i><i class="eye" style="left: 52px"><b></b></i></div>
         </div>
         <div id="p-notch"></div>
@@ -39,6 +42,13 @@
       const tl = gsap.timeline({ paused: true });
       // the pink floods in from the portal; the phone rises into place
       tl.fromTo("#p-phone", { y: 900, rotation: 8 }, { y: 0, rotation: 0, duration: 0.7, ease: "expo.out" }, 0);
+      tl.fromTo("#p-bg", { x: 0 }, { x: 156, duration: 3.75, ease: "none" }, 0);
+      tl.fromTo("#p-phone", { rotationY: -16, rotationX: 6 }, { rotationY: 12, rotationX: -4, duration: 2.6, ease: "sine.inOut" }, 0.2);
+      tl.to("#p-phone", { rotationY: 0, rotationX: 0, duration: 0.3, ease: "power2.out" }, 2.8);
+      let seed = 3; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const pal = ["#ff6b2c", "#2d4bff", "#ff5fa2", "#2ee6a6", "#ffd23f"];
+      const fxEl = document.getElementById("p-fx");
+      const burst = (x, y, t) => { for (let k = 0; k < 8; k++) { const p = document.createElement("div"); p.style.cssText = "position:absolute;left:0;top:0;width:16px;height:16px;opacity:0;border-radius:" + (k % 2 ? "50%" : "3px") + ";background:" + pal[k % 5]; fxEl.appendChild(p); const a = (Math.PI * 2 * k) / 8 + rnd() * 0.5; const r = 80 + rnd() * 60; tl.fromTo(p, { x, y, scale: 0.3, opacity: 1, rotation: 0 }, { x: x + Math.cos(a) * r, y: y + Math.sin(a) * r, scale: 1, rotation: 260, duration: 0.45, ease: "power3.out" }, t); tl.to(p, { opacity: 0, duration: 0.25 }, t + 0.35); } };
       // ball drops in from the top of the screen (coords are inside the screen)
       const pts = [[218, -120, 0.35], [190, 160, 0.75], [330, 360, 1.2], [150, 600, 1.65], [370, 420, 2.1], [218, 670, 2.55]];
       tl.set("#p-ball", { x: pts[0][0], y: pts[0][1] }, 0);
@@ -52,6 +62,7 @@
       [[0, 0.75], [1, 1.2], [2, 1.65], [1, 2.1]].forEach(([c, t], i) => {
         tl.to("#pc" + c, { scale: 1.08, rotation: i % 2 ? -4 : 4, duration: 0.08, ease: "power2.out" }, t);
         tl.to("#pc" + c, { scale: 1, rotation: 0, duration: 0.45, ease: "elastic.out(1.1, 0.4)" }, t + 0.08);
+        burst(pts[i + 1][0] + 50, pts[i + 1][1] + 50, t);
         if (i < 3) {
           tl.fromTo("#pp" + c, { opacity: 0, y: 0, scale: 0.6 }, { opacity: 1, y: -80, scale: 1.2, duration: 0.35, ease: "power2.out" }, t);
           tl.to("#pp" + c, { opacity: 0, duration: 0.25 }, t + 0.45);

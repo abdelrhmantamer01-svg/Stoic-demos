@@ -1,49 +1,67 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #ff6b2c; font-family: "Archivo Black", sans-serif; }
-    .n-row { position: absolute; left: 0; right: 0; text-align: center; font-size: 168px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; white-space: nowrap; }
-    #n-r1 { top: 560px; }
-    #n-r2 { top: 760px; }
+    #n-grid { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: radial-gradient(circle, rgba(27, 21, 48, 0.12) 3px, transparent 3.5px); background-size: 56px 56px; }
+    .n-row { position: absolute; left: 0; right: 0; text-align: center; font-size: 230px; line-height: 1; letter-spacing: -0.02em; color: #1b1530; white-space: nowrap; }
+    #n-r1 { top: 520px; }
+    #n-r2 { top: 785px; font-size: 168px; }
     .n-row .l { display: inline-block; opacity: 0; }
-    #n-sub { position: absolute; left: 0; right: 0; top: 1010px; text-align: center; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 60px; letter-spacing: 0.2em; color: #fff3e2; opacity: 0; }
-    #n-hello { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 58px; color: rgba(27, 21, 48, 0.6); opacity: 0; }
-    .ball { position: absolute; left: 0; top: 0; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffffff 0%, #fff3e2 55%, #f3d9b8 100%); }
-    .ball .eye { position: absolute; top: 18px; width: 15px; height: 19px; border-radius: 50%; background: #1b1530; transform-origin: 50% 50%; }
+    #n-r2 .l { color: #fff3e2; }
+    .ball { position: absolute; left: 0; top: 0; width: 84px; height: 84px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffffff 0%, #fff3e2 55%, #f3d9b8 100%); }
+    .ball .eye { position: absolute; top: 22px; width: 17px; height: 22px; border-radius: 50%; background: #1b1530; transform-origin: 50% 50%; }
     .blob { position: absolute; border-radius: 50%; }
+    .cf { position: absolute; left: 0; top: 0; width: 24px; height: 24px; opacity: 0; }
   </style>
   <div id="root" data-composition-id="name" data-width="1080" data-height="1920">
+    <div id="n-grid" data-layout-ignore></div>
     <div class="blob" id="n-b1" style="left: -160px; top: 1300px; width: 640px; height: 640px; background: #ff8a54" data-layout-ignore></div>
     <div class="blob" id="n-b2" style="left: 700px; top: 1420px; width: 480px; height: 480px; background: #2d4bff" data-layout-ignore></div>
     <div class="blob" id="n-b3" style="left: 820px; top: 140px; width: 200px; height: 200px; background: #ff5fa2" data-layout-ignore></div>
-    <div id="n-hello">made with love by</div>
-    <div class="n-row" id="n-r1"><span class="l">A</span><span class="l">B</span><span class="l">D</span><span class="l">E</span><span class="l">L</span></div>
-    <div class="n-row" id="n-r2"><span class="l">R</span><span class="l">A</span><span class="l">H</span><span class="l">M</span><span class="l">A</span><span class="l">N</span></div>
-    <div id="n-sub">MOTION DESIGNER</div>
-    <div class="ball" id="n-ball"><i class="eye" style="left: 18px"></i><i class="eye" style="left: 38px"></i></div>
+    <div class="blob" id="n-b4" style="left: 60px; top: 220px; width: 120px; height: 120px; background: #2ee6a6" data-layout-ignore></div>
+    <div class="n-row" id="n-r1"><span class="l">K</span><span class="l">E</span><span class="l">E</span><span class="l">P</span></div>
+    <div class="n-row" id="n-r2"><span class="l">M</span><span class="l">O</span><span class="l">V</span><span class="l">I</span><span class="l">N</span><span class="l">G</span></div>
+    <div id="n-fx" data-layout-ignore></div>
+    <div class="ball" id="n-ball"><i class="eye" style="left: 21px"></i><i class="eye" style="left: 46px"></i></div>
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
-      // the world behind settles in
-      tl.fromTo(["#n-b1", "#n-b2", "#n-b3"], { scale: 0 }, { scale: 1, duration: 0.7, stagger: 0.1, ease: "back.out(1.8)" }, 0.1);
-      tl.fromTo("#n-hello", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.3);
-      // letters drop and bounce in, one after another
-      tl.fromTo("#n-r1 .l", { opacity: 0, y: -260 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.09, ease: "bounce.out" }, 0.55);
-      tl.fromTo("#n-r2 .l", { opacity: 0, y: -260 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.09, ease: "bounce.out" }, 0.95);
-      // a little cream ball drops in and lands as the full stop after RAHMAN
-      // RAHMAN centred ~ 6 letters; full stop sits just right of the N
-      tl.fromTo("#n-ball", { x: 930, y: -100 }, { x: 958, y: 836, duration: 0.5, ease: "power2.in" }, 1.75);
+      tl.fromTo("#n-grid", { x: 0, y: 0 }, { x: -56, y: -168, duration: 5, ease: "none" }, 0);
+      tl.fromTo(["#n-b1", "#n-b2", "#n-b3", "#n-b4"], { scale: 0 }, { scale: 1, duration: 0.7, stagger: 0.1, ease: "back.out(1.8)" }, 0.1);
+      tl.to(["#n-b1", "#n-b2", "#n-b3", "#n-b4"], { y: "-=40", duration: 4, ease: "sine.inOut" }, 0.8);
+      // KEEP drops in letter by letter, MOVING slides in letter by letter
+      tl.fromTo("#n-r1 .l", { opacity: 0, y: -300 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.11, ease: "bounce.out" }, 0.35);
+      tl.fromTo("#n-r2 .l", { opacity: 0, x: 260, rotation: 25 }, { opacity: 1, x: 0, rotation: 0, duration: 0.5, stagger: 0.08, ease: "back.out(2)" }, 1.0);
+      // the little ball drops in and lands as the full stop after MOVING
+      tl.fromTo("#n-ball", { x: 920, y: -120 }, { x: 935, y: 830, duration: 0.5, ease: "power2.in" }, 1.75);
       tl.to("#n-ball", { scaleY: 0.7, scaleX: 1.3, duration: 0.06 }, 2.25);
-      tl.to("#n-ball", { y: 756, scaleY: 1.1, scaleX: 0.92, duration: 0.18, ease: "power2.out" }, 2.31);
-      tl.to("#n-ball", { y: 836, scaleY: 1, scaleX: 1, duration: 0.18, ease: "power2.in" }, 2.49);
+      tl.to("#n-ball", { y: 740, scaleY: 1.1, scaleX: 0.92, duration: 0.18, ease: "power2.out" }, 2.31);
+      tl.to("#n-ball", { y: 830, scaleY: 1, scaleX: 1, duration: 0.18, ease: "power2.in" }, 2.49);
       tl.to("#n-ball", { scaleY: 0.85, scaleX: 1.12, duration: 0.05 }, 2.67);
       tl.to("#n-ball", { scaleY: 1, scaleX: 1, duration: 0.3, ease: "elastic.out(1.2, 0.4)" }, 2.72);
-      tl.fromTo("#n-sub", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 2.75);
-      // it blinks at you
-      tl.to("#n-ball .eye", { scaleY: 0.1, duration: 0.06 }, 3.6);
-      tl.to("#n-ball .eye", { scaleY: 1, duration: 0.08 }, 3.68);
-      tl.to("#n-ball .eye", { scaleY: 0.1, duration: 0.06 }, 4.4);
-      tl.to("#n-ball .eye", { scaleY: 1, duration: 0.08 }, 4.48);
+      // confetti fountain when it lands
+      let seed = 21; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const pal = ["#1b1530", "#fff3e2", "#2d4bff", "#ff5fa2", "#2ee6a6", "#ffd23f"];
+      const fx = document.getElementById("n-fx");
+      for (let k = 0; k < 26; k++) {
+        const p = document.createElement("div");
+        p.className = "cf";
+        p.style.background = pal[k % pal.length];
+        p.style.borderRadius = k % 3 === 0 ? "50%" : "4px";
+        if (k % 3 === 2) p.style.height = "12px";
+        fx.appendChild(p);
+        const a = -Math.PI * (0.05 + 0.9 * rnd());
+        const r = 300 + rnd() * 450;
+        const x = 992, y = 860;
+        tl.fromTo(p, { x, y, scale: 0.4, rotation: 0, opacity: 1 }, { x: x + Math.cos(a) * r - 250, y: y + Math.sin(a) * r, scale: 1, rotation: 400 + rnd() * 500, duration: 0.8, ease: "power3.out" }, 2.72 + k * 0.004);
+        tl.to(p, { y: "+=320", opacity: 0, duration: 1.2, ease: "power1.in" }, 3.45);
+      }
+      // the words do a little happy wave, then it blinks at you
+      tl.to("#n-r1 .l, #n-r2 .l", { keyframes: { y: [0, -30, 0] }, duration: 0.35, stagger: 0.05, ease: "sine.inOut" }, 2.8);
+      tl.to("#n-ball .eye", { scaleY: 0.1, duration: 0.06 }, 3.7);
+      tl.to("#n-ball .eye", { scaleY: 1, duration: 0.08 }, 3.78);
+      tl.to("#n-ball .eye", { scaleY: 0.1, duration: 0.06 }, 4.45);
+      tl.to("#n-ball .eye", { scaleY: 1, duration: 0.08 }, 4.53);
       window.__timelines["name"] = tl;
     })();
   </script>

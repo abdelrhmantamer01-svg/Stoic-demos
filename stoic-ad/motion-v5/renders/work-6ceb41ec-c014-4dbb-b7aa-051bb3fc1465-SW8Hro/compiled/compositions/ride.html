@@ -1,0 +1,93 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #2d4bff; font-family: "Archivo Black", sans-serif; }
+    #r-svg { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #r-word { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 170px; line-height: 1; letter-spacing: -0.02em; color: #fff3e2; }
+    #r-word .w { display: inline-block; }
+    .star { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; background: #ffd23f; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+    .ball { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffc49a 0%, #ff6b2c 48%, #d9480f 100%); }
+    .ball .eye { position: absolute; top: 30px; width: 26px; height: 34px; border-radius: 50%; background: #fff; }
+    .ball .eye b { position: absolute; left: 9px; top: 12px; width: 13px; height: 16px; border-radius: 50%; background: #1b1530; }
+    .ghost { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; background: #ff6b2c; }
+    #r-rings { position: absolute; left: -460px; top: 100px; width: 2000px; height: 2000px; }
+    #r-portal { position: absolute; left: 0; top: 0; width: 200px; height: 200px; border-radius: 50%; background: #ff5fa2; box-shadow: 0 0 0 18px #ffd23f; }
+  </style>
+  <div id="root" data-composition-id="ride" data-width="1080" data-height="1920">
+    <svg id="r-rings" viewBox="0 0 2000 2000" data-layout-ignore><g fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="26" stroke-dasharray="70 50"><circle cx="1000" cy="1000" r="300"/><circle cx="1000" cy="1000" r="520"/><circle cx="1000" cy="1000" r="740"/><circle cx="1000" cy="1000" r="960"/></g></svg>
+    <div id="r-word"><span class="w">WH</span><span class="w">EEE</span><span class="w">!</span></div>
+    <svg id="r-svg" viewBox="0 0 1080 1920" data-layout-ignore>
+      <path id="r-ghost" d="M540,960 C780,960 940,880 900,700 C860,520 640,520 600,680 C560,840 760,880 820,760 C880,640 760,560 700,600 M700,600" fill="none" stroke="rgba(255,255,255,0.0)" stroke-width="1" />
+      <path id="r-shadow" d="M540,960 C700,1000 880,1060 900,1220 C920,1380 760,1460 640,1400 C520,1340 540,1180 660,1180 C780,1180 800,1340 700,1460 C600,1580 360,1580 260,1460 C160,1340 180,1160 300,1100" fill="none" stroke="rgba(10,20,90,0.45)" stroke-width="26" stroke-linecap="round" transform="translate(0,14)" />
+      <path id="r-path" d="M540,960 C700,1000 880,1060 900,1220 C920,1380 760,1460 640,1400 C520,1340 540,1180 660,1180 C780,1180 800,1340 700,1460 C600,1580 360,1580 260,1460 C160,1340 180,1160 300,1100" fill="none" stroke="#2ee6a6" stroke-width="26" stroke-linecap="round" />
+    </svg>
+    <div class="star" id="st0"></div><div class="star" id="st1"></div><div class="star" id="st2"></div><div class="star" id="st3"></div><div class="star" id="st4"></div>
+    <div id="r-portal"></div>
+    <div class="ghost" id="r-g3" style="opacity: 0.12"></div><div class="ghost" id="r-g2" style="opacity: 0.2"></div><div class="ghost" id="r-g1" style="opacity: 0.32"></div>
+    <div id="r-fx" data-layout-ignore></div>
+    <div class="ball" id="r-ball"><i class="eye" style="left: 34px"><b></b></i><i class="eye" style="left: 64px"><b></b></i></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const path = document.getElementById("r-path");
+      const L = path.getTotalLength();
+      const N = 80, xs = [], ys = [], rs = [];
+      let prev = null;
+      for (let k = 0; k <= N; k++) {
+        const p = path.getPointAtLength((L * k) / N);
+        xs.push(p.x - 60);
+        ys.push(p.y - 60);
+        if (prev) rs.push((Math.atan2(p.y - prev.y, p.x - prev.x) * 180) / Math.PI);
+        prev = p;
+      }
+      rs.unshift(rs[0]);
+      // continuous spin: total roll = path length / circumference
+      const spin = (L / (Math.PI * 120)) * 360;
+      // stars at fixed points along the track
+      const sf = [0.18, 0.36, 0.55, 0.72, 0.9];
+      sf.forEach((f, i) => {
+        const p = path.getPointAtLength(L * f);
+        const off = i % 2 ? -90 : 90;
+        tl.set("#st" + i, { x: p.x + off, y: p.y - 70, scale: 0, rotation: 0 }, 0);
+      });
+      const end = path.getPointAtLength(L);
+      tl.set("#r-portal", { x: end.x - 100, y: end.y - 100, scale: 0 }, 0);
+      // ball pops out of the hole at the centre
+      tl.fromTo("#r-ball", { x: 480, y: 900, scale: 0.2, rotation: 0 }, { scale: 1, duration: 0.35, ease: "back.out(2.5)" }, 0);
+      // the track draws itself just ahead of the ball
+      tl.fromTo(path, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 2.9, ease: "power1.inOut" }, 0.15);
+      tl.fromTo("#r-shadow", { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 2.9, ease: "power1.inOut" }, 0.15);
+      tl.fromTo("#r-rings", { rotation: 0, scale: 0.8 }, { rotation: 60, scale: 1, duration: 4.25, ease: "none" }, 0);
+      // motion-trail ghosts ride the same track a beat behind
+      [["#r-g1", 0.05], ["#r-g2", 0.1], ["#r-g3", 0.15]].forEach(([g, dt]) => {
+        tl.set(g, { x: 480, y: 900, scale: 0 }, 0);
+        tl.to(g, { scale: 1, duration: 0.01 }, 0.4 + dt);
+        tl.to(g, { keyframes: { x: xs, y: ys }, duration: 3.1, ease: "power1.inOut" }, 0.4 + dt);
+        tl.to(g, { scale: 0.3, opacity: 0, duration: 0.2 }, 3.5 + dt);
+      });
+      // confetti at each star
+      let seed = 5; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const pal = ["#ffd23f", "#ff5fa2", "#2ee6a6", "#fff3e2"];
+      const fxEl = document.getElementById("r-fx");
+      const burst = (x, y, t) => { for (let k = 0; k < 7; k++) { const p = document.createElement("div"); p.style.cssText = "position:absolute;left:0;top:0;width:18px;height:18px;opacity:0;border-radius:" + (k % 2 ? "50%" : "3px") + ";background:" + pal[k % 4]; fxEl.appendChild(p); const a = (Math.PI * 2 * k) / 7 + rnd(); const r = 90 + rnd() * 70; tl.fromTo(p, { x, y, scale: 0.3, opacity: 1, rotation: 0 }, { x: x + Math.cos(a) * r, y: y + Math.sin(a) * r, scale: 1, rotation: 300, duration: 0.5, ease: "power3.out" }, t); tl.to(p, { opacity: 0, duration: 0.3 }, t + 0.4); } };
+      // the ride: through every sampled point, ease in-out
+      tl.to("#r-ball", { keyframes: { x: xs, y: ys }, duration: 3.1, ease: "power1.inOut" }, 0.4);
+      tl.to("#r-ball", { rotation: spin, duration: 3.1, ease: "power1.inOut" }, 0.4);
+      // stars pop as the ball passes them
+      sf.forEach((f, i) => {
+        const t = 0.4 + 3.1 * f;
+        tl.to("#st" + i, { scale: 1.2, rotation: 90, duration: 0.25, ease: "back.out(3)" }, t);
+        tl.to("#st" + i, { scale: 1, duration: 0.2 }, t + 0.25);
+        const sp = path.getPointAtLength(L * f); burst(sp.x, sp.y, t);
+      });
+      // the word appears on the loop
+      tl.fromTo("#r-word .w", { opacity: 0, y: 60, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, stagger: 0.12, ease: "back.out(2.6)" }, 1.4);
+      tl.to("#r-word", { opacity: 0, y: -40, duration: 0.25, ease: "power2.in" }, 3.4);
+      // a portal opens where the track ends; the ball dives in and it floods the frame
+      tl.to("#r-portal", { scale: 1, duration: 0.35, ease: "back.out(2)" }, 3.15);
+      tl.to("#r-ball", { scale: 0.3, opacity: 0, duration: 0.2, ease: "power2.in" }, 3.5);
+      tl.to("#r-portal", { scale: 24, duration: 0.55, ease: "power3.in" }, 3.65);
+      window.__timelines["ride"] = tl;
+    })();
+  </script>
+</template>
