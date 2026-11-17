@@ -1,0 +1,108 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/bebas.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #f5f2ee;
+    }
+    .i-line {
+      position: absolute;
+      left: 120px;
+      white-space: nowrap;
+      font-family: "Bebas Neue", sans-serif;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      color: #0d0b0b;
+    }
+    #i-l1 {
+      top: 270px;
+      font-size: 280px;
+    }
+    #i-l2 {
+      top: 512px;
+      font-size: 280px;
+    }
+    #i-l3 {
+      top: 790px;
+      font-size: 170px;
+      opacity: 0;
+    }
+    #i-l4 {
+      top: 940px;
+      font-size: 280px;
+      color: #b3132b;
+      opacity: 0;
+    }
+    #i-bar {
+      position: absolute;
+      left: 120px;
+      top: 1196px;
+      width: 700px;
+      height: 24px;
+      background: #e63946;
+      opacity: 0;
+    }
+    #i-disc {
+      position: absolute;
+      left: -260px;
+      top: 1440px;
+      width: 1600px;
+      height: 1600px;
+      border-radius: 50%;
+      background: #0d0b0b;
+    }
+    #i-ghost {
+      position: absolute;
+      left: 150px;
+      top: 1560px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 330px;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      color: #b3132b;
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="intro" data-width="1080" data-height="1920">
+    <div id="i-words" data-layout-allow-overflow>
+      <div class="i-line" id="i-l1">WEB</div>
+      <div class="i-line" id="i-l2">DESIGN.</div>
+      <div class="i-line" id="i-l3">AT ITS</div>
+      <div class="i-line" id="i-l4">FINEST.</div>
+      <div id="i-bar"></div>
+    </div>
+    <div id="i-disc" data-layout-ignore></div>
+    <div id="i-ghost" data-layout-ignore>DESIGN</div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // beat 0: the statement is already there, settling
+      tl.fromTo("#i-l1", { scale: 1.1, transformOrigin: "0% 50%" }, { scale: 1, duration: 0.5, ease: "expo.out" }, 0);
+      tl.fromTo("#i-l2", { scale: 1.1, transformOrigin: "0% 50%" }, { scale: 1, duration: 0.6, ease: "expo.out" }, 0);
+      tl.fromTo(["#i-disc", "#i-ghost"], { y: 160 }, { y: 0, duration: 0.7, ease: "expo.out" }, 0);
+      // beat 2: "at its"  beat 3: "finest."
+      tl.fromTo("#i-l3", { opacity: 0, filter: "blur(18px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.22, ease: "power2.out" }, 0.95);
+      tl.fromTo("#i-l4", { opacity: 0, scale: 1.5, filter: "blur(14px)", transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.15, ease: "power3.in" }, 1.37);
+      tl.fromTo(["#i-disc", "#i-ghost"], { y: 0 }, { y: -90, duration: 0.5, ease: "back.out(2.5)", immediateRender: false }, 1.5);
+      // beat 4: the underline
+      tl.fromTo("#i-bar", { opacity: 1, scaleX: 0, transformOrigin: "0% 50%" }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "expo.out" }, 2.0);
+      // into beat 6: the black disc swallows the frame
+      tl.fromTo("#i-ghost", { opacity: 1 }, { opacity: 0, duration: 0.15 }, 2.55);
+      tl.fromTo("#i-disc", { scale: 1, transformOrigin: "50% 50%" }, { scale: 3.4, duration: 0.42, ease: "power3.in" }, 2.56);
+      tl.fromTo("#i-words", { filter: "blur(0px)", scale: 1 }, { filter: "blur(16px)", scale: 0.94, duration: 0.3, ease: "power2.in" }, 2.62);
+      tl.paused(false);
+      tl.timeScale(1 / 1.35);
+      const outer = gsap.timeline({ paused: true });
+      outer.add(tl, 0);
+      window.__timelines["intro"] = outer;
+    })();
+  </script>
+</template>
