@@ -1,0 +1,79 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #030201; font-family: "Inter", sans-serif; }
+    .rib { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; mix-blend-mode: screen; }
+    #b-cam { position: absolute; inset: 0; transform-origin: 960px 540px; }
+    #b-big { position: absolute; left: 0; right: 0; top: 470px; text-align: center; color: #fff; font-weight: 500; font-size: 110px; white-space: nowrap; }
+    #b-big .c { opacity: 0; }
+    .a { color: #ff8a3d; }
+    .chat { position: absolute; left: 160px; width: 1600px; height: 330px; border-radius: 56px; background: rgba(14,11,9,0.94); border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 40px 120px rgba(0,0,0,0.7); opacity: 0; }
+    .chat .txt { position: absolute; left: 70px; top: 60px; right: 70px; color: #f5efe9; font-size: 66px; font-weight: 500; white-space: nowrap; }
+    .chat .c { opacity: 0; }
+    .caret { display: inline-block; width: 5px; height: 72px; margin-left: 6px; vertical-align: -12px; background: #fff; }
+    .row { position: absolute; left: 64px; right: 50px; bottom: 44px; height: 90px; }
+    .plus { position: absolute; left: 0; top: -6px; color: #fff; font-size: 92px; line-height: 90px; font-weight: 200; }
+    .model { position: absolute; right: 330px; top: 18px; color: #e8e2dc; font-size: 50px; }
+    .mic { position: absolute; right: 230px; top: 16px; width: 56px; height: 56px; }
+    .wave { position: absolute; right: 140px; top: 16px; width: 56px; height: 56px; }
+    .send { position: absolute; right: 0; top: 0; width: 90px; height: 90px; border-radius: 24px; background: #f4612b; }
+    .send svg { position: absolute; left: 22px; top: 22px; width: 46px; height: 46px; }
+    #b-code { position: absolute; left: 380px; top: 0; font-family: "JetBrains Mono", monospace; font-size: 46px; line-height: 1.6; opacity: 0; text-shadow: 0 0 14px currentColor; }
+    .cl { white-space: nowrap; }
+    #b-persp { position: absolute; inset: 0; perspective: 2000px; }
+    .card { position: absolute; left: 400px; top: 170px; width: 1120px; height: 740px; border-radius: 44px; overflow: hidden; opacity: 0; color: #fff; }
+    .card.orange { background: linear-gradient(135deg, #3a1704 0%, #a8460a 40%, #f08a12 75%, #ffb648 100%); box-shadow: 0 0 0 3px rgba(255,200,120,0.6), 0 0 90px rgba(255,150,40,0.55), 0 50px 120px rgba(0,0,0,0.6); }
+    .card.blue { background: linear-gradient(135deg, #0a0f3c 0%, #1225a8 45%, #2f4dff 80%, #5c7cff 100%); box-shadow: 0 0 0 3px rgba(140,170,255,0.6), 0 0 90px rgba(60,100,255,0.55), 0 50px 120px rgba(0,0,0,0.6); }
+    .nav { position: absolute; left: 70px; right: 70px; top: 50px; display: flex; gap: 46px; align-items: center; font-size: 30px; font-weight: 500; opacity: 0.9; }
+    .nav .lg { width: 50px; height: 50px; border-radius: 14px; background: rgba(255,255,255,0.9); margin-right: 40px; }
+    .t1 { position: absolute; left: 70px; top: 230px; font-size: 104px; font-weight: 500; line-height: 1.08; letter-spacing: -0.02em; }
+    .price { position: absolute; left: 70px; top: 560px; padding: 16px 40px; border-radius: 16px; background: #fff; color: #111; font-size: 40px; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="build" data-width="1920" data-height="1080">
+    <svg class="rib" id="b11" viewBox="0 0 1920 1080" data-layout-ignore><defs><radialGradient id="b1g1" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#ffd27a"/><stop offset="0.45" stop-color="#ff9a1f"/><stop offset="1" stop-color="#ff6a00" stop-opacity="0"/></radialGradient></defs>
+<path d="M300,1200 C700,900 600,500 1000,420 C1350,350 1400,80 1700,-120 L2100,-120 C1800,200 1650,520 1300,620 C900,730 950,1050 700,1300 Z" fill="url(#b1g1)" style="filter: blur(22px)"/></svg>
+<svg class="rib" id="b12" viewBox="0 0 1920 1080" data-layout-ignore><defs><linearGradient id="b1g2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff7a00" stop-opacity="0"/><stop offset="0.5" stop-color="#ffb347"/><stop offset="1" stop-color="#ff7a00" stop-opacity="0"/></linearGradient></defs>
+<path d="M-100,900 C400,820 700,620 900,700 C1150,800 1300,500 1500,300 C1650,150 1800,60 2050,0" fill="none" stroke="url(#b1g2)" stroke-width="70" style="filter: blur(18px)"/>
+<path d="M-100,1000 C450,900 760,700 960,790 C1200,900 1380,560 1560,380 C1700,240 1850,140 2050,100" fill="none" stroke="#ffcf80" stroke-opacity="0.5" stroke-width="10" style="filter: blur(4px)"/></svg>
+    <div id="b-cam">
+      <div id="b-big"><span class="c">I</span><span class="c">&nbsp;</span><span class="c">w</span><span class="c">a</span><span class="c">n</span><span class="c">t</span><span class="c">&nbsp;</span><span class="c a">a</span><span class="c a">&nbsp;</span><span class="c a">w</span><span class="c a">e</span><span class="c a">b</span><span class="c a">s</span></div>
+      <div class="chat" id="b-chat1" style="top:370px"><div class="txt"><span class="c">I</span><span class="c">&nbsp;</span><span class="c">w</span><span class="c">a</span><span class="c">n</span><span class="c">t</span><span class="c">&nbsp;</span><span class="c">a</span><span class="c">&nbsp;</span><span class="c">w</span><span class="c">e</span><span class="c">b</span><span class="c">s</span><span class="c">i</span><span class="c">t</span><span class="c">e</span><span class="c">&nbsp;</span><span class="c">f</span><span class="c">o</span><span class="c">r</span><span class="c">&nbsp;</span><span class="c">m</span><span class="c">y</span><span class="c">&nbsp;</span><span class="c">m</span><span class="c">o</span><span class="c">t</span><span class="c">i</span><span class="c">o</span><span class="c">n</span><span class="c">&nbsp;</span><span class="c">d</span><span class="c">e</span><span class="c">s</span><span class="c">i</span><span class="c">g</span><span class="c">n</span><span class="c a">&nbsp;</span><span class="c a">w</span><span class="c a">o</span><span class="c a">r</span><span class="c a">k</span><span class="c a">.</span><span class="caret"></span></div>
+      <div class="row"><span class="plus">+</span><span class="model">Sonnet 5 ⌄</span><svg class="mic" viewBox="0 0 24 24" fill="#ddd"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#ddd" stroke-width="2" fill="none"/></svg><svg class="wave" viewBox="0 0 24 24" stroke="#ddd" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></svg><span class="send" id="b-chat1-send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div></div>
+      <div id="b-code" data-layout-ignore><div class="cl" style="color:#56d364;margin-left:0px">initial={{ opacity: 0 }}</div><div class="cl" style="color:#7ee787;margin-left:120px">})</div><div class="cl" style="color:#79c0ff;margin-left:120px">transition={{ type: "spring" }}</div><div class="cl" style="color:#ff7b72;margin-left:60px">export default function Page()</div><div class="cl" style="color:#7ee787;margin-left:60px">const projects = await load()</div><div class="cl" style="color:#e6edf3;margin-left:180px">useScroll({ target })</div><div class="cl" style="color:#e6edf3;margin-left:120px">&lt;nav&gt;Home Contact About FAQ&lt;/nav&gt;</div><div class="cl" style="color:#d2a8ff;margin-left:120px">&lt;/div&gt;</div><div class="cl" style="color:#7ee787;margin-left:0px">&lt;h1&gt;Premium Motion Design&lt;/h1&gt;</div><div class="cl" style="color:#d2a8ff;margin-left:120px">&lt;/div&gt;</div><div class="cl" style="color:#d2a8ff;margin-left:180px">&lt;/div&gt;</div><div class="cl" style="color:#ff7b72;margin-left:60px">&lt;nav&gt;Home Contact About FAQ&lt;/nav&gt;</div><div class="cl" style="color:#79c0ff;margin-left:60px">className="project-card"</div><div class="cl" style="color:#7ee787;margin-left:60px">&lt;h1&gt;Premium Motion Design&lt;/h1&gt;</div><div class="cl" style="color:#79c0ff;margin-left:60px">&lt;nav&gt;Home Contact About FAQ&lt;/nav&gt;</div><div class="cl" style="color:#ff7b72;margin-left:120px">&lt;nav&gt;Home Contact About FAQ&lt;/nav&gt;</div><div class="cl" style="color:#e6edf3;margin-left:60px">&lt;/div&gt;</div><div class="cl" style="color:#d2a8ff;margin-left:180px">&lt;Button&gt;Price&lt;/Button&gt;</div><div class="cl" style="color:#ff7b72;margin-left:120px">useScroll({ target })</div><div class="cl" style="color:#ff7b72;margin-left:120px">&lt;h1&gt;Premium Motion Design&lt;/h1&gt;</div><div class="cl" style="color:#56d364;margin-left:180px">animate={{ y: 0 }}</div><div class="cl" style="color:#56d364;margin-left:180px">&lt;Button&gt;Price&lt;/Button&gt;</div><div class="cl" style="color:#e6edf3;margin-left:180px">background: linear-gradient(120deg, #ff9a1f, #c2410c)</div><div class="cl" style="color:#ff7b72;margin-left:60px">M0,20 Q25,50 50,20 T100,20</div><div class="cl" style="color:#ffa657;margin-left:180px">&lt;nav&gt;Home Contact About FAQ&lt;/nav&gt;</div><div class="cl" style="color:#ff7b72;margin-left:120px">background: linear-gradient(120deg, #ff9a1f, #c2410c)</div><div class="cl" style="color:#d2a8ff;margin-left:180px">&lt;h1&gt;Premium Motion Design&lt;/h1&gt;</div><div class="cl" style="color:#ff7b72;margin-left:180px">M0,20 Q25,50 50,20 T100,20</div><div class="cl" style="color:#e6edf3;margin-left:60px">&lt;h1&gt;Premium Motion Design&lt;/h1&gt;</div><div class="cl" style="color:#56d364;margin-left:60px">&lt;/div&gt;</div></div>
+      <div id="b-persp"><div class="card orange" id="b-orange"><div class="nav"><span class="lg"></span><span>Home</span><span>Contact</span><span>About</span><span>FAQ</span></div><div class="t1">Premium<br/>Motion Design</div><div class="price">Price</div></div></div>
+      <div class="chat" id="b-chat2" style="top:660px"><div class="txt"><span class="c">I</span><span class="c">&nbsp;</span><span class="c">w</span><span class="c">a</span><span class="c">n</span><span class="c">t</span><span class="c">&nbsp;</span><span class="c">a</span><span class="c">&nbsp;</span><span class="c">b</span><span class="c">l</span><span class="c">u</span><span class="c">e</span><span class="c">&nbsp;</span><span class="c">b</span><span class="c">a</span><span class="c">c</span><span class="c">k</span><span class="c">g</span><span class="c">r</span><span class="c">o</span><span class="c">u</span><span class="c">n</span><span class="c">d</span><span class="c">.</span><span class="caret"></span></div>
+      <div class="row"><span class="plus">+</span><span class="model">Sonnet 5 ⌄</span><svg class="mic" viewBox="0 0 24 24" fill="#ddd"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#ddd" stroke-width="2" fill="none"/></svg><svg class="wave" viewBox="0 0 24 24" stroke="#ddd" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></svg><span class="send" id="b-chat2-send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.set(["#b11", "#b12"], { opacity: 0.35 }, 0);
+      tl.fromTo("#b11", { x: 200, y: 80 }, { x: -100, y: -60, duration: 5.1, ease: "sine.inOut" }, 0);
+      // the request starts as huge type in the dark
+      tl.to("#b-big .c", { opacity: 1, duration: 0.01, stagger: 0.045 }, 0.05);
+      // camera pulls back: it's a prompt box, still typing
+      tl.to("#b-big", { opacity: 0, scale: 0.6, y: -100, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 0.65);
+      tl.fromTo("#b-chat1", { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, 0.75);
+      tl.set("#b-chat1 .c", { opacity: 1 }, 0.75);
+      tl.set("#b-chat1 .c:nth-child(n+14)", { opacity: 0 }, 0.75);
+      tl.to("#b-chat1 .c:nth-child(n+14)", { opacity: 1, duration: 0.01, stagger: 0.035 }, 0.85);
+      tl.fromTo("#b-cam", { scale: 1.15 }, { scale: 1, duration: 1.2, ease: "power2.out", immediateRender: false }, 0.75);
+      tl.to("#b-chat1-send", { scale: 0.85, duration: 0.07 }, 1.85);
+      tl.to("#b-chat1-send", { scale: 1.1, duration: 0.2, ease: "back.out(3)" }, 1.92);
+      // whip into the code
+      tl.to("#b-chat1", { x: -900, filter: "blur(30px)", opacity: 0, duration: 0.3, ease: "power3.in" }, 2.0);
+      tl.fromTo("#b-code", { opacity: 0, x: 1200, y: 60, filter: "blur(14px)" }, { opacity: 1, x: 0, y: -300, filter: "blur(3px)", duration: 0.55, ease: "power2.out" }, 2.1);
+      tl.to("#b-code", { x: -1400, filter: "blur(30px)", opacity: 0, duration: 0.35, ease: "power3.in" }, 2.65);
+      // the site lands, glowing, in 3D
+      tl.to("#b11", { opacity: 0.8, duration: 0.6 }, 2.8);
+      tl.fromTo("#b-orange", { opacity: 0, x: 900, rotationY: -40, rotationX: 10, filter: "blur(24px)" }, { opacity: 1, x: 0, rotationY: -12, rotationX: 6, filter: "blur(0px)", duration: 0.7, ease: "expo.out" }, 2.85);
+      tl.to("#b-orange", { rotationY: 8, rotationX: -4, duration: 1.5, ease: "sine.inOut" }, 3.5);
+      // the card rides up, the next request comes in under it
+      tl.to("#b-orange", { y: -560, rotationY: 0, rotationX: 0, duration: 0.5, ease: "power3.inOut" }, 4.15);
+      tl.fromTo("#b-chat2", { opacity: 0, y: 200 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, 4.25);
+      tl.to("#b-chat2 .c", { opacity: 1, duration: 0.01, stagger: 0.03 }, 4.45);
+      tl.to("#b-chat2-send", { scale: 0.85, duration: 0.07 }, 5.0);
+      window.__timelines["build"] = tl;
+    })();
+  </script>
+</template>

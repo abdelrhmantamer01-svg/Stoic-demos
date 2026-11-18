@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #030201; font-family: "Inter", sans-serif; }
+    #c-glow { position: absolute; left: 360px; top: 160px; width: 1200px; height: 760px; border-radius: 50%; background: radial-gradient(ellipse, rgba(60,100,255,0.45), rgba(0,0,0,0) 70%); filter: blur(60px); }
+    #c-persp { position: absolute; inset: 0; perspective: 2000px; }
+    .card { position: absolute; left: 400px; top: 170px; width: 1120px; height: 740px; border-radius: 44px; overflow: hidden; color: #fff; }
+    .card.blue { background: linear-gradient(135deg, #0a0f3c 0%, #1225a8 45%, #2f4dff 80%, #5c7cff 100%); box-shadow: 0 0 0 3px rgba(140,170,255,0.6), 0 0 90px rgba(60,100,255,0.55), 0 50px 120px rgba(0,0,0,0.6); }
+    .nav { position: absolute; left: 70px; right: 70px; top: 50px; display: flex; gap: 46px; align-items: center; font-size: 30px; font-weight: 500; opacity: 0.9; }
+    .nav .lg { width: 50px; height: 50px; border-radius: 14px; background: rgba(255,255,255,0.9); margin-right: 40px; }
+    .t1 { position: absolute; left: 70px; top: 230px; font-size: 104px; font-weight: 500; line-height: 1.08; letter-spacing: -0.02em; }
+    .price { position: absolute; left: 70px; top: 560px; padding: 16px 40px; border-radius: 16px; background: #fff; color: #111; font-size: 40px; font-weight: 600; }
+    #c-end { position: absolute; inset: 0; background: #000; opacity: 0; }
+    #c-spark { position: absolute; left: 885px; top: 330px; width: 150px; height: 150px; opacity: 0; }
+    #c-line { position: absolute; left: 0; right: 0; top: 540px; text-align: center; font-family: "EB Garamond", serif; font-weight: 600; font-size: 104px; color: #fff4ec; text-shadow: 0 0 22px rgba(255,190,140,0.7); white-space: nowrap; }
+    #c-line .w { display: inline-block; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="blue" data-width="1920" data-height="1080">
+    <div id="c-glow" data-layout-ignore></div>
+    <div id="c-persp"><div class="card blue" id="c-blue"><div class="nav"><span class="lg"></span><span>Home</span><span>Contact</span><span>About</span><span>FAQ</span></div><div class="t1">Premium<br/>Motion Design</div><div class="price">Price</div></div></div>
+    <div id="c-end" data-layout-ignore></div>
+    <div id="c-spark"><svg viewBox="-110 -110 220 220"><g fill="#f6b08c" style="filter: drop-shadow(0 0 10px rgba(255,170,130,0.9))"><rect x="-6" y="-96" width="12" height="70" rx="6" transform="rotate(0)" /><rect x="-6" y="-80" width="12" height="54" rx="6" transform="rotate(30)" /><rect x="-6" y="-104" width="12" height="78" rx="6" transform="rotate(60)" /><rect x="-6" y="-84" width="12" height="58" rx="6" transform="rotate(90)" /><rect x="-6" y="-98" width="12" height="72" rx="6" transform="rotate(120)" /><rect x="-6" y="-78" width="12" height="52" rx="6" transform="rotate(150)" /><rect x="-6" y="-102" width="12" height="76" rx="6" transform="rotate(180)" /><rect x="-6" y="-86" width="12" height="60" rx="6" transform="rotate(210)" /><rect x="-6" y="-94" width="12" height="68" rx="6" transform="rotate(240)" /><rect x="-6" y="-82" width="12" height="56" rx="6" transform="rotate(270)" /><rect x="-6" y="-100" width="12" height="74" rx="6" transform="rotate(300)" /><rect x="-6" y="-88" width="12" height="62" rx="6" transform="rotate(330)" /></g></svg></div>
+    <div id="c-line"><span class="w">Built</span> <span class="w">with</span> <span class="w">Claude.</span></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // the same site, now blue, whips in
+      tl.fromTo("#c-blue", { x: -1000, rotationY: 40, filter: "blur(26px)" }, { x: 0, rotationY: 10, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 0);
+      tl.fromTo("#c-glow", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0);
+      tl.to("#c-blue", { rotationY: -8, rotationX: 4, duration: 1.4, ease: "sine.inOut" }, 0.6);
+      // to black, the spark, the line
+      tl.to(["#c-blue", "#c-glow"], { opacity: 0, filter: "blur(20px)", scale: 0.9, duration: 0.35, ease: "power2.in" }, 1.9);
+      tl.to("#c-end", { opacity: 1, duration: 0.3 }, 1.95);
+      tl.fromTo("#c-spark", { opacity: 0, scale: 0.2, rotation: -120 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.7, ease: "expo.out" }, 2.25);
+      tl.fromTo("#c-line .w", { opacity: 0, y: 40, rotation: 8, filter: "blur(8px)" }, { opacity: 1, y: 0, rotation: 0, filter: "blur(0px)", duration: 0.4, stagger: 0.18, ease: "back.out(2)" }, 2.6);
+      window.__timelines["blue"] = tl;
+    })();
+  </script>
+</template>

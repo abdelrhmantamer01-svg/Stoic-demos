@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #030201; font-family: "Inter", sans-serif; }
+    .rib { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; mix-blend-mode: screen; }
+    #a-cam { position: absolute; inset: 0; transform-origin: 960px 540px; }
+    #a-spark { position: absolute; left: 700px; top: 400px; width: 190px; height: 190px; }
+    #a-word { position: absolute; left: 910px; top: 405px; font-family: "EB Garamond", serif; font-weight: 600; font-size: 160px; line-height: 1; color: #fff4ec; text-shadow: 0 0 26px rgba(255,190,140,0.85); white-space: nowrap; }
+    #a-word .c { opacity: 0; }
+    #a-blob { position: absolute; left: 860px; top: 470px; width: 200px; height: 110px; border-radius: 60px; background: #fff; filter: blur(14px); opacity: 0; }
+    #a-pills { position: absolute; left: 0; right: 0; top: 488px; display: flex; justify-content: center; gap: 18px; }
+    .pill { display: flex; align-items: center; gap: 12px; height: 104px; padding: 0 34px; border-radius: 30px; border: 3px solid rgba(255,235,220,0.95); background: rgba(10,5,2,0.35); color: #fff; font-weight: 600; font-size: 42px; box-shadow: 0 0 26px rgba(255,190,160,0.75), inset 0 0 16px rgba(255,190,160,0.4); opacity: 0; }
+    .pill svg { width: 40px; height: 40px; }
+    #a-cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="intro" data-width="1920" data-height="1080">
+    <svg class="rib" id="a11" viewBox="0 0 1920 1080" data-layout-ignore><defs><radialGradient id="a1g1" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#ffd27a"/><stop offset="0.45" stop-color="#ff9a1f"/><stop offset="1" stop-color="#ff6a00" stop-opacity="0"/></radialGradient></defs>
+<path d="M300,1200 C700,900 600,500 1000,420 C1350,350 1400,80 1700,-120 L2100,-120 C1800,200 1650,520 1300,620 C900,730 950,1050 700,1300 Z" fill="url(#a1g1)" style="filter: blur(22px)"/></svg>
+<svg class="rib" id="a12" viewBox="0 0 1920 1080" data-layout-ignore><defs><linearGradient id="a1g2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff7a00" stop-opacity="0"/><stop offset="0.5" stop-color="#ffb347"/><stop offset="1" stop-color="#ff7a00" stop-opacity="0"/></linearGradient></defs>
+<path d="M-100,900 C400,820 700,620 900,700 C1150,800 1300,500 1500,300 C1650,150 1800,60 2050,0" fill="none" stroke="url(#a1g2)" stroke-width="70" style="filter: blur(18px)"/>
+<path d="M-100,1000 C450,900 760,700 960,790 C1200,900 1380,560 1560,380 C1700,240 1850,140 2050,100" fill="none" stroke="#ffcf80" stroke-opacity="0.5" stroke-width="10" style="filter: blur(4px)"/></svg>
+    <div id="a-cam">
+      <div id="a-spark"><svg viewBox="-110 -110 220 220"><g fill="#f6b08c" style="filter: drop-shadow(0 0 10px rgba(255,170,130,0.9))"><rect x="-6" y="-96" width="12" height="70" rx="6" transform="rotate(0)" /><rect x="-6" y="-80" width="12" height="54" rx="6" transform="rotate(30)" /><rect x="-6" y="-104" width="12" height="78" rx="6" transform="rotate(60)" /><rect x="-6" y="-84" width="12" height="58" rx="6" transform="rotate(90)" /><rect x="-6" y="-98" width="12" height="72" rx="6" transform="rotate(120)" /><rect x="-6" y="-78" width="12" height="52" rx="6" transform="rotate(150)" /><rect x="-6" y="-102" width="12" height="76" rx="6" transform="rotate(180)" /><rect x="-6" y="-86" width="12" height="60" rx="6" transform="rotate(210)" /><rect x="-6" y="-94" width="12" height="68" rx="6" transform="rotate(240)" /><rect x="-6" y="-82" width="12" height="56" rx="6" transform="rotate(270)" /><rect x="-6" y="-100" width="12" height="74" rx="6" transform="rotate(300)" /><rect x="-6" y="-88" width="12" height="62" rx="6" transform="rotate(330)" /></g></svg></div>
+      <div id="a-word"><span class="c">C</span><span class="c">l</span><span class="c">a</span><span class="c">u</span><span class="c">d</span><span class="c">e</span></div>
+      <div id="a-blob"></div>
+      <div id="a-pills"><div class="pill" id="p0"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Create</div><div class="pill" id="p1"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Write</div><div class="pill" id="p2"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/></svg>Code</div><div class="pill" id="p3"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 8h16v10H4zM8 8V5h8v3"/></svg>Life Stuff</div><div class="pill" id="p4"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5"/></svg>Learn</div></div>
+    </div>
+    <svg id="a-cursor" viewBox="0 0 24 24"><path d="M5 2l14 10-6 1.2L16 20l-3 1.4-3.2-6.9L5 18z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round" /></svg>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // the flame ribbons sweep slowly
+      tl.fromTo("#a11", { x: -160, y: 60, rotation: -6, transformOrigin: "50% 50%" }, { x: 120, y: -40, rotation: 5, duration: 3.9, ease: "sine.inOut" }, 0);
+      tl.fromTo("#a12", { x: 120, y: 40 }, { x: -160, y: -30, duration: 3.9, ease: "sine.inOut" }, 0);
+      // the spark blooms, then the name types in beside it
+      tl.fromTo("#a-spark", { opacity: 0, scale: 0.2, rotation: -120 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.7, ease: "expo.out" }, 0.25);
+      tl.to("#a-word .c", { opacity: 1, duration: 0.01, stagger: 0.09 }, 0.9);
+      // the name melts into a glowing pill, which splits into the row
+      tl.to("#a-word", { filter: "blur(18px)", opacity: 0, scaleX: 0.6, duration: 0.3, ease: "power2.in" }, 1.85);
+      tl.to("#a-spark", { opacity: 0, filter: "blur(10px)", duration: 0.25 }, 1.85);
+      tl.fromTo("#a-blob", { opacity: 0, scaleX: 0.5 }, { opacity: 1, scaleX: 1.6, duration: 0.25, ease: "power2.out" }, 2.0);
+      tl.to("#a-blob", { opacity: 0, scaleX: 6, duration: 0.3, ease: "power2.in" }, 2.25);
+      tl.fromTo(".pill", { opacity: 0, filter: "blur(12px)", scale: 0.9 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.35, stagger: { each: 0.05, from: "center" }, ease: "power3.out" }, 2.3);
+      // cursor clicks Code
+      tl.fromTo("#a-cursor", { x: 1300, y: 900, opacity: 0 }, { x: 905, y: 580, opacity: 1, duration: 0.6, ease: "power3.out", immediateRender: false }, 2.7);
+      tl.to("#a-cursor", { scale: 0.85, duration: 0.07 }, 3.3);
+      tl.to("#a-cursor", { scale: 1, duration: 0.12 }, 3.37);
+      tl.to("#p2", { scale: 0.94, duration: 0.07 }, 3.3);
+      tl.to("#p2", { scale: 1.08, backgroundColor: "rgba(255,170,120,0.45)", boxShadow: "0 0 60px rgba(255,190,150,1), inset 0 0 22px rgba(255,210,180,0.7)", duration: 0.2, ease: "back.out(2)" }, 3.37);
+      // whip blur out
+      tl.to("#a-cam", { scale: 2.4, x: -60, filter: "blur(20px)", opacity: 0, duration: 0.35, ease: "power3.in" }, 3.55);
+      tl.to("#a-cursor", { opacity: 0, duration: 0.15 }, 3.55);
+      tl.to(["#a11", "#a12"], { opacity: 0.5, duration: 0.35 }, 3.55);
+      window.__timelines["intro"] = tl;
+    })();
+  </script>
+</template>
