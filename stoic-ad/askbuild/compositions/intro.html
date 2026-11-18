@@ -1,0 +1,65 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050302; font-family: "Inter", sans-serif; }
+    .flame { position: absolute; border-radius: 50%; filter: blur(70px); mix-blend-mode: screen; }
+    #i-f1 { left: 80px; top: 120px; width: 900px; height: 1300px; background: radial-gradient(ellipse at 50% 50%, rgba(255, 140, 30, 0.95), rgba(255, 90, 0, 0.45) 45%, rgba(0, 0, 0, 0) 70%); }
+    #i-f2 { left: 420px; top: -200px; width: 700px; height: 1100px; background: radial-gradient(ellipse at 50% 50%, rgba(255, 196, 80, 0.9), rgba(255, 120, 20, 0.3) 50%, rgba(0, 0, 0, 0) 70%); }
+    #i-f3 { left: -200px; top: 700px; width: 800px; height: 1000px; background: radial-gradient(ellipse at 50% 50%, rgba(220, 70, 10, 0.85), rgba(120, 30, 0, 0.3) 50%, rgba(0, 0, 0, 0) 70%); }
+    #i-streak { position: absolute; left: 300px; top: -200px; width: 260px; height: 2300px; background: linear-gradient(180deg, rgba(255,220,150,0), rgba(255,220,150,0.55), rgba(255,220,150,0)); filter: blur(30px); mix-blend-mode: screen; }
+    #i-cam { position: absolute; inset: 0; transform-origin: 540px 960px; }
+    #i-mark { position: absolute; left: 470px; top: 640px; width: 140px; height: 140px; border-radius: 50%; border: 10px solid #ffe1c2; box-shadow: 0 0 40px rgba(255, 190, 120, 0.9), inset 0 0 30px rgba(255, 190, 120, 0.8); opacity: 0; }
+    #i-mark i { position: absolute; left: 41px; top: 41px; width: 38px; height: 38px; border-radius: 50%; background: #ffe1c2; box-shadow: 0 0 30px #ffb070; }
+    #i-word { position: absolute; left: 0; right: 0; top: 840px; text-align: center; font-family: "Playfair Display", serif; font-weight: 700; font-size: 120px; color: #fff2e4; text-shadow: 0 0 30px rgba(255, 170, 90, 0.85); white-space: nowrap; }
+    #i-word .c { opacity: 0; }
+    #i-chips { position: absolute; left: 0; right: 0; top: 900px; display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; padding: 0 60px; }
+    .chip { display: flex; align-items: center; gap: 14px; padding: 22px 34px; border-radius: 26px; background: rgba(20, 10, 4, 0.55); border: 2.5px solid rgba(255, 228, 200, 0.85); color: #fff3e6; font-weight: 600; font-size: 44px; box-shadow: 0 0 22px rgba(255, 170, 90, 0.55), inset 0 0 14px rgba(255, 170, 90, 0.25); opacity: 0; }
+    .chip svg { width: 40px; height: 40px; }
+    #i-cursor { position: absolute; left: 0; top: 0; width: 70px; height: 70px; }
+  </style>
+  <div id="root" data-composition-id="intro" data-width="1080" data-height="1920">
+    <div class="flame" id="i-f3" data-layout-ignore></div>
+    <div class="flame" id="i-f1" data-layout-ignore></div>
+    <div class="flame" id="i-f2" data-layout-ignore></div>
+    <div id="i-streak" data-layout-ignore></div>
+    <div id="i-cam">
+      <div id="i-mark"><i></i></div>
+      <div id="i-word"><span class="c">B</span><span class="c">u</span><span class="c">i</span><span class="c">l</span><span class="c">d</span><span class="c">&nbsp;</span><span class="c">a</span><span class="c">n</span><span class="c">y</span><span class="c">t</span><span class="c">h</span><span class="c">i</span><span class="c">n</span><span class="c">g</span><span class="c">.</span></div>
+      <div id="i-chips">
+        <div class="chip" id="ch0"><svg viewBox="0 0 24 24" fill="none" stroke="#fff3e6" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18"/></svg>Website</div>
+        <div class="chip" id="ch1"><svg viewBox="0 0 24 24" fill="none" stroke="#fff3e6" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg>Brand</div>
+        <div class="chip" id="ch2"><svg viewBox="0 0 24 24" fill="none" stroke="#fff3e6" stroke-width="2"><path d="M5 19c4-14 10-14 14 0"/><circle cx="12" cy="8" r="2"/></svg>Motion</div>
+        <div class="chip" id="ch3"><svg viewBox="0 0 24 24" fill="none" stroke="#fff3e6" stroke-width="2"><rect x="7" y="3" width="10" height="18" rx="2"/></svg>App</div>
+        <div class="chip" id="ch4"><svg viewBox="0 0 24 24" fill="none" stroke="#fff3e6" stroke-width="2"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>Shop</div>
+      </div>
+    </div>
+    <svg id="i-cursor" viewBox="0 0 24 24"><path d="M5 2l14 10-6 1.2L16 20l-3 1.4-3.2-6.9L5 18z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round" /></svg>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // the flame moves: slow drifting, rotating light
+      tl.fromTo("#i-f1", { x: -40, y: 40, rotation: -8, scale: 0.95 }, { x: 60, y: -60, rotation: 10, scale: 1.08, duration: 4.2, ease: "sine.inOut" }, 0);
+      tl.fromTo("#i-f2", { x: 60, y: 0, rotation: 15 }, { x: -80, y: 120, rotation: -10, duration: 4.2, ease: "sine.inOut" }, 0);
+      tl.fromTo("#i-f3", { x: 0, y: 60 }, { x: 90, y: -80, duration: 4.2, ease: "sine.inOut" }, 0);
+      tl.fromTo("#i-streak", { x: -120, rotation: 18 }, { x: 260, rotation: 26, duration: 4.2, ease: "sine.inOut" }, 0);
+      // the mark glows on, the line types in
+      tl.fromTo("#i-mark", { opacity: 0, scale: 0.4, rotation: -90 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "expo.out" }, 0.15);
+      tl.to("#i-word .c", { opacity: 1, duration: 0.01, stagger: 0.055 }, 0.45);
+      // the line blurs away and the pill buttons glow on
+      tl.to(["#i-word", "#i-mark"], { opacity: 0, filter: "blur(14px)", y: -40, duration: 0.3, ease: "power2.in" }, 1.75);
+      tl.fromTo(".chip", { opacity: 0, y: 30, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, stagger: 0.07, ease: "power3.out" }, 1.95);
+      // the cursor glides in and clicks Website
+      tl.fromTo("#i-cursor", { x: 1150, y: 1500 }, { x: 330, y: 960, duration: 0.7, ease: "power3.out" }, 2.45);
+      tl.to("#i-cursor", { scale: 0.85, duration: 0.07 }, 3.2);
+      tl.to("#i-cursor", { scale: 1, duration: 0.12 }, 3.27);
+      tl.to("#ch0", { scale: 0.94, duration: 0.07 }, 3.2);
+      tl.to("#ch0", { scale: 1.06, backgroundColor: "rgba(255,150,60,0.55)", boxShadow: "0 0 60px rgba(255,170,90,1), inset 0 0 20px rgba(255,200,140,0.6)", duration: 0.25, ease: "back.out(2)" }, 3.27);
+      tl.to(["#ch1", "#ch2", "#ch3", "#ch4"], { opacity: 0, filter: "blur(10px)", duration: 0.3 }, 3.45);
+      tl.to("#i-cursor", { opacity: 0, duration: 0.2 }, 3.5);
+      // push into the chosen button
+      tl.fromTo("#i-cam", { scale: 1 }, { scale: 2.6, x: 300, filter: "blur(0px)", duration: 0.6, ease: "power3.in", immediateRender: false }, 3.6);
+      tl.to("#i-cam", { filter: "blur(16px)", opacity: 0, duration: 0.2 }, 4.0);
+      window.__timelines["intro"] = tl;
+    })();
+  </script>
+</template>
