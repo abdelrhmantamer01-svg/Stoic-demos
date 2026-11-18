@@ -1,0 +1,80 @@
+{
+  "created_by": "seed-market",
+  "generated": "2026-11-18",
+  "method": "top-down TAM, bottom-up SAM, SOM 3% of SAM in 2 years",
+  "tam": 250800000,
+  "sam": 18625000,
+  "som": 558750,
+  "currency": "AED",
+  "inputs": [
+    {
+      "name": "active registered vehicles in the UAE (June 2025)",
+      "value": 4560000,
+      "unit": "count",
+      "source": "Salik / The National, May 2025: 4.56 million active registered vehicles (thenationalnews.com/news/uae/2025/05/13/dubais-salik-reports-9-more-vehicles-on-the-roads-as-profits-soar)",
+      "kind": "publication",
+      "level": "tam"
+    },
+    {
+      "name": "share of active registered vehicles in the UAE (June 2025) that would buy",
+      "value": 50,
+      "unit": "%",
+      "source": "assumption: about half of UAE drivers use a windshield sunshade in summer heat; check with a 50-person survey",
+      "kind": "assumption",
+      "level": "tam"
+    },
+    {
+      "name": "spend a year each",
+      "value": 110,
+      "unit": "AED a year",
+      "source": "assumption: one AED 130-150 custom shade replaced roughly every 14 months",
+      "kind": "assumption",
+      "level": "tam"
+    },
+    {
+      "name": "Patrol, Land Cruiser and Hilux on UAE roads",
+      "value": 250000,
+      "unit": "count",
+      "source": "assumption: three top-10 models (2025 sales: Hilux ~19,140, Patrol ~16,790 per autopunditz.com/post/uae-car-market-2025-toyota-jetour-t2-sales) at ~5% share each over ~10 years of the 4.56M fleet",
+      "kind": "assumption",
+      "level": "sam"
+    },
+    {
+      "name": "shades a year per customer",
+      "value": 0.5,
+      "unit": "per year",
+      "source": "assumption: half of owners buy a new shade each year (first purchase or replacement)",
+      "kind": "assumption",
+      "level": "sam"
+    },
+    {
+      "name": "price per shade",
+      "value": 149,
+      "unit": "AED",
+      "source": "assumption: launch price at the custom-fit band seen on UAE stores, AED 130-222 (desertcart.ae, carrefouruae.com listings)",
+      "kind": "assumption",
+      "level": "sam"
+    },
+    {
+      "name": "Custom-fit sunshade price band, UAE stores",
+      "value": 130,
+      "unit": "AED",
+      "source": "Proadsy Camry AED 140, Arismotor Land Cruiser/Navigator ~AED 133, Galaxy Auto Shield AED 222 (desertcart.ae, carrefouruae.com)",
+      "kind": "publication",
+      "level": "context"
+    }
+  ],
+  "notes": [],
+  "methods": {
+    "tam": "top-down",
+    "sam": "bottom-up"
+  },
+  "formulas": {
+    "tam": "4,560,000 active registered vehicles in the UAE (June 2025) x 50% x AED 110 = AED 250,800,000",
+    "sam": "250,000 Patrol, Land Cruiser and Hilux on UAE roads x 0.5 shades a year x AED 149 = AED 18,625,000",
+    "som": "3% of SAM AED 18,625,000 = AED 558,750"
+  },
+  "som_share_pct": 3.0,
+  "som_years": 2,
+  "som_reason": "Owners of Patrol, Land Cruiser and Hilux who now buy loose universal shades (AED 57-69) or no exact fit switch to a shade cut for their exact model year, found by searching their model name on Amazon.ae; a model-specific listing with a fit video wins that search"
+}
