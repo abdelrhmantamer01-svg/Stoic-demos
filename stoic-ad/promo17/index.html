@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.705" data-motion-blur="on" data-width="1920" data-height="1080">
+      <div id="intro" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="0.000" data-duration="3.380" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="world" data-composition-id="world" data-composition-src="compositions/world.html" data-start="3.380" data-duration="10.595" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="end" data-composition-id="end" data-composition-src="compositions/end.html" data-start="13.975" data-duration="2.730" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <audio id="fx02" class="clip" src="assets/sfx/typing.mp3" data-start="0.806" data-duration="0.65" data-track-index="4" data-volume="0.3" data-fade-out="0.12"></audio>
+      <audio id="fx05" class="clip" src="assets/sfx/click-soft.mp3" data-start="2.795" data-duration="0.36" data-track-index="4" data-volume="0.7"></audio>
+      <audio id="fx06" class="clip" src="assets/sfx/glassclick.wav" data-start="2.873" data-duration="0.11" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="fx08" class="clip" src="assets/sfx/typing.mp3" data-start="3.796" data-duration="1.53" data-track-index="4" data-volume="0.4" data-fade-out="0.12"></audio>
+      <audio id="fx09" class="clip" src="assets/sfx/click-soft.mp3" data-start="5.720" data-duration="0.36" data-track-index="4" data-volume="0.75"></audio>
+      <audio id="fx12" class="clip" src="assets/sfx/typing.mp3" data-start="6.240" data-duration="1.1" data-track-index="4" data-volume="0.35" data-fade-out="0.12"></audio>
+      <audio id="fx17" class="clip" src="assets/sfx/typing.mp3" data-start="10.465" data-duration="0.98" data-track-index="4" data-volume="0.4" data-fade-out="0.12"></audio>
+      <audio id="fx18" class="clip" src="assets/sfx/click-soft.mp3" data-start="11.635" data-duration="0.36" data-track-index="4" data-volume="0.75"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
