@@ -1,0 +1,73 @@
+<template>
+  <style>
+    @font-face { font-family: "Bebas Neue"; src: url("assets/fonts/bebas.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #08070a; font-family: "Outfit", sans-serif; }
+    .stage { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 45% at 50% 40%, #3a1420 0%, #140c12 55%, #08070a 100%); }
+    .glow { position: absolute; left: 140px; top: 520px; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,80,0.35), rgba(255,140,80,0) 70%); }
+    #g-persp { position: absolute; inset: 0; perspective: 1600px; }
+    #g-cam { position: absolute; inset: 0; transform-origin: 560px 760px; }
+    #g-ugly { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .shard { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: url("assets/img/ugly.jpg") 0 0 / 1080px 1920px; opacity: 0; transform-origin: 560px 760px; }
+    #g-cracks { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #g-pov { position: absolute; left: 0; right: 0; top: 640px; text-align: center; }
+    #g-pov span { display: inline-block; padding: 22px 38px; border-radius: 22px; background: #111; color: #fff; font-weight: 800; font-size: 52px; line-height: 1.15; box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+    #g-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+    #g-or { position: absolute; left: 0; right: 0; top: 300px; text-align: center; color: rgba(255,255,255,0.75); font-weight: 700; font-size: 70px; opacity: 0; }
+    #g-this { position: absolute; left: 0; right: 0; top: 380px; text-align: center; font-family: "Bebas Neue", sans-serif; font-size: 230px; line-height: 1; color: #fff; letter-spacing: 0.02em; opacity: 0; }
+    #g-this b { color: #ff6b3d; font-weight: 400; }
+    #g-card { position: absolute; left: 160px; top: 330px; width: 760px; height: 1350px; border-radius: 50px; overflow: hidden; box-shadow: 0 60px 140px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,255,255,0.08); opacity: 0; }
+    #g-card img { width: 760px; height: 1350px; }
+  </style>
+  <div id="root" data-composition-id="glass" data-width="1080" data-height="1920">
+    <div class="stage" data-layout-ignore></div>
+    <div class="glow" id="g-glow" data-layout-ignore></div>
+    <div id="g-or">or…</div>
+    <div id="g-this">THIS<b>.</b></div>
+    <div id="g-persp"><div id="g-card"><img src="assets/img/cafe.jpg" /></div></div>
+    <div id="g-persp2" style="position:absolute;inset:0;perspective:1600px" data-layout-ignore>
+      <div id="g-cam">
+        <img id="g-ugly" src="assets/img/ugly.jpg" />
+        <div id="g-shards"><div class="shard" id="sh0" style="clip-path: polygon(560px 760px, 1080px 779px, 1080px 1038px)"></div><div class="shard" id="sh1" style="clip-path: polygon(560px 760px, 1080px 1038px, 1080px 1452px)"></div><div class="shard" id="sh2" style="clip-path: polygon(560px 760px, 1080px 1452px, 1080px 1920px, 773px 1920px)"></div><div class="shard" id="sh3" style="clip-path: polygon(560px 760px, 773px 1920px, 353px 1920px)"></div><div class="shard" id="sh4" style="clip-path: polygon(560px 760px, 353px 1920px, 0px 1920px, 0px 1496px)"></div><div class="shard" id="sh5" style="clip-path: polygon(560px 760px, 0px 1496px, 0px 1303px)"></div><div class="shard" id="sh6" style="clip-path: polygon(560px 760px, 0px 1303px, 0px 885px)"></div><div class="shard" id="sh7" style="clip-path: polygon(560px 760px, 0px 885px, 0px 560px)"></div><div class="shard" id="sh8" style="clip-path: polygon(560px 760px, 0px 560px, 0px 314px)"></div><div class="shard" id="sh9" style="clip-path: polygon(560px 760px, 0px 314px, 0px 0px, 236px 0px)"></div><div class="shard" id="sh10" style="clip-path: polygon(560px 760px, 236px 0px, 389px 0px)"></div><div class="shard" id="sh11" style="clip-path: polygon(560px 760px, 389px 0px, 799px 0px)"></div><div class="shard" id="sh12" style="clip-path: polygon(560px 760px, 799px 0px, 1080px 0px, 1080px 86px)"></div><div class="shard" id="sh13" style="clip-path: polygon(560px 760px, 1080px 86px, 1080px 537px)"></div><div class="shard" id="sh14" style="clip-path: polygon(560px 760px, 1080px 537px, 1080px 779px)"></div></div>
+        <svg id="g-cracks" viewBox="0 0 1080 1920"><g fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" style="filter: drop-shadow(0 0 3px rgba(0,0,0,0.9))"><polyline class="ck ck1" points="560,760 610,748 647,757 715,773 741,775 788,772" /><polyline class="ck ck2" points="560,760 597,772 666,803 695,850 761,856 811,889" /><polyline class="ck ck1" points="560,760 613,815 668,892 716,961 745,1010 789,1067" /><polyline class="ck ck2" points="560,760 567,861 602,959 623,1074 633,1194 657,1287" /><polyline class="ck ck1" points="560,760 540,872 510,986 490,1086 494,1172 473,1288" /><polyline class="ck ck2" points="560,760 511,814 445,886 419,954 362,1042 316,1093" /><polyline class="ck ck1" points="560,760 505,810 465,849 413,918 365,946 316,997" /><polyline class="ck ck2" points="560,760 504,775 469,778 418,796 349,801 294,806" /><polyline class="ck ck1" points="560,760 499,747 471,714 393,719 356,684 296,671" /><polyline class="ck ck2" points="560,760 518,718 455,666 418,624 354,606 293,562" /><polyline class="ck ck1" points="560,760 543,694 509,610 469,541 451,476 410,426" /><polyline class="ck ck2" points="560,760 554,704 527,620 520,550 492,479 472,408" /><polyline class="ck ck1" points="560,760 596,703 607,621 621,539 641,489 680,408" /><polyline class="ck ck2" points="560,760 616,706 661,641 710,571 756,507 798,459" /><polyline class="ck ck1" points="560,760 613,734 668,723 705,685 752,671 803,657" /><polyline class="ck ck1" points="695,760 686,799 657,844 628,858 584,896 538,901 489,865 467,827 432,808 441,760 437,715 480,674 498,649 540,636 583,635 625,676 639,685 680,724 689,760" /></g></svg>
+      </div>
+    </div>
+    <div id="g-pov"><span>POV: your business<br/>website in 2026 💀</span></div>
+    <div id="g-flash" data-layout-ignore></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const cent = [[906.6666666666666, 859.0], [906.6666666666666, 1083.3333333333333], [873.25, 1513.0], [562.0, 1533.3333333333333], [228.25, 1524.0], [186.66666666666666, 1186.3333333333333], [186.66666666666666, 982.6666666666666], [186.66666666666666, 735.0], [186.66666666666666, 544.6666666666666], [199.0, 268.5], [395.0, 253.33333333333334], [582.6666666666666, 253.33333333333334], [879.75, 211.5], [906.6666666666666, 461.0], [906.6666666666666, 692.0]];
+      const P = [560, 760];
+      tl.set(".ck", { strokeDasharray: 1400, strokeDashoffset: 1400 }, 0);
+      // slow push-in on the ugly site
+      tl.fromTo("#g-cam", { scale: 1 }, { scale: 1.06, duration: 3.2, ease: "none" }, 0);
+      // impact 1 and impact 2: cracks + screen shake
+      [[1.8, ".ck1", 14], [2.5, ".ck2", 22]].forEach(([t, sel, amp]) => {
+        tl.to(sel, { strokeDashoffset: 0, duration: 0.18, ease: "power3.out" }, t);
+        tl.to("#g-persp2", { keyframes: { x: [0, amp, -amp, amp * 0.6, -amp * 0.3, 0], y: [0, -amp * 0.6, amp * 0.5, -amp * 0.3, 0, 0] }, duration: 0.35, ease: "none" }, t);
+      });
+      tl.to("#g-pov", { opacity: 0, y: -30, duration: 0.25, ease: "power2.in" }, 2.9);
+      // SHATTER: the page is replaced by its own shards, which fall away in 3D
+      const T = 3.2;
+      tl.set("#g-ugly", { opacity: 0 }, T);
+      tl.set(".shard", { opacity: 1 }, T);
+      tl.fromTo("#g-flash", { opacity: 0.85 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, T);
+      tl.to(".ck", { opacity: 0, duration: 0.15 }, T);
+      cent.forEach(([cx, cy], i) => {
+        const dx = cx - P[0], dy = cy - P[1], L = Math.hypot(dx, dy) || 1;
+        const push = 260 + (i % 4) * 90, delay = (L / 1400) * 0.25;
+        const sgn = i % 2 ? 1 : -1;
+        tl.to("#sh" + i, { x: (dx / L) * push, y: (dy / L) * push * 0.6 + 1300, z: 200 + (i % 3) * 120, rotationZ: sgn * (30 + (i % 5) * 18), rotationX: 40 + (i % 4) * 20, rotationY: sgn * (25 + (i % 3) * 20), opacity: 0, duration: 1.5, ease: "power2.in" }, T + delay);
+      });
+      // behind the glass: the real thing
+      tl.fromTo("#g-glow", { scale: 0.5, opacity: 0 }, { scale: 1.2, opacity: 1, duration: 1.5, ease: "power2.out" }, T);
+      tl.fromTo("#g-or", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, T + 0.35);
+      tl.to("#g-or", { opacity: 0, duration: 0.2 }, T + 1.0);
+      tl.fromTo("#g-this", { opacity: 0, scale: 1.6, filter: "blur(18px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, T + 1.05);
+      tl.to("#g-this", { opacity: 0, y: -60, filter: "blur(12px)", duration: 0.3, ease: "power2.in" }, T + 1.75);
+      tl.fromTo("#g-card", { opacity: 0, y: 700, rotationX: 35, scale: 0.85 }, { opacity: 1, y: 0, rotationX: 0, scale: 1, duration: 0.9, ease: "expo.out" }, T + 1.45);
+      window.__timelines["glass"] = tl;
+    })();
+  </script>
+</template>

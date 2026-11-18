@@ -1,0 +1,49 @@
+<template>
+  <style>
+    @font-face { font-family: "Bebas Neue"; src: url("assets/fonts/bebas.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #08070a; font-family: "Outfit", sans-serif; }
+    .stage { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 45% at 50% 40%, #3a1420 0%, #140c12 55%, #08070a 100%); }
+    .glow { position: absolute; left: 140px; top: 520px; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(255,140,80,0.35), rgba(255,140,80,0) 70%); }
+    #s-persp { position: absolute; inset: 0; perspective: 1700px; }
+    .card { position: absolute; left: 160px; top: 330px; width: 760px; height: 1350px; border-radius: 50px; overflow: hidden; box-shadow: 0 60px 140px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,255,255,0.08); }
+    .card img { width: 760px; height: 1350px; }
+    .lab { position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-family: "Bebas Neue", sans-serif; font-size: 110px; letter-spacing: 0.06em; color: #fff; opacity: 0; }
+    #s-q { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-weight: 800; font-size: 82px; color: #fff; opacity: 0; }
+    #s-q b { color: #ff6b3d; }
+  </style>
+  <div id="root" data-composition-id="sites" data-width="1080" data-height="1920">
+    <div class="stage" data-layout-ignore></div>
+    <div class="glow" style="transform: scale(1.2)" data-layout-ignore></div>
+    <div class="lab" id="l0">CAFÉ</div><div class="lab" id="l1">CLINIC</div><div class="lab" id="l2">REAL ESTATE</div><div class="lab" id="l3">GARAGE</div><div class="lab" id="l4">NURSERY</div>
+    <div id="s-q">which one is <b>yours?</b></div>
+    <div id="s-persp"><div class="card" id="c0"><img src="assets/img/cafe.jpg" /></div><div class="card" id="c1"><img src="assets/img/clinic.jpg" /></div><div class="card" id="c2"><img src="assets/img/realestate.jpg" /></div><div class="card" id="c3"><img src="assets/img/garage.jpg" /></div><div class="card" id="c4"><img src="assets/img/nursery.jpg" /></div></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const N = 5;
+      // café is already centred (handed over from the shatter); others wait off to the right
+      for (let i = 1; i < N; i++) tl.set("#c" + i, { x: 900, rotationY: -80, opacity: 0 }, 0);
+      tl.to("#l0", { opacity: 1, duration: 0.25 }, 0.05);
+      tl.fromTo("#l0", { y: 30 }, { y: 0, duration: 0.4, ease: "expo.out", immediateRender: false }, 0.05);
+      for (let i = 1; i < N; i++) {
+        const t = i * 1.0;
+        tl.to("#c" + (i - 1), { x: -900, rotationY: 80, opacity: 0, duration: 0.55, ease: "power3.inOut" }, t - 0.25);
+        tl.to("#l" + (i - 1), { opacity: 0, y: -30, duration: 0.2 }, t - 0.25);
+        tl.to("#c" + i, { x: 0, rotationY: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, t - 0.15);
+        tl.fromTo("#l" + i, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out", immediateRender: false }, t);
+      }
+      // the finale: all five fan out together like a hand of cards
+      const F = 5.0;
+      tl.to("#l4", { opacity: 0, duration: 0.2 }, F - 0.2);
+      const fan = [[-330, 140, -18], [-170, 60, -9], [0, 30, 0], [170, 60, 9], [330, 140, 18]];
+      for (let i = 0; i < N; i++) {
+        const [x, y, r] = fan[i];
+        tl.set("#c" + i, { zIndex: i === 2 ? 10 : 5 - Math.abs(i - 2) }, F - 0.01);
+        tl.to("#c" + i, { x, y: y + 160, rotation: r, rotationY: 0, scale: 0.52, opacity: 1, duration: 0.7, ease: "back.out(1.4)" }, F + Math.abs(i - 2) * 0.06);
+      }
+      tl.fromTo("#s-q", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.2)", immediateRender: false }, F + 0.45);
+      window.__timelines["sites"] = tl;
+    })();
+  </script>
+</template>

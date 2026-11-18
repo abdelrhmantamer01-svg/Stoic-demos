@@ -2,60 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, height=1080" />
+    <meta name="viewport" content="width=1080, height=1920" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
     <style>
-      /* Placeholders: replace all three with the film's own palette and display face. */
-      :root {
-        --ground: #000;
-        --ink: #ffffff;
-        --font-display: sans-serif;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
-        overflow: hidden;
-        background: var(--ground);
-      }
-      #root {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--font-display);
-      }
-      #title {
-        color: var(--ink);
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #08070a; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
     </style>
   </head>
   <body>
-    <div
-      id="root"
-      data-composition-id="main"
-      data-start="0"
-      data-duration="10"
-      data-width="1920"
-      data-height="1080"
-    >
-      <h1 id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12.6" data-width="1080" data-height="1920">
+      <div id="glass" data-composition-id="glass" data-composition-src="compositions/glass.html" data-start="0" data-duration="5.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="sites" data-composition-id="sites" data-composition-src="compositions/sites.html" data-start="5.6" data-duration="7.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <!-- MUSIC SLOT: added in-app. -->
+      <audio id="fx00" class="clip" src="assets/kit/tick.wav" data-start="0.050" data-duration="0.07" data-track-index="3" data-volume="0.2"></audio>
+      <audio id="fx01" class="clip" src="assets/kit/knock.wav" data-start="1.800" data-duration="0.17" data-track-index="3" data-volume="0.95"></audio>
+      <audio id="fx02" class="clip" src="assets/kit/crack.wav" data-start="1.820" data-duration="0.34" data-track-index="4" data-volume="0.6"></audio>
+      <audio id="fx03" class="clip" src="assets/kit/knock.wav" data-start="2.500" data-duration="0.17" data-track-index="3" data-volume="1.0"></audio>
+      <audio id="fx04" class="clip" src="assets/kit/crack.wav" data-start="2.520" data-duration="0.34" data-track-index="4" data-volume="0.7"></audio>
+      <audio id="fx05" class="clip" src="assets/kit/shatter.wav" data-start="3.200" data-duration="1.59" data-track-index="3" data-volume="0.9"></audio>
+      <audio id="fx06" class="clip" src="assets/kit/low0.wav" data-start="3.550" data-duration="0.59" data-track-index="4" data-volume="0.35"></audio>
+      <audio id="fx07" class="clip" src="assets/kit/chord_c.wav" data-start="4.250" data-duration="1.01" data-track-index="4" data-volume="0.5"></audio>
+      <audio id="fx08" class="clip" src="assets/kit/swish_up.wav" data-start="4.650" data-duration="0.34" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="fx09" class="clip" src="assets/kit/swish_up.wav" data-start="6.350" data-duration="0.34" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="fx10" class="clip" src="assets/kit/note1.wav" data-start="6.600" data-duration="0.49" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="fx11" class="clip" src="assets/kit/swish_down.wav" data-start="7.350" data-duration="0.34" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="fx12" class="clip" src="assets/kit/note2.wav" data-start="7.600" data-duration="0.49" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="fx13" class="clip" src="assets/kit/swish_up.wav" data-start="8.350" data-duration="0.34" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="fx14" class="clip" src="assets/kit/note3.wav" data-start="8.600" data-duration="0.49" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="fx15" class="clip" src="assets/kit/swish_down.wav" data-start="9.350" data-duration="0.34" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="fx16" class="clip" src="assets/kit/note4.wav" data-start="9.600" data-duration="0.49" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="fx17" class="clip" src="assets/kit/arp_up.wav" data-start="10.600" data-duration="0.79" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx18" class="clip" src="assets/kit/chord_g.wav" data-start="11.050" data-duration="1.29" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="fx19" class="clip" src="assets/kit/sparkle.wav" data-start="11.070" data-duration="0.86" data-track-index="5" data-volume="0.3"></audio>
     </div>
     <script>
-      const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 0);
-      window.__timelines["main"] = tl;
-      tl.seek(0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
     </script>
   </body>
 </html>
