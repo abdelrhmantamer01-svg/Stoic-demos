@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; font-family: "Inter", sans-serif; }
+    .rib { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; mix-blend-mode: screen; }
+    #e-spark { position: absolute; left: 885px; top: 250px; width: 150px; height: 150px; opacity: 0; }
+    #e-line { position: absolute; left: 0; right: 0; top: 470px; text-align: center; font-family: "EB Garamond", serif; font-weight: 700; font-size: 130px; color: #fff; text-shadow: 0 0 24px rgba(255,210,180,0.55); white-space: nowrap; }
+    #e-line .l { display: inline-block; opacity: 0; }
+    #e-all { position: absolute; inset: 0; }
+  </style>
+  <div id="root" data-composition-id="end" data-width="1920" data-height="1080">
+    <div id="e-all">
+      <div id="e-spark"><svg viewBox="-110 -110 220 220"><g fill="#f4a385" style="filter: drop-shadow(0 0 8px rgba(255,160,120,0.95))"><rect x="-5" y="-96" width="10" height="72" rx="5" transform="rotate(0)" /><rect x="-5" y="-80" width="10" height="56" rx="5" transform="rotate(30)" /><rect x="-5" y="-104" width="10" height="80" rx="5" transform="rotate(60)" /><rect x="-5" y="-84" width="10" height="60" rx="5" transform="rotate(90)" /><rect x="-5" y="-98" width="10" height="74" rx="5" transform="rotate(120)" /><rect x="-5" y="-78" width="10" height="54" rx="5" transform="rotate(150)" /><rect x="-5" y="-102" width="10" height="78" rx="5" transform="rotate(180)" /><rect x="-5" y="-86" width="10" height="62" rx="5" transform="rotate(210)" /><rect x="-5" y="-94" width="10" height="70" rx="5" transform="rotate(240)" /><rect x="-5" y="-82" width="10" height="58" rx="5" transform="rotate(270)" /><rect x="-5" y="-100" width="10" height="76" rx="5" transform="rotate(300)" /><rect x="-5" y="-88" width="10" height="64" rx="5" transform="rotate(330)" /></g></svg></div>
+      <div id="e-line"><span class="l">B</span><span class="l">u</span><span class="l">i</span><span class="l">l</span><span class="l">t</span><span class="l">&nbsp;</span><span class="l">w</span><span class="l">i</span><span class="l">t</span><span class="l">h</span><span class="l">&nbsp;</span><span class="l">C</span><span class="l">l</span><span class="l">a</span><span class="l">u</span><span class="l">d</span><span class="l">e</span><span class="l">.</span></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // the starburst spins in from the bottom-left to centre top
+      tl.fromTo("#e-spark", { opacity: 0, x: -760, y: 640, rotation: -540, scale: 0.4 }, { opacity: 1, x: 0, y: 0, rotation: 0, scale: 1, duration: 0.7, ease: "power3.out", immediateRender: false }, 0.05);
+      // letters flow in along a curved ribbon path, then settle into a straight line
+      const ls = document.querySelectorAll("#e-line .l");
+      ls.forEach((el, i) => {
+        const u = 1 - i / (ls.length - 1);
+        const a = Math.PI * (0.15 + 0.9 * u);
+        const x = -Math.cos(a) * 520 - 260, y = Math.sin(a) * 300 + 120, r = -(a * 180) / Math.PI + 90;
+        tl.fromTo(el, { opacity: 0, x, y, rotation: r, filter: "blur(10px)" }, { opacity: 1, x: 0, y: 0, rotation: 0, filter: "blur(0px)", duration: 0.55, ease: "back.out(1.4)", immediateRender: false }, 0.4 + i * 0.035);
+      });
+      tl.to("#e-all", { opacity: 0, duration: 0.35, ease: "power2.in" }, 1.75);
+      tl.paused(false);
+      tl.timeScale(1 / 1.3);
+      const outer = gsap.timeline({ paused: true });
+      outer.add(tl, 0);
+      window.__timelines["end"] = outer;
+    })();
+  </script>
+</template>
