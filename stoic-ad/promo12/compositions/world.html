@@ -1,0 +1,102 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; font-family: "Inter", sans-serif; }
+    .rib { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; mix-blend-mode: screen; }
+    #w-glow { position: absolute; left: 160px; top: 120px; width: 1600px; height: 900px; border-radius: 50%; filter: blur(110px); background: radial-gradient(ellipse, rgba(255,120,30,0.35), rgba(0,0,0,0) 70%); }
+    #w-violet { position: absolute; left: 120px; top: 160px; width: 900px; height: 800px; border-radius: 50%; filter: blur(110px); background: radial-gradient(ellipse, rgba(120,70,255,0.6), rgba(40,60,255,0.25) 50%, rgba(0,0,0,0) 72%); opacity: 0; }
+    #w-cam { position: absolute; inset: 0; transform-origin: 960px 540px; }
+    #w-world { position: absolute; left: 0; top: 0; width: 1920px; height: 2000px; }
+    .chat { position: absolute; left: 230px; width: 1460px; height: 310px; border-radius: 52px; background: rgba(16,12,10,0.95); border: 2px solid rgba(255,150,80,0.45); box-shadow: 0 0 36px rgba(255,120,40,0.35), inset 0 0 22px rgba(255,120,40,0.12), 0 40px 120px rgba(0,0,0,0.7); opacity: 0; }
+    .chat .txt { position: absolute; left: 68px; top: 58px; right: 68px; color: #fff; font-size: 62px; font-weight: 500; white-space: nowrap; }
+    .chat .c { opacity: 0; }
+    .caret { display: inline-block; width: 5px; height: 68px; margin-left: 6px; vertical-align: -12px; background: #fff; }
+    .row { position: absolute; left: 60px; right: 48px; bottom: 42px; height: 86px; }
+    .plus { position: absolute; left: 0; top: -6px; color: #fff; font-size: 88px; line-height: 86px; font-weight: 200; }
+    .model { position: absolute; right: 330px; top: 16px; color: #ece6e0; font-size: 48px; }
+    .mic { position: absolute; right: 230px; top: 14px; width: 56px; height: 56px; }
+    .wave { position: absolute; right: 140px; top: 14px; width: 56px; height: 56px; }
+    .send { position: absolute; right: 0; top: 0; width: 86px; height: 86px; border-radius: 22px; background: #f2622c; box-shadow: 0 0 22px rgba(242,98,44,0.6); }
+    .send svg { position: absolute; left: 20px; top: 20px; width: 46px; height: 46px; }
+    #w-code { position: absolute; left: 330px; top: 720px; font-family: "JetBrains Mono", monospace; font-size: 40px; line-height: 1.55; white-space: pre; text-shadow: 0 0 10px rgba(255,255,255,0.25); transform-origin: 600px 200px; }
+    .cl { opacity: 0; }
+    #w-persp { position: absolute; left: 0; top: 0; width: 1920px; height: 2000px; perspective: 2200px; }
+    .card { position: absolute; left: 400px; top: 150px; width: 1120px; height: 760px; border-radius: 46px; overflow: hidden; color: #fff; opacity: 0; }
+    .card.orange { background: linear-gradient(180deg, #ff6d12 0%, #ff8a1e 45%, #ffb43c 100%); border: 3px solid #ffd27a; box-shadow: 0 0 34px rgba(255,200,110,0.85), 0 0 120px rgba(255,140,40,0.5), 0 60px 140px rgba(0,0,0,0.65); }
+    .card.blue { background: linear-gradient(180deg, #2238ff 0%, #1426c8 50%, #0b1680 100%); border: 3px solid #8fb0ff; box-shadow: 0 0 34px rgba(120,160,255,0.9), 0 0 120px rgba(60,90,255,0.55), 0 60px 140px rgba(0,0,0,0.65); }
+    .nav { position: absolute; left: 64px; right: 64px; top: 50px; display: flex; gap: 44px; align-items: center; font-size: 30px; font-weight: 500; }
+    .nav .lg { width: 58px; height: 58px; border-radius: 50%; background: #1a1009; margin-right: 34px; display: flex; align-items: center; justify-content: center; }
+    .blue .nav .lg { background: #0a0f3a; }
+    .nav .lg svg { width: 30px; height: 30px; }
+    .t1 { position: absolute; left: 64px; top: 240px; font-size: 112px; font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; }
+    .price { position: absolute; left: 64px; top: 580px; padding: 18px 44px; border-radius: 999px; background: #fff; color: #111; font-size: 40px; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="world" data-width="1920" data-height="1080">
+    <div id="w-glow" data-layout-ignore></div>
+    <div id="w-violet" data-layout-ignore></div>
+    <div id="w-cam"><div id="w-world">
+      <div class="chat" id="w-chat1" style="top:385px"><div class="txt"><span class="w" id="t1w0"><span class="c">I</span></span><span class="c">&nbsp;</span><span class="w" id="t1w1"><span class="c">w</span><span class="c">a</span><span class="c">n</span><span class="c">t</span></span><span class="c">&nbsp;</span><span class="w" id="t1w2"><span class="c">a</span></span><span class="c">&nbsp;</span><span class="w" id="t1w3"><span class="c">w</span><span class="c">e</span><span class="c">b</span><span class="c">s</span><span class="c">i</span><span class="c">t</span><span class="c">e</span></span><span class="c">&nbsp;</span><span class="w" id="t1w4"><span class="c">f</span><span class="c">o</span><span class="c">r</span></span><span class="c">&nbsp;</span><span class="w" id="t1w5"><span class="c">m</span><span class="c">y</span></span><span class="c">&nbsp;</span><span class="w" id="t1w6"><span class="c">m</span><span class="c">o</span><span class="c">t</span><span class="c">i</span><span class="c">o</span><span class="c">n</span></span><span class="c">&nbsp;</span><span class="w" id="t1w7"><span class="c">d</span><span class="c">e</span><span class="c">s</span><span class="c">i</span><span class="c">g</span><span class="c">n</span></span><span class="c">&nbsp;</span><span class="w" id="t1w8"><span class="c">w</span><span class="c">o</span><span class="c">r</span><span class="c">k</span><span class="c">.</span></span><span class="caret"></span></div>
+      <div class="row"><span class="plus">+</span><span class="model">Sonnet 5 <span style="font-size:0.7em">⌄</span></span><svg class="mic" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="#ddd"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><svg class="wave" viewBox="0 0 24 24" stroke="#ddd" stroke-width="2" stroke-linecap="round"><path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M23 10v4"/></svg><span class="send" id="w-chat1-send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div></div>
+      <div id="w-code" data-layout-ignore><div class="cl" id="cl0"><span style="color:#ff7b72">import</span><span style="color:#79c0ff"> React </span><span style="color:#ff7b72">from </span><span style="color:#7ee787">&#x27;react&#x27;;</span></div><div class="cl" id="cl1"><span style="color:#ff7b72">import</span><span style="color:#79c0ff"> { motion } </span><span style="color:#ff7b72">from </span><span style="color:#7ee787">&#x27;framer-motion&#x27;;</span></div><div class="cl" id="cl2"><span style="color:#ff7b72">const </span><span style="color:#ffd866">PortfolioSite</span><span style="color:#e6edf3"> = () =&gt; {</span></div><div class="cl" id="cl3"><span style="color:#ff7b72">  const </span><span style="color:#79c0ff">projects</span><span style="color:#e6edf3"> = [</span></div><div class="cl" id="cl4"><span style="color:#e6edf3">    { </span><span style="color:#79c0ff">title: </span><span style="color:#7ee787">&#x27;Brand Reveal&#x27;</span><span style="color:#e6edf3">, </span><span style="color:#79c0ff">type: </span><span style="color:#7ee787">&#x27;motion&#x27;</span><span style="color:#e6edf3"> },</span></div><div class="cl" id="cl5"><span style="color:#e6edf3">    { </span><span style="color:#79c0ff">title: </span><span style="color:#7ee787">&#x27;Product Launch&#x27;</span><span style="color:#e6edf3">, </span><span style="color:#79c0ff">type: </span><span style="color:#7ee787">&#x27;3d&#x27;</span><span style="color:#e6edf3"> },</span></div><div class="cl" id="cl6"><span style="color:#e6edf3">  ];</span></div><div class="cl" id="cl7"><span style="color:#ff7b72">  return (</span></div><div class="cl" id="cl8"><span style="color:#ffd866">    &lt;motion.div </span><span style="color:#79c0ff">animate</span><span style="color:#e6edf3">={{ </span><span style="color:#79c0ff">opacity: 1 </span><span style="color:#e6edf3">}}&gt;</span></div><div class="cl" id="cl9"><span style="color:#ffd866">      &lt;h1&gt;</span><span style="color:#7ee787">Premium Motion Design</span><span style="color:#ffd866">&lt;/h1&gt;</span></div></div>
+      <div id="w-persp"><div class="card orange" id="w-orange"><div class="nav"><span class="lg"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3l2.2 6.3H21l-5.4 4 2 6.4L12 15.9 6.4 19.7l2-6.4L3 9.3h6.8z"/></svg></span><span>Home</span><span>Contact</span><span>About</span><span>FAQ</span></div><div class="t1">Premium<br/>Motion Design</div><div class="price">Price</div></div><div class="card blue" id="w-blue"><div class="nav"><span class="lg"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3l2.2 6.3H21l-5.4 4 2 6.4L12 15.9 6.4 19.7l2-6.4L3 9.3h6.8z"/></svg></span><span>Home</span><span>Contact</span><span>About</span><span>FAQ</span></div><div class="t1">Premium<br/>Motion Design</div><div class="price">Price</div></div></div>
+      <div class="chat" id="w-chat2" style="top:1250px"><div class="txt"><span class="w" id="t2w0"><span class="c">I</span></span><span class="c">&nbsp;</span><span class="w" id="t2w1"><span class="c">w</span><span class="c">a</span><span class="c">n</span><span class="c">t</span></span><span class="c">&nbsp;</span><span class="w" id="t2w2"><span class="c">a</span></span><span class="c">&nbsp;</span><span class="w" id="t2w3"><span class="c">b</span><span class="c">l</span><span class="c">u</span><span class="c">e</span></span><span class="c">&nbsp;</span><span class="w" id="t2w4"><span class="c">b</span><span class="c">a</span><span class="c">c</span><span class="c">k</span><span class="c">g</span><span class="c">r</span><span class="c">o</span><span class="c">u</span><span class="c">n</span><span class="c">d</span><span class="c">.</span></span><span class="caret"></span></div>
+      <div class="row"><span class="plus">+</span><span class="model">Sonnet 5 <span style="font-size:0.7em">⌄</span></span><svg class="mic" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="#ddd"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><svg class="wave" viewBox="0 0 24 24" stroke="#ddd" stroke-width="2" stroke-linecap="round"><path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M23 10v4"/></svg><span class="send" id="w-chat2-send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></div></div>
+    </div></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // typing with the word in progress lit orange, then settling to white
+      const type = (pfx, n, t0, cps) => {
+        let t = t0;
+        for (let w = 0; w < n; w++) {
+          const chars = document.querySelectorAll("#" + pfx + "w" + w + " .c");
+          tl.set("#" + pfx + "w" + w, { color: "#ff8a3d" }, t);
+          chars.forEach((c) => { tl.set(c, { opacity: 1 }, t); t += cps; });
+          const sp = document.querySelector("#" + pfx + "w" + w).nextElementSibling;
+          if (sp && sp.classList.contains("c")) { tl.set(sp, { opacity: 1 }, t); t += cps; }
+          tl.to("#" + pfx + "w" + w, { color: "#ffffff", duration: 0.18 }, t);
+        }
+        return t;
+      };
+      // arrive: fast zoom into the chat box
+      tl.fromTo("#w-cam", { scale: 3.2, filter: "blur(24px)" }, { scale: 1, filter: "blur(0px)", duration: 0.35, ease: "power3.out" }, 0);
+      tl.set("#w-chat1", { opacity: 1 }, 0);
+      tl.fromTo("#w-glow", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0);
+      tl.to("#w-chat1 .caret", { opacity: 0, duration: 0.18, repeat: 1, yoyo: true, ease: "steps(1)" }, 0.0);
+      const e1 = type("t1", 9, 0.32, 0.031);
+      tl.to("#w-chat1 .caret", { opacity: 0, duration: 0.15, repeat: 1, yoyo: true, ease: "steps(1)" }, e1);
+      // send
+      tl.to("#w-chat1-send", { scale: 0.82, duration: 0.06 }, 1.8);
+      tl.to("#w-chat1-send", { scale: 1.12, boxShadow: "0 0 50px rgba(255,120,40,1)", duration: 0.2, ease: "back.out(3)" }, 1.86);
+      // code pours out below the box...
+      document.querySelectorAll(".cl").forEach((el, i) => {
+        tl.fromTo(el, { opacity: 0, y: -30, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.15, ease: "power2.out", immediateRender: false }, 1.9 + i * 0.03);
+      });
+      tl.to("#w-world", { y: -260, duration: 0.5, ease: "power2.inOut" }, 1.9);
+      // ...then rushes at the camera
+      tl.to("#w-chat1", { opacity: 0, filter: "blur(20px)", duration: 0.25 }, 2.3);
+      tl.to("#w-code", { scale: 4.5, z: 0, opacity: 0, filter: "blur(28px)", duration: 0.4, ease: "power3.in" }, 2.3);
+      tl.to("#w-world", { y: 0, duration: 0.01 }, 2.7);
+      // the code resolves into the site card, which swings to face us
+      tl.fromTo("#w-orange", { opacity: 0, rotationY: -70, rotationX: 18, z: -400, filter: "blur(22px)" }, { opacity: 1, rotationY: 6, rotationX: -3, z: 0, filter: "blur(0px)", duration: 0.75, ease: "back.out(1.3)", immediateRender: false }, 2.65);
+      tl.to("#w-orange", { rotationY: -4, rotationX: 2, duration: 0.6, ease: "sine.inOut" }, 3.4);
+      // pan down past the card's bottom edge to the chat box below
+      tl.to("#w-world", { y: -650, duration: 0.6, ease: "power3.inOut" }, 4.0);
+      tl.to("#w-orange", { rotationY: 0, rotationX: 0, duration: 0.5 }, 4.0);
+      tl.fromTo("#w-chat2", { opacity: 0 }, { opacity: 1, duration: 0.3, immediateRender: false }, 4.2);
+      const e2 = type("t2", 5, 4.6, 0.03);
+      tl.to("#w-chat2-send", { scale: 0.82, duration: 0.06 }, 5.5);
+      tl.to("#w-chat2-send", { scale: 1.12, duration: 0.2, ease: "back.out(3)" }, 5.56);
+      // whip-pan back up: the same site, now electric blue
+      tl.to("#w-world", { y: 0, duration: 0.35, ease: "power3.inOut" }, 5.8);
+      tl.to("#w-cam", { keyframes: { filter: ["blur(0px)", "blur(26px)", "blur(0px)"] }, duration: 0.4, ease: "none" }, 5.78);
+      tl.set("#w-orange", { opacity: 0 }, 5.97);
+      tl.set("#w-blue", { opacity: 1, rotationY: 14, rotationX: -6, scale: 1.04 }, 5.97);
+      tl.to("#w-glow", { opacity: 0, duration: 0.3 }, 5.95);
+      tl.to("#w-violet", { opacity: 1, duration: 0.5 }, 5.95);
+      tl.to("#w-blue", { rotationY: -3, rotationX: 2, scale: 1, duration: 0.8, ease: "back.out(1.6)" }, 6.15);
+      tl.to("#w-blue", { rotationY: 0, rotationX: 0, duration: 0.5, ease: "sine.inOut" }, 6.95);
+      window.__timelines["world"] = tl;
+    })();
+  </script>
+</template>
