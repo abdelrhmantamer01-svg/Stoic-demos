@@ -1,0 +1,23 @@
+<template>
+  <style>
+    @font-face { font-family: "Bebas Neue"; src: url("assets/fonts/bebas.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #111; }
+    #cam0 { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 909.09px 1636.36px; }
+    .lvl { position: absolute; width: 1080px; height: 1920px; overflow: hidden; }
+    .site { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .bezel { position: absolute; border-radius: 34px; background: #0d0d10; box-shadow: 0 40px 90px rgba(0,0,0,0.55), 0 0 0 3px rgba(255,255,255,0.08); }
+    .tag { position: absolute; left: 56px; top: 1420px; padding: 18px 34px; border-radius: 999px; background: rgba(13,13,16,0.85); color: #fff; font-family: "Bebas Neue", sans-serif; font-size: 72px; letter-spacing: 0.06em; line-height: 1; }
+  </style>
+  <div id="root" data-composition-id="dive0" data-width="1080" data-height="1920">
+    <div id="cam0"><div class="lvl" style="left:0;top:0"><img class="site" src="assets/img/cafe.jpg" /><div class="tag">CAFÉ</div><div class="bezel" style="left:582px;top:1062px;width:403.2px;height:688.8px"></div>
+<div class="lvl" style="left:600px;top:1080px;transform:scale(0.34);transform-origin:0 0"><img class="site" src="assets/img/clinic.jpg" /><div class="tag">CLINIC</div><div class="bezel" style="left:582px;top:1062px;width:403.2px;height:688.8px"></div>
+<div class="lvl" style="left:600px;top:1080px;transform:scale(0.34);transform-origin:0 0"><img class="site" src="assets/img/realestate.jpg" /><div class="tag">REAL ESTATE</div></div></div></div></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#cam0", { scale: 1 }, { scale: 2.941176, duration: 1.1, ease: "power2.inOut" }, 0.8);
+      window.__timelines["dive0"] = tl;
+    })();
+  </script>
+</template>

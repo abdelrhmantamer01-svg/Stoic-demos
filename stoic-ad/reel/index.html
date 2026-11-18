@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #120f26; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="21.0" data-width="1080" data-height="1920">
+      <div id="glass" data-composition-id="glass" data-composition-src="compositions/glass.html" data-start="0" data-duration="4.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="rail" data-composition-id="rail" data-composition-src="compositions/rail.html" data-start="4.0" data-duration="5.2" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="swipe" data-composition-id="swipe" data-composition-src="compositions/swipe.html" data-start="9.2" data-duration="5.2" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="bar" data-composition-id="bar" data-composition-src="compositions/bar.html" data-start="14.4" data-duration="6.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="vignette" class="clip" data-start="0" data-duration="21" data-track-index="2" data-layout-ignore style="position:absolute;inset:0;z-index:40;pointer-events:none;background:radial-gradient(ellipse 75% 65% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%);"></div>
+      <div id="grain" class="clip" data-start="0" data-duration="21" data-track-index="2" data-layout-ignore style="position:absolute;inset:0;z-index:50;pointer-events:none;opacity:0.09;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>&quot;);"></div>
+      <!-- MUSIC SLOT: none by design (added in-app). -->
+      <audio id="fx000" class="clip" src="assets/kit/knock.wav" data-start="0.450" data-duration="0.17" data-track-index="3" data-volume="0.9"></audio>
+      <audio id="fx001" class="clip" src="assets/kit/crack.wav" data-start="0.470" data-duration="0.34" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="fx002" class="clip" src="assets/kit/knock.wav" data-start="0.950" data-duration="0.17" data-track-index="3" data-volume="0.95"></audio>
+      <audio id="fx003" class="clip" src="assets/kit/crack.wav" data-start="0.970" data-duration="0.34" data-track-index="4" data-volume="0.5"></audio>
+      <audio id="fx004" class="clip" src="assets/kit/blip.wav" data-start="1.350" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx005" class="clip" src="assets/kit/blip.wav" data-start="1.410" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx006" class="clip" src="assets/kit/blip.wav" data-start="1.470" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx007" class="clip" src="assets/kit/blip.wav" data-start="1.530" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx008" class="clip" src="assets/kit/blip.wav" data-start="1.590" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx009" class="clip" src="assets/kit/blip.wav" data-start="1.650" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx010" class="clip" src="assets/kit/swish_down.wav" data-start="2.100" data-duration="0.34" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx011" class="clip" src="assets/kit/bub3.wav" data-start="3.000" data-duration="0.11" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx012" class="clip" src="assets/kit/low0.wav" data-start="3.000" data-duration="0.59" data-track-index="4" data-volume="0.4"></audio>
+      <audio id="fx013" class="clip" src="assets/kit/tick.wav" data-start="3.250" data-duration="0.07" data-track-index="3" data-volume="0.2"></audio>
+      <audio id="fx014" class="clip" src="assets/kit/tick.wav" data-start="3.600" data-duration="0.07" data-track-index="3" data-volume="0.2"></audio>
+      <audio id="fx015" class="clip" src="assets/kit/blip.wav" data-start="4.230" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx016" class="clip" src="assets/kit/blip.wav" data-start="4.290" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx017" class="clip" src="assets/kit/blip.wav" data-start="4.350" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx018" class="clip" src="assets/kit/blip.wav" data-start="4.410" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx019" class="clip" src="assets/kit/blip.wav" data-start="4.470" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx020" class="clip" src="assets/kit/bub1.wav" data-start="4.650" data-duration="0.08" data-track-index="3" data-volume="0.15"></audio>
+      <audio id="fx021" class="clip" src="assets/kit/note0.wav" data-start="4.650" data-duration="0.49" data-track-index="4" data-volume="0.5"></audio>
+      <audio id="fx022" class="clip" src="assets/kit/bub1.wav" data-start="5.100" data-duration="0.08" data-track-index="3" data-volume="0.15"></audio>
+      <audio id="fx023" class="clip" src="assets/kit/note1.wav" data-start="5.100" data-duration="0.49" data-track-index="5" data-volume="0.5"></audio>
+      <audio id="fx024" class="clip" src="assets/kit/bub1.wav" data-start="5.550" data-duration="0.08" data-track-index="3" data-volume="0.15"></audio>
+      <audio id="fx025" class="clip" src="assets/kit/note2.wav" data-start="5.550" data-duration="0.49" data-track-index="4" data-volume="0.5"></audio>
+      <audio id="fx026" class="clip" src="assets/kit/bub1.wav" data-start="6.000" data-duration="0.08" data-track-index="3" data-volume="0.15"></audio>
+      <audio id="fx027" class="clip" src="assets/kit/note3.wav" data-start="6.000" data-duration="0.49" data-track-index="5" data-volume="0.5"></audio>
+      <audio id="fx028" class="clip" src="assets/kit/hearts.wav" data-start="6.020" data-duration="0.49" data-track-index="6" data-volume="0.55"></audio>
+      <audio id="fx029" class="clip" src="assets/kit/chord_c.wav" data-start="6.040" data-duration="1.01" data-track-index="4" data-volume="0.35"></audio>
+      <audio id="fx030" class="clip" src="assets/kit/blip.wav" data-start="6.180" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx031" class="clip" src="assets/kit/blip.wav" data-start="6.240" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx032" class="clip" src="assets/kit/blip.wav" data-start="6.300" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx033" class="clip" src="assets/kit/blip.wav" data-start="6.360" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx034" class="clip" src="assets/kit/note5.wav" data-start="6.800" data-duration="0.49" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx035" class="clip" src="assets/kit/follow.wav" data-start="6.840" data-duration="0.31" data-track-index="5" data-volume="0.5"></audio>
+      <audio id="fx036" class="clip" src="assets/kit/blip.wav" data-start="6.980" data-duration="0.03" data-track-index="6" data-volume="0.25"></audio>
+      <audio id="fx037" class="clip" src="assets/kit/blip.wav" data-start="7.040" data-duration="0.03" data-track-index="6" data-volume="0.25"></audio>
+      <audio id="fx038" class="clip" src="assets/kit/blip.wav" data-start="7.100" data-duration="0.03" data-track-index="4" data-volume="0.25"></audio>
+      <audio id="fx039" class="clip" src="assets/kit/tick.wav" data-start="7.150" data-duration="0.07" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="fx040" class="clip" src="assets/kit/blip.wav" data-start="7.160" data-duration="0.03" data-track-index="5" data-volume="0.25"></audio>
+      <audio id="fx041" class="clip" src="assets/kit/blip.wav" data-start="7.220" data-duration="0.03" data-track-index="4" data-volume="0.25"></audio>
+      <audio id="fx042" class="clip" src="assets/kit/whistle_down.wav" data-start="7.400" data-duration="0.44" data-track-index="3" data-volume="0.3"></audio>
+      <audio id="fx043" class="clip" src="assets/kit/bub3.wav" data-start="8.150" data-duration="0.11" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx044" class="clip" src="assets/kit/low0.wav" data-start="8.150" data-duration="0.59" data-track-index="4" data-volume="0.35"></audio>
+      <audio id="fx045" class="clip" src="assets/kit/blip.wav" data-start="8.380" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx046" class="clip" src="assets/kit/blip.wav" data-start="8.440" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx047" class="clip" src="assets/kit/blip.wav" data-start="8.500" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx048" class="clip" src="assets/kit/blip.wav" data-start="8.560" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx049" class="clip" src="assets/kit/blip.wav" data-start="8.620" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx050" class="clip" src="assets/kit/blip.wav" data-start="8.680" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx051" class="clip" src="assets/kit/blip.wav" data-start="8.740" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx052" class="clip" src="assets/kit/tick.wav" data-start="9.300" data-duration="0.07" data-track-index="3" data-volume="0.2"></audio>
+      <audio id="fx053" class="clip" src="assets/kit/boing_up.wav" data-start="9.500" data-duration="0.54" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="fx054" class="clip" src="assets/kit/swipe_up.wav" data-start="9.550" data-duration="0.39" data-track-index="4" data-volume="0.6"></audio>
+      <audio id="fx055" class="clip" src="assets/kit/bub3.wav" data-start="10.400" data-duration="0.11" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx056" class="clip" src="assets/kit/gasp.wav" data-start="10.450" data-duration="0.29" data-track-index="4" data-volume="0.35"></audio>
+      <audio id="fx057" class="clip" src="assets/kit/blip.wav" data-start="10.630" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx058" class="clip" src="assets/kit/blip.wav" data-start="10.690" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx059" class="clip" src="assets/kit/blip.wav" data-start="10.750" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx060" class="clip" src="assets/kit/blip.wav" data-start="10.810" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx061" class="clip" src="assets/kit/blip.wav" data-start="10.870" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx062" class="clip" src="assets/kit/boing_up.wav" data-start="11.400" data-duration="0.54" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx063" class="clip" src="assets/kit/swipe_up.wav" data-start="11.450" data-duration="0.39" data-track-index="4" data-volume="0.6"></audio>
+      <audio id="fx064" class="clip" src="assets/kit/bub3.wav" data-start="12.150" data-duration="0.11" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx065" class="clip" src="assets/kit/low1.wav" data-start="12.200" data-duration="0.59" data-track-index="4" data-volume="0.4"></audio>
+      <audio id="fx066" class="clip" src="assets/kit/blip.wav" data-start="12.280" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx067" class="clip" src="assets/kit/blip.wav" data-start="12.340" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx068" class="clip" src="assets/kit/blip.wav" data-start="12.400" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx069" class="clip" src="assets/kit/scratch.wav" data-start="12.800" data-duration="0.44" data-track-index="3" data-volume="0.55"></audio>
+      <audio id="fx070" class="clip" src="assets/kit/swipe_down.wav" data-start="12.950" data-duration="0.54" data-track-index="4" data-volume="0.65"></audio>
+      <audio id="fx071" class="clip" src="assets/kit/bub3.wav" data-start="13.650" data-duration="0.11" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx072" class="clip" src="assets/kit/blip.wav" data-start="13.730" data-duration="0.03" data-track-index="4" data-volume="0.25"></audio>
+      <audio id="fx073" class="clip" src="assets/kit/blip.wav" data-start="13.790" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx074" class="clip" src="assets/kit/blip.wav" data-start="13.850" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx075" class="clip" src="assets/kit/blip.wav" data-start="13.910" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx076" class="clip" src="assets/kit/blip.wav" data-start="13.970" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx077" class="clip" src="assets/kit/blip.wav" data-start="14.030" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx078" class="clip" src="assets/kit/swish_up.wav" data-start="14.550" data-duration="0.34" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx079" class="clip" src="assets/kit/blip.wav" data-start="14.930" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx080" class="clip" src="assets/kit/blip.wav" data-start="14.990" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx081" class="clip" src="assets/kit/blip.wav" data-start="15.050" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx082" class="clip" src="assets/kit/blip.wav" data-start="15.110" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx083" class="clip" src="assets/kit/blip.wav" data-start="15.170" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx084" class="clip" src="assets/kit/blip.wav" data-start="15.230" data-duration="0.03" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx085" class="clip" src="assets/kit/boing_up.wav" data-start="15.850" data-duration="0.54" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="fx086" class="clip" src="assets/kit/bub1.wav" data-start="16.300" data-duration="0.08" data-track-index="4" data-volume="0.4"></audio>
+      <audio id="fx087" class="clip" src="assets/kit/step.wav" data-start="16.350" data-duration="0.04" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="fx088" class="clip" src="assets/kit/step.wav" data-start="16.670" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx089" class="clip" src="assets/kit/step.wav" data-start="16.945" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx090" class="clip" src="assets/kit/step.wav" data-start="17.182" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx091" class="clip" src="assets/kit/step.wav" data-start="17.385" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx092" class="clip" src="assets/kit/step.wav" data-start="17.560" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx093" class="clip" src="assets/kit/step.wav" data-start="17.711" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx094" class="clip" src="assets/kit/step.wav" data-start="17.840" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx095" class="clip" src="assets/kit/step.wav" data-start="17.952" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx096" class="clip" src="assets/kit/step.wav" data-start="18.048" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx097" class="clip" src="assets/kit/step.wav" data-start="18.130" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx098" class="clip" src="assets/kit/step.wav" data-start="18.201" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx099" class="clip" src="assets/kit/step.wav" data-start="18.271" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx100" class="clip" src="assets/kit/step.wav" data-start="18.341" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx101" class="clip" src="assets/kit/step.wav" data-start="18.411" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx102" class="clip" src="assets/kit/step.wav" data-start="18.481" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx103" class="clip" src="assets/kit/step.wav" data-start="18.551" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx104" class="clip" src="assets/kit/step.wav" data-start="18.621" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx105" class="clip" src="assets/kit/step.wav" data-start="18.691" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx106" class="clip" src="assets/kit/step.wav" data-start="18.761" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx107" class="clip" src="assets/kit/step.wav" data-start="18.831" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx108" class="clip" src="assets/kit/step.wav" data-start="18.901" data-duration="0.04" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="fx109" class="clip" src="assets/kit/chord_g.wav" data-start="19.000" data-duration="1.29" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx110" class="clip" src="assets/kit/sparkle.wav" data-start="19.020" data-duration="0.86" data-track-index="4" data-volume="0.35"></audio>
+      <audio id="fx111" class="clip" src="assets/kit/blip.wav" data-start="19.130" data-duration="0.03" data-track-index="5" data-volume="0.25"></audio>
+      <audio id="fx112" class="clip" src="assets/kit/blip.wav" data-start="19.190" data-duration="0.03" data-track-index="5" data-volume="0.25"></audio>
+      <audio id="fx113" class="clip" src="assets/kit/blip.wav" data-start="19.250" data-duration="0.03" data-track-index="5" data-volume="0.25"></audio>
+      <audio id="fx114" class="clip" src="assets/kit/blip.wav" data-start="19.310" data-duration="0.03" data-track-index="5" data-volume="0.25"></audio>
+      <audio id="fx115" class="clip" src="assets/kit/whistle_up.wav" data-start="19.800" data-duration="0.89" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="fx116" class="clip" src="assets/kit/bub3.wav" data-start="20.820" data-duration="0.11" data-track-index="3" data-volume="0.5"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

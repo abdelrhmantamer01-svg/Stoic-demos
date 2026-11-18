@@ -1,0 +1,94 @@
+<template>
+  <style>
+
+    #root { position: absolute; inset: 0; overflow: hidden; background: #120f26; font-family: "Outfit", sans-serif; }
+    .room { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 55% at 50% 22%, #3b2f80 0%, #1d1840 45%, #0d0b1d 100%); }
+    .spot { position: absolute; left: 190px; top: -100px; width: 700px; height: 1900px; background: linear-gradient(180deg, rgba(255, 236, 200, 0.16), rgba(255, 236, 200, 0.02) 85%); clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%); filter: blur(14px); }
+    .floor { position: absolute; left: -100px; top: 1700px; width: 1280px; height: 400px; background: radial-gradient(ellipse 50% 40% at 50% 10%, rgba(255, 220, 170, 0.18), rgba(0, 0, 0, 0) 70%), #0b0918; border-top: 3px solid rgba(255, 255, 255, 0.06); }
+    .dust { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 240, 210, 0.55); }
+    .ball { position: absolute; left: 0; top: 0; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffc9a0 0%, #ff6b2c 46%, #c93d08 100%); box-shadow: inset -10px -14px 0 rgba(0, 0, 0, 0.1), 0 0 60px rgba(255, 107, 44, 0.25); }
+    .ball .eye { position: absolute; top: 40px; width: 34px; height: 46px; border-radius: 50%; background: #fff; }
+    .ball .eye b { position: absolute; left: 11px; top: 16px; width: 17px; height: 22px; border-radius: 50%; background: #120f26; }
+    .ball .eye i { position: absolute; left: 14px; top: 18px; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+    .shadow { position: absolute; left: 0; top: 0; width: 150px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); filter: blur(4px); }
+    .bubble { position: absolute; padding: 26px 40px; border-radius: 44px; background: #fff; color: #120f26; font-weight: 800; font-size: 60px; line-height: 1; white-space: nowrap; opacity: 0; }
+    .bubble::after { content: ""; position: absolute; left: 50px; bottom: -22px; border: 16px solid transparent; border-top: 22px solid #fff; border-bottom: 0; }
+    .bubble .c { opacity: 0; }
+    #t-bar { position: absolute; left: 90px; top: 1236px; width: 900px; height: 14px; border-radius: 7px; background: rgba(255,255,255,0.22); transform-origin: 0 50%; }
+    #t-fill { position: absolute; left: 0; top: 0; width: 900px; height: 14px; border-radius: 7px; background: #ff2d55; transform-origin: 0 50%; }
+    #t-head { position: absolute; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+    .tick { position: absolute; top: 26px; width: 4px; height: 14px; border-radius: 2px; background: rgba(255,255,255,0.3); }
+    .speed { position: absolute; left: 0; top: 0; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.6); opacity: 0; }
+    #t-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+    #t-end { position: absolute; left: 990px; top: 1243px; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; border: 5px solid #fff; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="bar" data-width="1080" data-height="1920">
+    <div class="room" data-layout-ignore></div>
+    <div class="spot" data-layout-ignore></div>
+    <div class="floor" data-layout-ignore></div>
+    <div id="t-dust" data-layout-ignore></div>
+    <div class="shadow" id="t-shadow"></div>
+    <div id="t-bar"><div class="tick" style="left: 0px"></div><div class="tick" style="left: 90px"></div><div class="tick" style="left: 180px"></div><div class="tick" style="left: 270px"></div><div class="tick" style="left: 360px"></div><div class="tick" style="left: 450px"></div><div class="tick" style="left: 540px"></div><div class="tick" style="left: 630px"></div><div class="tick" style="left: 720px"></div><div class="tick" style="left: 810px"></div><div class="tick" style="left: 900px"></div><div id="t-fill"></div><div id="t-head"></div></div>
+    <div id="t-end"></div>
+    <div class="speed" id="sp0"></div><div class="speed" id="sp1"></div><div class="speed" id="sp2"></div>
+    <div class="ball" id="t-ball"><span class="eye" style="left: 42px"><b></b><i></i></span><span class="eye" style="left: 84px"><b></b><i></i></span></div>
+    <div class="bubble" id="tb1" style="left: 150px; top: 1000px"><span class="c">…</span><span class="c">t</span><span class="c">h</span><span class="c">e</span><span class="c">&nbsp;</span><span class="c">t</span><span class="c">i</span><span class="c">m</span><span class="c">e</span><span class="c">l</span><span class="c">i</span><span class="c">n</span><span class="c">e</span><span class="c">?</span></div>
+    <div class="bubble" id="tb2" style="left: 380px; top: 880px"><span class="c">t</span><span class="c">h</span><span class="c">e</span><span class="c">&nbsp;</span><span class="c">E</span><span class="c">N</span><span class="c">D</span><span class="c">!</span></div>
+    <div id="t-flash" data-layout-ignore></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      let seed = 13; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const dust = document.getElementById("t-dust");
+      for (let k = 0; k < 16; k++) {
+        const d = document.createElement("div"); d.className = "dust"; dust.appendChild(d);
+        const x = 260 + rnd() * 560, y = 300 + rnd() * 1300;
+        tl.fromTo(d, { x, y, opacity: 0.2 + rnd() * 0.6, scale: 0.5 + rnd() }, { x: x + (rnd() - 0.5) * 80, y: y - 160 - rnd() * 140, duration: 6.6, ease: "none" }, 0);
+      }
+      const at = (cx, cy) => ({ x: cx - 80, y: cy - 80 });
+      const bubble = (id, t, out) => {
+        tl.to(id, { opacity: 1, duration: 0.1 }, t);
+        tl.fromTo(id, { scale: 0.6, transformOrigin: "10% 100%" }, { scale: 1, duration: 0.3, ease: "back.out(2.5)", immediateRender: false }, t);
+        tl.to(id + " .c", { opacity: 1, duration: 0.01, stagger: 0.05 }, t + 0.08);
+        tl.to(id, { opacity: 0, y: -24, duration: 0.2, ease: "power2.in" }, out);
+      };
+      const TOTAL = 21.0, START = 14.4, W = 900;
+      const px = (p) => 90 + W * p;
+      tl.set("#t-ball", { ...at(540, 1620), transformOrigin: "50% 50%" }, 0);
+      tl.set("#t-shadow", { x: 465, y: 1688 }, 0);
+      // the timeline appears, already at the real point we are in the film
+      const p0 = START / TOTAL, p1 = (START + 1.9) / TOTAL;
+      tl.fromTo("#t-bar", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.5, ease: "expo.out" }, 0.15);
+      tl.fromTo("#t-fill", { scaleX: p0 }, { scaleX: p1, duration: 1.9, ease: "none" }, 0);
+      tl.fromTo("#t-head", { x: W * p0, y: 7 }, { x: W * p1, duration: 1.9, ease: "none" }, 0);
+      tl.to("#t-ball .eye b", { x: 0, y: -8, duration: 0.15 }, 0.3);
+      bubble("#tb1", 0.45, 1.35);
+      // hop onto the playhead
+      const headY = 1243 - 22 - 56; // ball (scale 0.7) sits on the bar
+      tl.to("#t-ball", { x: px(p1) - 80, scale: 0.7, duration: 0.45, ease: "none" }, 1.45);
+      tl.to("#t-ball", { y: 900 - 80, duration: 0.22, ease: "power2.out" }, 1.45);
+      tl.to("#t-ball", { y: 1100, duration: 0.23, ease: "power2.in" }, 1.67);
+      tl.to("#t-shadow", { opacity: 0, duration: 0.2 }, 1.5);
+      // it pushes the playhead to the end, faster and faster
+      tl.to("#t-fill", { scaleX: 1, duration: 2.7, ease: "power2.in" }, 1.9);
+      tl.to("#t-head", { x: W, duration: 2.7, ease: "power2.in" }, 1.9);
+      tl.to("#t-ball", { x: px(1) - 80, duration: 2.7, ease: "power2.in" }, 1.9);
+      tl.to("#t-ball", { rotation: 900, duration: 2.7, ease: "power2.in" }, 1.9);
+      tl.to("#t-ball .eye b", { x: 8, y: 0, duration: 0.15 }, 1.9);
+      [0, 1, 2].forEach((k) => {
+        tl.fromTo("#sp" + k, { x: px(0.6) - 260, y: 1150 + k * 26, width: 120, opacity: 0 }, { x: px(1) - 230, width: 200 - k * 40, opacity: 0.7, duration: 1.2, ease: "power2.in", immediateRender: false }, 3.4 + k * 0.05);
+        tl.to("#sp" + k, { opacity: 0, duration: 0.15 }, 4.6);
+      });
+      tl.fromTo("#t-end", { scale: 0.4, opacity: 1 }, { scale: 2.6, opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 4.6);
+      bubble("#tb2", 4.65, 5.25);
+      tl.to("#t-ball", { rotation: 1080, duration: 0.3, ease: "power2.out" }, 4.6);
+      // ...and launches straight at your screen (where the film began)
+      tl.to("#t-bar", { opacity: 0, duration: 0.3 }, 5.3);
+      tl.to("#t-ball .eye b", { x: 0, y: 4, duration: 0.15 }, 5.3);
+      tl.to("#t-ball", { x: 540 - 80, y: 960 - 80, scaleX: 3.2, scaleY: 3.2, duration: 1.0, ease: "power3.in" }, 5.4);
+      tl.to("#t-ball", { scaleX: 3.55, scaleY: 2.95, duration: 0.06, ease: "power2.out" }, 6.44);
+      window.__timelines["bar"] = tl;
+    })();
+  </script>
+</template>

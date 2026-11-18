@@ -1,0 +1,109 @@
+<template>
+  <style>
+
+    #root { position: absolute; inset: 0; overflow: hidden; background: #120f26; font-family: "Outfit", sans-serif; }
+    .room { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 55% at 50% 22%, #3b2f80 0%, #1d1840 45%, #0d0b1d 100%); }
+    .spot { position: absolute; left: 190px; top: -100px; width: 700px; height: 1900px; background: linear-gradient(180deg, rgba(255, 236, 200, 0.16), rgba(255, 236, 200, 0.02) 85%); clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%); filter: blur(14px); }
+    .floor { position: absolute; left: -100px; top: 1700px; width: 1280px; height: 400px; background: radial-gradient(ellipse 50% 40% at 50% 10%, rgba(255, 220, 170, 0.18), rgba(0, 0, 0, 0) 70%), #0b0918; border-top: 3px solid rgba(255, 255, 255, 0.06); }
+    .dust { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 240, 210, 0.55); }
+    .ball { position: absolute; left: 0; top: 0; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffc9a0 0%, #ff6b2c 46%, #c93d08 100%); box-shadow: inset -10px -14px 0 rgba(0, 0, 0, 0.1), 0 0 60px rgba(255, 107, 44, 0.25); }
+    .ball .eye { position: absolute; top: 40px; width: 34px; height: 46px; border-radius: 50%; background: #fff; }
+    .ball .eye b { position: absolute; left: 11px; top: 16px; width: 17px; height: 22px; border-radius: 50%; background: #120f26; }
+    .ball .eye i { position: absolute; left: 14px; top: 18px; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+    .shadow { position: absolute; left: 0; top: 0; width: 150px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); filter: blur(4px); }
+    .bubble { position: absolute; padding: 26px 40px; border-radius: 44px; background: #fff; color: #120f26; font-weight: 800; font-size: 60px; line-height: 1; white-space: nowrap; opacity: 0; }
+    .bubble::after { content: ""; position: absolute; left: 50px; bottom: -22px; border: 16px solid transparent; border-top: 22px solid #fff; border-bottom: 0; }
+    .bubble .c { opacity: 0; }
+    .ball .cheek { position: absolute; top: 96px; width: 30px; height: 16px; border-radius: 50%; background: #ff3d7f; opacity: 0; }
+    .heart { position: absolute; left: 0; top: 0; width: 70px; height: 64px; opacity: 0; }
+    .ring { position: absolute; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 5px solid rgba(255,255,255,0.7); opacity: 0; }
+    #r-plus { position: absolute; left: 0; top: 0; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: #ff2d55; color: #fff; font-weight: 800; font-size: 50px; line-height: 64px; text-align: center; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="rail" data-width="1080" data-height="1920">
+    <div class="room" data-layout-ignore></div>
+    <div class="spot" data-layout-ignore></div>
+    <div class="floor" data-layout-ignore></div>
+    <div id="r-dust" data-layout-ignore></div>
+    <div class="shadow" id="r-shadow"></div>
+    <div id="r-fx" data-layout-ignore></div>
+    <div class="ring" id="rg0"></div><div class="ring" id="rg1"></div><div class="ring" id="rg2"></div><div class="ring" id="rg3"></div><div class="ring" id="rg4"></div>
+    <div id="r-plus"><span id="r-pl">+</span><span id="r-ck" style="position:absolute;left:0;right:0;top:0;opacity:0">✓</span></div>
+    <div class="ball" id="r-ball"><span class="eye" style="left: 42px"><b></b><i></i></span><span class="eye" style="left: 84px"><b></b><i></i></span><span class="cheek" style="left: 18px"></span><span class="cheek" style="left: 112px"></span></div>
+    <div class="bubble" id="rb1" style="left: 140px; top: 1150px"><span class="c">…</span><span class="c">b</span><span class="c">u</span><span class="c">t</span><span class="c">t</span><span class="c">o</span><span class="c">n</span><span class="c">s</span><span class="c">?</span></div>
+    <div class="bubble" id="rb2" style="left: 300px; top: 1000px"><span class="c">a</span><span class="c">w</span><span class="c">w</span><span class="c">&nbsp;</span><span class="c">♥</span></div>
+    <div class="bubble" id="rb3" style="left: 260px; top: 820px"><span class="c">f</span><span class="c">o</span><span class="c">l</span><span class="c">l</span><span class="c">o</span><span class="c">w</span><span class="c">e</span><span class="c">d</span><span class="c">!</span></div>
+    <div class="bubble" id="rb4" style="left: 120px; top: 1150px"><span class="c">…</span><span class="c">h</span><span class="c">o</span><span class="c">w</span><span class="c">&nbsp;</span><span class="c">d</span><span class="c">o</span><span class="c">&nbsp;</span><span class="c">I</span><span class="c">&nbsp;</span><span class="c">g</span><span class="c">e</span><span class="c">t</span><span class="c">&nbsp;</span><span class="c">O</span><span class="c">U</span><span class="c">T</span><span class="c">?</span></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      let seed = 8; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const dust = document.getElementById("r-dust");
+      for (let k = 0; k < 16; k++) {
+        const d = document.createElement("div"); d.className = "dust"; dust.appendChild(d);
+        const x = 260 + rnd() * 560, y = 300 + rnd() * 1300;
+        tl.fromTo(d, { x, y, opacity: 0.2 + rnd() * 0.6, scale: 0.5 + rnd() }, { x: x + (rnd() - 0.5) * 80, y: y - 160 - rnd() * 140, duration: 5.2, ease: "none" }, 0);
+      }
+      const at = (cx, cy) => ({ x: cx - 80, y: cy - 80 });
+      const bubble = (id, t, out) => {
+        tl.to(id, { opacity: 1, duration: 0.1 }, t);
+        tl.fromTo(id, { scale: 0.6, transformOrigin: "10% 100%" }, { scale: 1, duration: 0.3, ease: "back.out(2.5)", immediateRender: false }, t);
+        tl.to(id + " .c", { opacity: 1, duration: 0.01, stagger: 0.05 }, t + 0.08);
+        tl.to(id, { opacity: 0, y: -24, duration: 0.2, ease: "power2.in" }, out);
+      };
+      // start where scene 1 left it: on the floor, looking up-right
+      tl.set("#r-ball", { ...at(540, 1620), transformOrigin: "50% 50%" }, 0);
+      tl.set("#r-ball .eye b", { x: 10, y: -10 }, 0);
+      tl.set("#r-shadow", { x: 465, y: 1688 }, 0);
+      bubble("#rb1", 0.15, 0.95);
+      // hops up the right edge: share → save → comment → like → profile
+      const pts = [[540, 1620, 1, 0], [1000, 1620, 0.62, 0.65], [1000, 1480, 0.62, 1.1], [1000, 1340, 0.62, 1.55], [1000, 1190, 0.62, 2.0], [1000, 1040, 0.62, 2.8]];
+      for (let k = 1; k < pts.length; k++) {
+        const [x, y, s, t] = pts[k], [px, py, ps, pt] = pts[k - 1], d = t - pt - 0.04;
+        const peak = Math.min(py, y) - (k === 1 ? 260 : 110);
+        tl.to("#r-ball", { x: x - 80, scale: s, duration: d, ease: "none" }, pt + 0.04);
+        tl.to("#r-ball", { y: peak - 80, duration: d * 0.5, ease: "power2.out" }, pt + 0.04);
+        tl.to("#r-ball", { y: y - 80, duration: d * 0.5, ease: "power2.in" }, pt + 0.04 + d * 0.5);
+        tl.to("#r-ball", { scaleY: s * 0.72, scaleX: s * 1.22, duration: 0.05 }, t);
+        tl.to("#r-ball", { scaleY: s, scaleX: s, duration: 0.3, ease: "elastic.out(1.2, 0.4)" }, t + 0.05);
+        tl.fromTo("#rg" + (k - 1), { x, y: y + 40, scale: 0.3, opacity: 0.8 }, { scale: 1.3, opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, t);
+      }
+      tl.to("#r-shadow", { opacity: 0, duration: 0.2 }, 0.7);
+      tl.to("#r-ball .eye b", { x: -6, y: 0, duration: 0.15 }, 0.7);
+      // the like: hearts burst out of the real like button spot
+      const fx = document.getElementById("r-fx");
+      for (let k = 0; k < 8; k++) {
+        const h = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        h.setAttribute("viewBox", "0 0 24 22"); h.setAttribute("class", "heart");
+        h.innerHTML = '<path d="M12 21s-8-5.2-10.4-10C-.1 6.6 2.4 2 6.6 2 9 2 10.6 3.4 12 5.2 13.4 3.4 15 2 17.4 2c4.2 0 6.7 4.6 5 9C20 15.8 12 21 12 21z" fill="' + (k % 3 ? "#ff2d55" : "#ff6b9a") + '"/>';
+        fx.appendChild(h);
+        const a = -Math.PI * (0.55 + 0.4 * rnd()), r = 180 + rnd() * 240;
+        const sx = 1000 - 35, sy = 1190 - 32;
+        tl.fromTo(h, { x: sx, y: sy, scale: 0.3, rotation: 0, opacity: 1 }, { x: sx + Math.cos(a) * r, y: sy + Math.sin(a) * r, scale: 0.8 + rnd() * 0.7, rotation: (rnd() - 0.5) * 60, duration: 0.9, ease: "power2.out", immediateRender: false }, 2.02 + k * 0.04);
+        tl.to(h, { opacity: 0, duration: 0.3 }, 2.75 + k * 0.03);
+      }
+      tl.to("#r-ball .cheek", { opacity: 0.85, duration: 0.15 }, 2.05);
+      tl.to("#r-ball .eye", { scaleY: 0.25, duration: 0.1 }, 2.05);
+      tl.to("#r-ball .eye", { scaleY: 1, duration: 0.15 }, 2.55);
+      bubble("#rb2", 2.1, 2.65);
+      // the follow "+" pops and turns into a check
+      tl.fromTo("#r-plus", { x: 1000, y: 1120, scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, 2.82);
+      tl.to("#r-plus", { rotation: 360, backgroundColor: "#2ee6a6", duration: 0.35, ease: "power2.inOut" }, 3.05);
+      tl.to("#r-pl", { opacity: 0, duration: 0.08 }, 3.15);
+      tl.to("#r-ck", { opacity: 1, duration: 0.08 }, 3.15);
+      tl.to("#r-plus", { opacity: 0, scale: 0.5, duration: 0.25 }, 3.7);
+      bubble("#rb3", 2.9, 3.5);
+      // jumps back down to the middle of its room
+      tl.to("#r-ball .cheek", { opacity: 0, duration: 0.3 }, 3.5);
+      tl.to("#r-ball", { x: 540 - 80, scale: 1, duration: 0.75, ease: "none" }, 3.4);
+      tl.to("#r-ball", { y: 640 - 80, duration: 0.35, ease: "power2.out" }, 3.4);
+      tl.to("#r-ball", { y: 1620 - 80, duration: 0.4, ease: "power2.in" }, 3.75);
+      tl.to("#r-shadow", { opacity: 1, duration: 0.3 }, 3.85);
+      tl.to("#r-ball", { scaleY: 0.7, scaleX: 1.28, duration: 0.06 }, 4.15);
+      tl.to("#r-ball", { scaleY: 1, scaleX: 1, duration: 0.35, ease: "elastic.out(1.2, 0.4)" }, 4.21);
+      tl.to("#r-ball .eye b", { x: 0, y: 6, duration: 0.15 }, 4.2);
+      bubble("#rb4", 4.3, 5.05);
+      window.__timelines["rail"] = tl;
+    })();
+  </script>
+</template>

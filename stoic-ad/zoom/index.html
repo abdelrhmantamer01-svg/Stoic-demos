@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #111; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9.5" data-width="1080" data-height="1920">
+      <div id="dive0" data-composition-id="dive0" data-composition-src="compositions/dive0.html" data-start="0.000" data-duration="1.900" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="dive1" data-composition-id="dive1" data-composition-src="compositions/dive1.html" data-start="1.900" data-duration="1.900" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="dive2" data-composition-id="dive2" data-composition-src="compositions/dive2.html" data-start="3.800" data-duration="1.900" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="dive3" data-composition-id="dive3" data-composition-src="compositions/dive3.html" data-start="5.700" data-duration="1.900" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="dive4" data-composition-id="dive4" data-composition-src="compositions/dive4.html" data-start="7.600" data-duration="1.900" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <!-- MUSIC SLOT: added in-app. -->
+      <audio id="fx00" class="clip" src="assets/kit/note0.wav" data-start="0.020" data-duration="0.49" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx01" class="clip" src="assets/kit/bell_hi.wav" data-start="0.030" data-duration="0.79" data-track-index="4" data-volume="0.15"></audio>
+      <audio id="fx02" class="clip" src="assets/kit/swish_long.wav" data-start="0.750" data-duration="0.69" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx03" class="clip" src="assets/kit/bub3.wav" data-start="1.700" data-duration="0.11" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx04" class="clip" src="assets/kit/note1.wav" data-start="1.920" data-duration="0.49" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx05" class="clip" src="assets/kit/bell_hi.wav" data-start="1.930" data-duration="0.79" data-track-index="4" data-volume="0.15"></audio>
+      <audio id="fx06" class="clip" src="assets/kit/swish_long.wav" data-start="2.650" data-duration="0.69" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx07" class="clip" src="assets/kit/bub3.wav" data-start="3.600" data-duration="0.11" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx08" class="clip" src="assets/kit/note2.wav" data-start="3.820" data-duration="0.49" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx09" class="clip" src="assets/kit/bell_hi.wav" data-start="3.830" data-duration="0.79" data-track-index="4" data-volume="0.15"></audio>
+      <audio id="fx10" class="clip" src="assets/kit/swish_long.wav" data-start="4.550" data-duration="0.69" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx11" class="clip" src="assets/kit/bub3.wav" data-start="5.500" data-duration="0.11" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx12" class="clip" src="assets/kit/note3.wav" data-start="5.720" data-duration="0.49" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx13" class="clip" src="assets/kit/bell_hi.wav" data-start="5.730" data-duration="0.79" data-track-index="4" data-volume="0.15"></audio>
+      <audio id="fx14" class="clip" src="assets/kit/swish_long.wav" data-start="6.450" data-duration="0.69" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx15" class="clip" src="assets/kit/bub3.wav" data-start="7.400" data-duration="0.11" data-track-index="3" data-volume="0.25"></audio>
+      <audio id="fx16" class="clip" src="assets/kit/note4.wav" data-start="7.620" data-duration="0.49" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="fx17" class="clip" src="assets/kit/bell_hi.wav" data-start="7.630" data-duration="0.79" data-track-index="4" data-volume="0.15"></audio>
+      <audio id="fx18" class="clip" src="assets/kit/swish_long.wav" data-start="8.350" data-duration="0.69" data-track-index="3" data-volume="0.45"></audio>
+      <audio id="fx19" class="clip" src="assets/kit/bub3.wav" data-start="9.300" data-duration="0.11" data-track-index="3" data-volume="0.25"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
